@@ -2004,6 +2004,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1608719491998942847, guid: f9df8eebcc6f44e63bf21f48d542f42e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2096105069298303377, guid: f9df8eebcc6f44e63bf21f48d542f42e, type: 3}
       propertyPath: m_Name
       value: Seat (1)
