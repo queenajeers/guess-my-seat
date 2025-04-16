@@ -385,6 +385,9 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             iconOriginalSizeDelta = personIconRef.sizeDelta;
 
             MoveToWorldSpace(personIconRef, targetWorldPosition, UIManager.Instance.GamePlayPanel);
+
+            // 👇 Make sure personIconRef is rendered behind the contentToDrag
+            personIconRef.SetSiblingIndex(0); // or any lower index than contentToDrag
         }
         else
         {
