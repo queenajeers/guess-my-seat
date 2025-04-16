@@ -48,6 +48,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private bool targetFound = false;
     private Vector3 targetWorldPosition;
 
+    public Seat assignedSeat;
+
     public Vector2 ContentRefWorldPos
     {
         get { return Camera.main.ScreenToWorldPoint(contentToDrag.position); }
@@ -360,6 +362,10 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
 
         contentToDrag.localPosition = endPos;
+        if (assignedSeat != null)
+        {
+
+        }
     }
 
     public void SetTargetStatus(bool found, Vector3 worldPosition)

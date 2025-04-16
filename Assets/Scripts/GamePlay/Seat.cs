@@ -3,6 +3,7 @@ using UnityEngine;
 public class Seat : MonoBehaviour
 {
     public SpriteRenderer mySeatSR;
+    public Canvas worldCanvas;
 
     public Vector2 SeatingPos
     {

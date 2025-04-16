@@ -35,11 +35,12 @@ public class SeatSelector : MonoBehaviour
 
         if (nearestSeat != null && nearestDistance <= minDistForSeatPlacement)
         {
-
+            currentPersonDraggable.assignedSeat = nearestSeat;
             currentPersonDraggable.SetTargetStatus(true, nearestSeat.SeatingPos);
         }
         else
         {
+            currentPersonDraggable.assignedSeat = null;
             currentPersonDraggable.SetTargetStatus(false, Vector2.zero);
         }
     }
