@@ -7,6 +7,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
     [Header("Drag Target Settings")]
     public RectTransform contentToDrag;
+    public RectTransform personIconRef;
     public Vector2 dragOffset = new Vector2(0f, 50f);
     public float dragThreshold = 10f;
     public float smoothFollowSpeed = 10f;
@@ -16,7 +17,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public bool enableHorizontalScrollTransfer = true;
     public ScrollRect parentScrollRect;
     public float horizontalScrollSensitivity = 1f;
-    public float horizontalScrollVelocityMultiplier = 2f; // Controls inertia strength
+    public float horizontalScrollVelocityMultiplier = 2f;
 
     private bool isDragging = false;
     private bool isVerticalDrag = false;
@@ -35,12 +36,22 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Vector3 originalLocalPosition;
     private Vector2 originalSizeDelta;
 
+    private Transform iconOriginalParent;
+    private int iconOriginalSiblingIndex;
+    private Vector3 iconOriginalLocalPosition;
+    private Vector2 iconOriginalSizeDelta;
+
     private Coroutine smoothFollowCoroutine;
     private Coroutine returnCoroutine;
     private Coroutine scrollInertiaCoroutine;
 
     private bool targetFound = false;
     private Vector3 targetWorldPosition;
+
+    public Vector2 ContentRefWorldPos
+    {
+        get { return Camera.main.ScreenToWorldPoint(contentToDrag.position); }
+    }
 
     private void Awake()
     {
@@ -53,16 +64,29 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         rootCanvas = GetComponentInParent<Canvas>();
 
-        // Find parent ScrollRect if not assigned
         if (parentScrollRect == null)
         {
             parentScrollRect = GetComponentInParent<ScrollRect>();
         }
+
+        if (personIconRef != null)
+            personIconRef.gameObject.SetActive(false);
+    }
+
+    public void BackToScrollPanel()
+    {
+        if (returnCoroutine != null)
+            StopCoroutine(returnCoroutine);
+
+        returnCoroutine = StartCoroutine(SmoothReturn());
+        targetFound = false;
+        wasDragged = false;
+
+        ReturnPersonIcon();
     }
 
     private void Update()
     {
-        // Only if this object was dragged
         if (wasDragged && Input.GetKeyDown(KeyCode.Space))
         {
             if (returnCoroutine != null)
@@ -71,11 +95,18 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             returnCoroutine = StartCoroutine(SmoothReturn());
             targetFound = false;
             wasDragged = false;
+
+            ReturnPersonIcon();
         }
 
         if (wasDragged && Input.GetKeyDown(KeyCode.T))
         {
             SetTargetStatus(true, Vector2.zero);
+        }
+
+        if (wasDragged && Input.GetKeyDown(KeyCode.U))
+        {
+            SetTargetStatus(false, Vector2.zero);
         }
     }
 
@@ -90,36 +121,32 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         lastDragTime = Time.unscaledTime;
         pointerDeltaTime = 0;
 
-        // Stop any ongoing inertia
+        SeatSelector.Instance.SelectedCurrentDraggable(this); // 👈 ADD THIS
+
         if (scrollInertiaCoroutine != null)
         {
             StopCoroutine(scrollInertiaCoroutine);
             scrollInertiaCoroutine = null;
         }
 
-        // Cache the current ScrollRect state, but don't disable it yet
         if (parentScrollRect != null && enableHorizontalScrollTransfer)
         {
-            // Keep scrolling enabled but capture velocity if there is any
             scrollVelocity = parentScrollRect.velocity;
-            parentScrollRect.StopMovement(); // Stop any ongoing movement
+            parentScrollRect.StopMovement();
         }
     }
+
 
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 delta = eventData.position - initialPointerPosition;
         Vector2 frameDelta = eventData.position - lastPointerPosition;
 
-        // Calculate time since last update for velocity calculation
         float currentTime = Time.unscaledTime;
-        pointerDeltaTime = Mathf.Max(currentTime - lastDragTime, 0.001f); // Avoid division by zero
+        pointerDeltaTime = Mathf.Max(currentTime - lastDragTime, 0.001f);
         lastDragTime = currentTime;
-
-        // Store last position for next frame
         lastPointerPosition = eventData.position;
 
-        // Determine drag direction after crossing threshold
         if (!isVerticalDrag && !isHorizontalDrag && delta.magnitude > dragThreshold)
         {
             if (Mathf.Abs(delta.y) > Mathf.Abs(delta.x))
@@ -131,7 +158,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             {
                 isHorizontalDrag = true;
 
-                // Make sure the ScrollRect is set to horizontal scrolling
                 if (parentScrollRect != null && enableHorizontalScrollTransfer)
                 {
                     parentScrollRect.horizontal = true;
@@ -139,19 +165,15 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
         }
 
-        // Handle horizontal scrolling
         if (isHorizontalDrag && parentScrollRect != null && enableHorizontalScrollTransfer)
         {
-            // Calculate horizontal velocity for inertia
             scrollVelocity.x = frameDelta.x / pointerDeltaTime;
 
-            // Apply the drag movement to the scroll rect
             float normalizedDelta = frameDelta.x / Screen.width * horizontalScrollSensitivity;
             parentScrollRect.horizontalNormalizedPosition -= normalizedDelta;
             return;
         }
 
-        // Handle vertical dragging
         if (isVerticalDrag && contentToDrag != null)
         {
             Vector3 targetWorldPos;
@@ -193,21 +215,17 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         isDragging = false;
 
-        // Handle horizontal scroll inertia
+        SeatSelector.Instance.CancelDraggable(this); // 👈 ADD THIS
+
         if (isHorizontalDrag && parentScrollRect != null && enableHorizontalScrollTransfer)
         {
-            // Apply velocity for elastic/inertia behavior
             Vector2 finalVelocity = scrollVelocity * horizontalScrollVelocityMultiplier;
-
-            // Limit maximum velocity to prevent extreme scrolling
             finalVelocity.x = Mathf.Clamp(finalVelocity.x, -3000f, 3000f);
 
-            // Only apply inertia if there's significant velocity
             if (Mathf.Abs(finalVelocity.x) > 50f)
             {
                 parentScrollRect.velocity = finalVelocity;
 
-                // Optional: Start a coroutine to handle additional custom inertia effects
                 if (scrollInertiaCoroutine != null)
                     StopCoroutine(scrollInertiaCoroutine);
 
@@ -215,7 +233,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             }
         }
 
-        // Handle vertical drag ending
         if (isVerticalDrag && contentToDrag != null)
         {
             if (smoothFollowCoroutine != null)
@@ -232,31 +249,30 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             {
                 returnCoroutine = StartCoroutine(SmoothReturn());
             }
+
+            if (personIconRef != null && personIconRef.gameObject.activeSelf)
+            {
+                ReturnPersonIcon();
+            }
         }
 
         isVerticalDrag = false;
         isHorizontalDrag = false;
     }
 
+
     private IEnumerator HandleScrollInertia()
     {
-        // Optional: Add custom inertia handling here
-        // For example, you could modify the ScrollRect's elasticity behavior
-
-        // Wait for the ScrollRect to finish its elastic movement
         float startTime = Time.unscaledTime;
         while (Time.unscaledTime - startTime < 0.5f &&
                (Mathf.Abs(parentScrollRect.velocity.x) > 0.1f ||
                 Mathf.Abs(parentScrollRect.velocity.y) > 0.1f))
         {
-            // Let Unity's built-in elasticity handle it
             yield return null;
         }
 
-        // Ensure the content is within bounds after inertia settles
         yield return new WaitForSeconds(0.1f);
 
-        // Check if we need to snap back if scrolled past bounds
         float normalizedPos = parentScrollRect.horizontalNormalizedPosition;
         if (normalizedPos < 0)
         {
@@ -319,6 +335,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         contentToDrag.localPosition = originalLocalPosition;
         contentToDrag.sizeDelta = originalSizeDelta;
         wasDragged = false;
+
+        ReturnPersonIcon();
     }
 
     private IEnumerator SmoothMoveToTarget(Vector3 worldTarget)
@@ -348,5 +366,46 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         targetFound = found;
         targetWorldPosition = worldPosition;
+
+        if (personIconRef == null) return;
+
+        if (found)
+        {
+            personIconRef.gameObject.SetActive(true);
+
+            iconOriginalParent = personIconRef.parent;
+            iconOriginalSiblingIndex = personIconRef.GetSiblingIndex();
+            iconOriginalLocalPosition = personIconRef.localPosition;
+            iconOriginalSizeDelta = personIconRef.sizeDelta;
+
+            MoveToWorldSpace(personIconRef, targetWorldPosition, UIManager.Instance.GamePlayPanel);
+        }
+        else
+        {
+            ReturnPersonIcon();
+        }
+    }
+
+    private void MoveToWorldSpace(RectTransform element, Vector3 targetWorldPosition, Transform newParent)
+    {
+
+        Vector2 size = element.sizeDelta;
+
+        element.SetParent(newParent, worldPositionStays: false);
+
+        element.sizeDelta = size;
+
+        element.position = Camera.main.WorldToScreenPoint(targetWorldPosition);
+    }
+
+    private void ReturnPersonIcon()
+    {
+        if (personIconRef == null || iconOriginalParent == null) return;
+
+        personIconRef.SetParent(iconOriginalParent, worldPositionStays: false);
+        personIconRef.SetSiblingIndex(iconOriginalSiblingIndex);
+        personIconRef.localPosition = iconOriginalLocalPosition;
+        personIconRef.sizeDelta = iconOriginalSizeDelta;
+        personIconRef.gameObject.SetActive(false);
     }
 }

@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0825ac373e794e398aa4d9d02e79eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySR: {fileID: 2394984082169645302}
+  mySeatSR: {fileID: 2394984082169645302}
 --- !u!1 &3862038499600171903
 GameObject:
   m_ObjectHideFlags: 0
