@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 2812174849962701456}
   - component: {fileID: 2938456941080925020}
   - component: {fileID: 7038775179174738668}
-  - component: {fileID: 7593377307007246246}
+  - component: {fileID: 1235116728774765318}
   m_Layer: 5
   m_Name: PersonDraggable
   m_TagString: Untagged
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7593377307007246246
+--- !u!114 &1235116728774765318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,12 +313,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2647496468776594974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0610b9c9740b044729b67a02a7ee3c06, type: 3}
+  m_Script: {fileID: 11500000, guid: 06e903554b3524ee8a3ce39106a5472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   contentToDrag: {fileID: 3733697085564425444}
   personIconRef: {fileID: 2006136191620498656}
-  dragOffset: {x: 0, y: 50}
+  dragOffset: {x: 0, y: 200}
   dragThreshold: 10
   smoothFollowSpeed: 10
   returnDuration: 0.25
@@ -327,6 +327,8 @@ MonoBehaviour:
   horizontalScrollSensitivity: 1
   horizontalScrollVelocityMultiplier: 2
   assignedSeat: {fileID: 0}
+  personName: 
+  personIcon: {fileID: 0}
 --- !u!1 &4622716800518750590
 GameObject:
   m_ObjectHideFlags: 0

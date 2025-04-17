@@ -1,25 +1,24 @@
+using TMPro;
 using UnityEngine;
 
 public class Seat : MonoBehaviour
 {
-    public SpriteRenderer mySeatSR;
-    public Canvas worldCanvas;
+    [SerializeField] SpriteRenderer mySeatSR;
+    [SerializeField] TextMeshPro seatNumberIndicator;
+    [SerializeField] TextMeshPro hintIndicator;
+
+    string assignedToPerson;
 
     public Vector2 SeatingPos
     {
         get { return mySeatSR.transform.position; }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void LoadData(string personName, string seatNumber, string hint)
     {
-
+        assignedToPerson = personName;
+        seatNumberIndicator.text = seatNumber;
+        hintIndicator.text = hint;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
 }

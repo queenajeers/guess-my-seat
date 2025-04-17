@@ -15,6 +15,11 @@ public class SeatSelector : MonoBehaviour
         Instance = this;
     }
 
+    public void AddSeat(Seat seat)
+    {
+        availableSeats.Add(seat);
+    }
+
     void Update()
     {
         if (currentPersonDraggable == null) return;

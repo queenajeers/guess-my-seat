@@ -1,0 +1,30 @@
+{
+  "rows": 1,
+  "cols": 3,
+  "seats": [
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personSeating": "Bob",
+      "hint": "I sit next to Charlie, and I'm to his left.",
+      "isInitiallyOpened": true
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personSeating": "Charlie",
+      "hint": "I'm not sitting next to Bob. We need a little :",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "C1",
+      "row": 0,
+      "col": 2,
+      "personSeating": "Alice",
+      "hint": "I'm not a fan of sitting on the far left.",
+      "isInitiallyOpened": false
+    }
+  ]
+}
