@@ -110,7 +110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0, y: -11.4}
+  m_AnchoredPosition: {x: -0, y: -18.3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &6823567250858944053
@@ -328,7 +328,8 @@ MonoBehaviour:
   horizontalScrollVelocityMultiplier: 2
   assignedSeat: {fileID: 0}
   personName: 
-  personIcon: {fileID: 0}
+  personNameIndicator: {fileID: 6377285725807326389}
+  personIcon: {fileID: 7414350290899365332}
 --- !u!1 &4622716800518750590
 GameObject:
   m_ObjectHideFlags: 0

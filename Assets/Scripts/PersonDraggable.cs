@@ -83,6 +83,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         returnCoroutine = StartCoroutine(SmoothReturn());
         targetFound = false;
         wasDragged = false;
+        assignedSeat = null;
 
         ReturnPersonIcon();
     }
@@ -91,14 +92,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (wasDragged && Input.GetKeyDown(KeyCode.Space))
         {
-            if (returnCoroutine != null)
-                StopCoroutine(returnCoroutine);
-
-            returnCoroutine = StartCoroutine(SmoothReturn());
-            targetFound = false;
-            wasDragged = false;
-
-            ReturnPersonIcon();
+            BackToScrollPanel();
         }
 
         if (wasDragged && Input.GetKeyDown(KeyCode.T))
@@ -364,8 +358,13 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         contentToDrag.localPosition = endPos;
         if (assignedSeat != null)
         {
-
+            TargetReached();
         }
+    }
+
+    public virtual void TargetReached()
+    {
+
     }
 
     public void SetTargetStatus(bool found, Vector3 worldPosition)
@@ -397,7 +396,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private void MoveToWorldSpace(RectTransform element, Vector3 targetWorldPosition, Transform newParent)
     {
-
         Vector2 size = element.sizeDelta;
 
         element.SetParent(newParent, worldPositionStays: false);

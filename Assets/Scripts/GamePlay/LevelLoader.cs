@@ -44,7 +44,7 @@ public class LevelLoader : MonoBehaviour
     }
 
     [Header("JSON Level File")]
-    public TextAsset jsonFile;
+    public int levelToLoad;
 
     [Header("Level Building Blocks")]
     [SerializeField] private GameObject seatPrefab;
@@ -53,6 +53,8 @@ public class LevelLoader : MonoBehaviour
 
     void Start()
     {
+        var jsonFile = Resources.Load<TextAsset>($"Levels/{levelToLoad}/Level_{levelToLoad}");
+
         if (jsonFile == null || seatPrefab == null)
         {
             Debug.LogError("Missing JSON file or Seat Prefab in inspector.");
@@ -100,5 +102,17 @@ public class LevelLoader : MonoBehaviour
                 }
             }
         }
+
+        // Spawning People
+
+        for (int p = 0; p < levelData.seats.Count; p++)
+        {
+            PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{levelData.seats[p].personSeating.Trim()}");
+            if (personData != null)
+            {
+                UIManager.Instance.SpawnNewPerson(personData.personIcon, personData.personName);
+            }
+        }
+
     }
 }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+
 
 
 public class PersonItem : PersonDraggable
@@ -9,6 +9,37 @@ public class PersonItem : PersonDraggable
     [Space(20)]
 
     [Header("Person Data")]
-    public string personName;
+    [SerializeField] string personName;
+    public string PersonName
+    {
+        get { return personName; }
+    }
+    public TextMeshProUGUI personNameIndicator;
     public Image personIcon;
+
+    public void LoadData(string personName, Sprite personIcon)
+    {
+        this.personName = personName;
+        this.personIcon.sprite = personIcon;
+        personNameIndicator.text = personName;
+
+    }
+
+    public override void TargetReached()
+    {
+        if (assignedSeat.PersonName == personName)
+        {
+            assignedSeat.CorrectPlacement();
+            Destroy(contentToDrag.gameObject);
+            Destroy(personIconRef.gameObject);
+        }
+        else
+        {
+            assignedSeat.WrongAnimation();
+            BackToScrollPanel();
+        }
+    }
+
+
+
 }
