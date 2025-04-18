@@ -6,6 +6,8 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Camera))]
 public class CameraDragMove : MonoBehaviour
 {
+    public static CameraDragMove Instance { get; private set; }
+
     [Header("Drag Settings")]
     public float dragSpeed = 1f;
 
@@ -18,6 +20,11 @@ public class CameraDragMove : MonoBehaviour
     private bool startedOverUI = false;
 
     private Camera cam;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -113,5 +120,25 @@ public class CameraDragMove : MonoBehaviour
             0.1f);
 
         Gizmos.DrawWireCube(center, size);
+    }
+
+    public float boundaryPadding = 1f; // Optional extra space around all bounds
+
+    public void AdjustBoundary(List<Bounds> bounds)
+    {
+        if (bounds == null || bounds.Count == 0)
+            return;
+
+        Bounds combined = bounds[0];
+        for (int i = 1; i < bounds.Count; i++)
+        {
+            combined.Encapsulate(bounds[i]);
+        }
+
+        // Apply padding
+        combined.Expand(boundaryPadding * 2); // Padding applies to both sides
+
+        minBounds = new Vector2(combined.min.x, combined.min.y);
+        maxBounds = new Vector2(combined.max.x, combined.max.y);
     }
 }

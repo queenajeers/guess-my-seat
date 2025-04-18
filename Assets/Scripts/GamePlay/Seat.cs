@@ -5,11 +5,16 @@ using DG.Tweening;
 public class Seat : MonoBehaviour
 {
     [SerializeField] SpriteRenderer mySeatSR;
+    [SerializeField] SpriteRenderer personSR;
+
     [SerializeField] TextMeshPro seatNumberIndicator;
     [SerializeField] TextMeshPro hintIndicator;
     [SerializeField] TextMeshPro personName;
 
     [SerializeField] SpriteRenderer BGRed;
+
+    [SerializeField] SpriteRenderer BGBottom;
+    [SerializeField] SpriteRenderer Border;
 
     [SerializeField] Transform seatContainer;
     [SerializeField] GameObject personObject;
@@ -17,6 +22,13 @@ public class Seat : MonoBehaviour
     [SerializeField] Vector2 seatCorrectPlacement;
 
     string assignedToPerson;
+
+    public Color correctColor;
+    public Color normalColor;
+
+    public GameObject happyEmoji;
+    [SerializeField] Transform checkMark;
+
 
     public string PersonName
     {
@@ -28,22 +40,29 @@ public class Seat : MonoBehaviour
         get { return mySeatSR.transform.position; }
     }
 
-    public void LoadData(string personName, string seatNumber, string hint)
+    public void LoadData(string personName, Sprite personIcon, string seatNumber, string hint)
     {
+        personSR.sprite = personIcon;
         assignedToPerson = personName;
         seatNumberIndicator.text = seatNumber;
         hintIndicator.text = hint;
         this.personName.text = personName;
     }
 
+
+
     // Make sure DOTween is imported
 
     public void CorrectPlacement()
     {
         personObject.SetActive(true);
+        BGBottom.gameObject.SetActive(true);
+        happyEmoji.SetActive(true);
+
+        checkMark.DOScale(1f, 1f).SetDelay(.2f).SetEase(Ease.OutBounce);
 
         // Move seatContainer to seatCorrectPlacement
-        seatContainer.DOLocalMove(seatCorrectPlacement, 0.5f).SetEase(Ease.OutQuad);
+        seatContainer.DOLocalMove(seatCorrectPlacement, 0.35f).SetEase(Ease.OutQuad);
 
         // Make sure the hintIndicator is active and alpha is 0 before fading in
         hintIndicator.gameObject.SetActive(true);
@@ -52,8 +71,41 @@ public class Seat : MonoBehaviour
         hintColor.a = 0;
         hintIndicator.color = hintColor;
 
+        Color bgBottomColor = BGBottom.color;
+        bgBottomColor.a = 0;
+        BGBottom.color = bgBottomColor;
+
+
         // Fade in the hint text
-        hintIndicator.DOFade(1f, 0.5f).SetEase(Ease.InOutQuad);
+        hintIndicator.DOFade(1f, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
+        BGBottom.DOFade(1f, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
+
+        seatNumberIndicator.DOColor(correctColor, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
+
+        BGRed.color = correctColor;
+        BGRed.DOKill();
+
+        Color bgColor = BGRed.color;
+        bgColor.a = 0;
+        BGRed.color = bgColor;
+
+
+        // Fade in and out BGRed
+        BGRed.DOFade(.8f, 0.4f) // Fade in quickly
+            .OnComplete(() =>
+            {
+                BGRed.DOFade(0f, 0.5f).SetDelay(.2f); // Then fade out more slowly
+            });
+    }
+
+    public void SetOpenSeat()
+    {
+        checkMark.localScale = Vector3.one;
+        seatNumberIndicator.color = correctColor;
+        personObject.SetActive(true);
+        BGBottom.gameObject.SetActive(true);
+        seatContainer.localPosition = seatCorrectPlacement;
+        hintIndicator.gameObject.SetActive(true);
     }
 
 
@@ -62,11 +114,11 @@ public class Seat : MonoBehaviour
         BGRed.DOKill();
 
         // Fade in and out BGRed
-        BGRed.DOFade(.5f, 0.2f) // Fade in quickly
-            .OnComplete(() =>
-            {
-                BGRed.DOFade(0f, 0.5f); // Then fade out more slowly
-            });
+        BGRed.DOFade(.8f, 0.4f) // Fade in quickly
+             .OnComplete(() =>
+             {
+                 BGRed.DOFade(0f, 0.5f).SetDelay(.2f); // Then fade out more slowly
+             });
 
         mySeatSR.DOKill();
         // Shake the seat horizontally
@@ -78,6 +130,11 @@ public class Seat : MonoBehaviour
             snapping: false,
             fadeOut: true
         );
+    }
+
+    public Bounds GetBounds()
+    {
+        return BGRed.bounds;
     }
 
 

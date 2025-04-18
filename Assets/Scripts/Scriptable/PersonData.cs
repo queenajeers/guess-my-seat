@@ -6,4 +6,6 @@ public class PersonData : ScriptableObject
 
     public string personName;
     public Sprite personIcon;
+    public Sprite personIconHappy;
+
 }

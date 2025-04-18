@@ -1,3 +1,6 @@
+using System.Collections;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -8,6 +11,11 @@ public class UIManager : MonoBehaviour
 
     public Transform personScrollView;
     public GameObject personItemPrefab;
+
+    public TextMeshProUGUI seatsFilledIndicator;
+    public Transform seatsFilledIndicatorBG;
+
+    public GameObject winConfetti;
 
     void Awake()
     {
@@ -20,4 +28,27 @@ public class UIManager : MonoBehaviour
         personItemComp.LoadData(personName, icon);
     }
 
+    public void SetSeatsIndicator(int seatsFilled, int totalSeats)
+    {
+        seatsFilledIndicator.text = $"{seatsFilled}/{totalSeats}";
+        seatsFilledIndicatorBG.DOKill();
+        seatsFilledIndicatorBG.DOScale(1.1f, .1f).OnComplete(() =>
+        {
+
+            seatsFilledIndicatorBG.DOScale(1f, .2f).SetEase(Ease.InBack);
+        });
+    }
+
+    public void FinishActivate()
+    {
+        StartCoroutine(FinishActivateCor());
+    }
+
+    IEnumerator FinishActivateCor()
+    {
+
+        yield return new WaitForSeconds(.5f);
+        SoundManager.Play(SoundNames.Win);
+        winConfetti.SetActive(true);
+    }
 }

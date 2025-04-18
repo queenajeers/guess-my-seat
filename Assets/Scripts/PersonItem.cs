@@ -16,11 +16,13 @@ public class PersonItem : PersonDraggable
     }
     public TextMeshProUGUI personNameIndicator;
     public Image personIcon;
+    public Image personRefIcon;
 
     public void LoadData(string personName, Sprite personIcon)
     {
         this.personName = personName;
         this.personIcon.sprite = personIcon;
+        this.personRefIcon.sprite = personIcon;
         personNameIndicator.text = personName;
 
     }
@@ -30,13 +32,20 @@ public class PersonItem : PersonDraggable
         if (assignedSeat.PersonName == personName)
         {
             assignedSeat.CorrectPlacement();
+            SeatSelector.Instance.SeatPlaced(assignedSeat);
             Destroy(contentToDrag.gameObject);
             Destroy(personIconRef.gameObject);
+            Destroy(gameObject);
+
+            SoundManager.Play(SoundNames.Correct, .5f);
         }
         else
         {
             assignedSeat.WrongAnimation();
             BackToScrollPanel();
+            //SoundManager.Play(SoundNames.Wrong);
+            SoundManager.Play(SoundNames.Error);
+
         }
     }
 

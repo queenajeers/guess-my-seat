@@ -10,6 +10,9 @@ public class SeatSelector : MonoBehaviour
 
     PersonDraggable currentPersonDraggable;
 
+    public int seatsFilled;
+    public int totalSeats;
+
     void Awake()
     {
         Instance = this;
@@ -40,6 +43,7 @@ public class SeatSelector : MonoBehaviour
 
         if (nearestSeat != null && nearestDistance <= minDistForSeatPlacement)
         {
+
             currentPersonDraggable.assignedSeat = nearestSeat;
             currentPersonDraggable.SetTargetStatus(true, nearestSeat.SeatingPos);
         }
@@ -48,6 +52,8 @@ public class SeatSelector : MonoBehaviour
             currentPersonDraggable.assignedSeat = null;
             currentPersonDraggable.SetTargetStatus(false, Vector2.zero);
         }
+
+
     }
 
     public void SelectedCurrentDraggable(PersonDraggable personDraggable)
@@ -63,32 +69,32 @@ public class SeatSelector : MonoBehaviour
         }
     }
 
-    public void OnVerifySeatPlacement(Vector2 placementPos)
+    public void InitialseSeats(int seatsFilled, int totalSeats)
     {
-        // Find the closest seat to where the person was dropped
-        Seat seatToAssign = null;
-        float closestDist = Mathf.Infinity;
+        this.seatsFilled = seatsFilled;
+        this.totalSeats = totalSeats;
 
-        foreach (var seat in availableSeats)
-        {
-            float dist = Vector2.Distance(seat.SeatingPos, placementPos);
-            if (dist < closestDist)
-            {
-                closestDist = dist;
-                seatToAssign = seat;
-            }
-        }
+        UIManager.Instance.SetSeatsIndicator(seatsFilled, totalSeats);
 
-        if (seatToAssign != null && closestDist <= minDistForSeatPlacement && false)
-        {
-            availableSeats.Remove(seatToAssign);
-            // You might also want to do something like: seatToAssign.AssignPerson(currentPersonDraggable);
-        }
-        else
-        {
-            currentPersonDraggable.BackToScrollPanel();
-        }
-
-        currentPersonDraggable = null;
     }
+
+    public void SeatPlaced(Seat seat)
+    {
+        if (availableSeats.Contains(seat))
+        {
+            availableSeats.Remove(seat);
+            seatsFilled++;
+            UIManager.Instance.SetSeatsIndicator(seatsFilled, totalSeats);
+
+
+            if (availableSeats.Count == 0)
+            {
+                Debug.Log("LEVEL FINISHED!");
+                UIManager.Instance.FinishActivate();
+            }
+
+        }
+    }
+
+
 }

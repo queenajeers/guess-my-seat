@@ -76,6 +76,18 @@ public class LevelLoader : MonoBehaviour
     void InitialiseLevel()
     {
         var seatData = levelData.seatsGrid;
+        var allPersons = new List<string>();
+        var openPersons = new List<string>();
+        List<Bounds> seatBounds = new List<Bounds>();
+
+        foreach (var seat in seatData)
+        {
+            allPersons.Add(seat.personSeating.Trim());
+        }
+
+        Vector2 seatPositionsMean = Vector2.zero;
+        var allSeats = new Transform[seatData.GetLength(0), seatData.GetLength(1)];
+
         for (int x = 0; x < seatData.GetLength(0); x++)
         {
             for (int y = 0; y < seatData.GetLength(1); y++)
@@ -87,14 +99,31 @@ public class LevelLoader : MonoBehaviour
                     continue;
                 }
 
-                Vector2 spawnPos = new Vector2(2f * y, -2f * x); // y = col, x = row
-                GameObject seatObj = Instantiate(seatPrefab, spawnPos, Quaternion.identity);
-                Seat seatComponent = seatObj.GetComponent<Seat>();
+                GameObject seatObj = Instantiate(seatPrefab, Vector2.zero, Quaternion.identity);
+                allSeats[x, y] = seatObj.transform;
 
-                if (seatComponent != null)
+                if (seatObj.TryGetComponent<Seat>(out var seatComponent))
                 {
-                    seatComponent.LoadData(currentSeat.personSeating, currentSeat.seatNumber, currentSeat.hint);
-                    SeatSelector.Instance.AddSeat(seatComponent);
+                    var seatBound = seatComponent.GetBounds();
+                    seatBounds.Add(seatBound);
+
+                    Vector2 spawnPos = new((seatBound.size.x + 0.1f) * y, -(seatBound.size.y + 0.1f) * x); // y = col, x = row
+                    seatObj.transform.position = spawnPos;
+                    seatPositionsMean += spawnPos;
+                    PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{currentSeat.personSeating.Trim()}");
+
+                    string hyperHintText = TextStyler.GiveHyperText(currentSeat.hint, allPersons);
+                    seatComponent.LoadData(currentSeat.personSeating, personData.personIconHappy, currentSeat.seatNumber, hyperHintText);
+
+                    if (!currentSeat.isInitiallyOpened)
+                    {
+                        SeatSelector.Instance.AddSeat(seatComponent);
+                    }
+                    else
+                    {
+                        openPersons.Add(currentSeat.personSeating);
+                        seatComponent.SetOpenSeat();
+                    }
                 }
                 else
                 {
@@ -105,14 +134,39 @@ public class LevelLoader : MonoBehaviour
 
         // Spawning People
 
+        var seatsCenterPos = seatPositionsMean / allPersons.Count;
+
+        GameObject seatsCentre = new GameObject("AllSeats");
+
+        seatsCenterPos.y = allSeats[0, 0].transform.position.y + (seatBounds[0].size.y / 2f);
+
+        seatsCentre.transform.position = seatsCenterPos;
+
+
+        foreach (var item in allSeats)
+        {
+            item.SetParent(seatsCentre.transform);
+        }
+
+        seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
+
         for (int p = 0; p < levelData.seats.Count; p++)
         {
             PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{levelData.seats[p].personSeating.Trim()}");
-            if (personData != null)
+            if (personData != null && !openPersons.Contains(personData.personName))
             {
                 UIManager.Instance.SpawnNewPerson(personData.personIcon, personData.personName);
             }
         }
+
+        CameraDragMove.Instance.AdjustBoundary(seatBounds);
+        SeatSelector.Instance.InitialseSeats(openPersons.Count, allPersons.Count);
+
+    }
+
+    Vector2 VptoWP(float x, float y)
+    {
+        return Camera.main.ViewportToWorldPoint(new(x, y, 0));
 
     }
 }

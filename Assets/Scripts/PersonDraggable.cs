@@ -204,6 +204,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             contentToDrag.SetParent(UIManager.Instance.GamePlayPanel, worldPositionStays: false);
             contentToDrag.position = worldPos;
             contentToDrag.sizeDelta = size;
+
+            SoundManager.Play(SoundNames.Pick);
         }
     }
 
@@ -333,6 +335,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         wasDragged = false;
 
         ReturnPersonIcon();
+        SoundManager.Play(SoundNames.Pick, 1f, 1.4f);
     }
 
     private IEnumerator SmoothMoveToTarget(Vector3 worldTarget)
