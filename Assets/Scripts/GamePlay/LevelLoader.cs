@@ -78,7 +78,7 @@ public class LevelLoader : MonoBehaviour
         var seatData = levelData.seatsGrid;
         var allPersons = new List<string>();
         var openPersons = new List<string>();
-        List<Bounds> seatBounds = new List<Bounds>();
+        List<Seat> seatBounds = new List<Seat>();
 
         foreach (var seat in seatData)
         {
@@ -105,7 +105,7 @@ public class LevelLoader : MonoBehaviour
                 if (seatObj.TryGetComponent<Seat>(out var seatComponent))
                 {
                     var seatBound = seatComponent.GetBounds();
-                    seatBounds.Add(seatBound);
+                    seatBounds.Add(seatComponent);
 
                     Vector2 spawnPos = new((seatBound.size.x + 0.1f) * y, -(seatBound.size.y + 0.1f) * x); // y = col, x = row
                     seatObj.transform.position = spawnPos;
@@ -138,7 +138,8 @@ public class LevelLoader : MonoBehaviour
 
         GameObject seatsCentre = new GameObject("AllSeats");
 
-        seatsCenterPos.y = allSeats[0, 0].transform.position.y + (seatBounds[0].size.y / 2f);
+        seatsCenterPos.y = allSeats[0, 0].transform.position.y + (seatBounds[0].GetBounds().size.y / 2f);
+        seatsCenterPos.x = allSeats[0, 0].transform.position.x - (seatBounds[0].GetBounds().size.x / 2f);
 
         seatsCentre.transform.position = seatsCenterPos;
 
@@ -148,7 +149,8 @@ public class LevelLoader : MonoBehaviour
             item.SetParent(seatsCentre.transform);
         }
 
-        seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
+        //seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
+        seatsCentre.transform.position = VptoWP(0f, 1f) + new Vector2(0.25f, -2f);
 
         for (int p = 0; p < levelData.seats.Count; p++)
         {

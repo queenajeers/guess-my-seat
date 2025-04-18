@@ -124,21 +124,38 @@ public class CameraDragMove : MonoBehaviour
 
     public float boundaryPadding = 1f; // Optional extra space around all bounds
 
-    public void AdjustBoundary(List<Bounds> bounds)
+    public void AdjustBoundary(List<Seat> seats)
     {
-        if (bounds == null || bounds.Count == 0)
+        if (seats == null || seats.Count == 0)
             return;
 
-        Bounds combined = bounds[0];
-        for (int i = 1; i < bounds.Count; i++)
+        float minX = float.MaxValue;
+        float minY = float.MaxValue;
+        float maxX = float.MinValue;
+        float maxY = float.MinValue;
+
+        foreach (var seat in seats)
         {
-            combined.Encapsulate(bounds[i]);
+            // Assuming seat.transform.position gives the center of the seat
+            // and seat.GetBounds() returns a Bounds object with extents
+            Bounds bounds = seat.GetBounds();
+            Vector3 center = seat.transform.position;
+            Vector3 extents = bounds.extents;
+
+            float seatMinX = center.x - extents.x;
+            float seatMinY = center.y - extents.y;
+            float seatMaxX = center.x + extents.x;
+            float seatMaxY = center.y + extents.y;
+
+            minX = Mathf.Min(minX, seatMinX);
+            minY = Mathf.Min(minY, seatMinY);
+            maxX = Mathf.Max(maxX, seatMaxX);
+            maxY = Mathf.Max(maxY, seatMaxY);
         }
 
         // Apply padding
-        combined.Expand(boundaryPadding * 2); // Padding applies to both sides
-
-        minBounds = new Vector2(combined.min.x, combined.min.y);
-        maxBounds = new Vector2(combined.max.x, combined.max.y);
+        minBounds = new Vector2(minX - boundaryPadding, minY - boundaryPadding);
+        maxBounds = new Vector2(maxX + boundaryPadding, maxY + boundaryPadding);
     }
+
 }

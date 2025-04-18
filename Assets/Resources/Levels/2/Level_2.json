@@ -1,0 +1,78 @@
+{
+  "rows": 3,
+  "cols": 3,
+  "seats": [
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": true
+    },
+    {
+      "seatNumber": "C3",
+      "row": 2,
+      "col": 2,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": true
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "C1",
+      "row": 0,
+      "col": 2,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "C2",
+      "row": 1,
+      "col": 2,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "B2",
+      "row": 1,
+      "col": 1,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "A2",
+      "row": 1,
+      "col": 0,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "A3",
+      "row": 2,
+      "col": 0,
+      "personSeating": "Alan",
+      "hint": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis harum     accusantium",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "B3",
+      "row": 2,
+      "col": 1,
+      "personSeating": "Alan",
+      "hint": "",
+      "isInitiallyOpened": false
+    }
+  ]
+}

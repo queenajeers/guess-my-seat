@@ -253,6 +253,10 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 ReturnPersonIcon();
             }
         }
+        else
+        {
+            personIconRef.gameObject.SetActive(false);
+        }
 
         isVerticalDrag = false;
         isHorizontalDrag = false;
@@ -376,6 +380,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         targetWorldPosition = worldPosition;
 
         if (personIconRef == null) return;
+        if (!isVerticalDrag) return;
 
         if (found)
         {
