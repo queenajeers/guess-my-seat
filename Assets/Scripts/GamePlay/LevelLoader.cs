@@ -122,7 +122,8 @@ public class LevelLoader : MonoBehaviour
                     else
                     {
                         openPersons.Add(currentSeat.personSeating);
-                        seatComponent.SetOpenSeat();
+                        seatComponent.isOpenSeat = true;
+
                     }
                 }
                 else

@@ -30,6 +30,8 @@ public class Seat : MonoBehaviour
     [SerializeField] Transform checkMark;
 
 
+    public bool isOpenSeat;
+
     public string PersonName
     {
         get { return assignedToPerson; }
@@ -102,10 +104,24 @@ public class Seat : MonoBehaviour
     {
         checkMark.localScale = Vector3.one;
         seatNumberIndicator.color = correctColor;
+
+        // Animate personObject scale from 0 to 1 with bounce
+        personObject.transform.localScale = Vector3.zero;
         personObject.SetActive(true);
+        personObject.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+
+        // Move seatContainer to correct position
+        seatContainer.DOLocalMove(seatCorrectPlacement, 0.5f).SetEase(Ease.OutCubic);
+
         BGBottom.gameObject.SetActive(true);
-        seatContainer.localPosition = seatCorrectPlacement;
+
+        // Fade in hintIndicator (TextMeshProUGUI)
+        Color hintColor = hintIndicator.color;
+        hintColor.a = 0f;
+        hintIndicator.color = hintColor;
         hintIndicator.gameObject.SetActive(true);
+
+        hintIndicator.DOFade(1f, 0.5f).SetEase(Ease.InOutQuad);
     }
 
 

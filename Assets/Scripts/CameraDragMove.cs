@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections;
 
 enum GestureMode { None, Pan, Zoom }
 
@@ -38,6 +39,9 @@ public class CameraDragMove : MonoBehaviour
     private float targetZoom;
     private Vector3 targetPosition;
 
+    bool preventPanAndZoom = false;
+
+
 
     void Awake()
     {
@@ -65,17 +69,21 @@ public class CameraDragMove : MonoBehaviour
 
     void Update()
     {
+        if (preventPanAndZoom)
+            return;
+
 #if UNITY_EDITOR || UNITY_STANDALONE
         HandleMouseDrag();
         HandleMouseZoom();
 #else
-        HandleTouchDrag();
-        HandleTouchZoom();
+    HandleTouchDrag();
+    HandleTouchZoom();
 #endif
+
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime * zoomLerpSpeed);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * zoomLerpSpeed);
-
     }
+
 
     void HandleMouseDrag()
     {
@@ -241,5 +249,90 @@ public class CameraDragMove : MonoBehaviour
 
         minBounds = new Vector2(minX - boundaryPadding, minY - boundaryPadding);
         maxBounds = new Vector2(maxX + boundaryPadding, maxY + boundaryPadding);
+
+        StartCoroutine(ZoomOutFromWholeLevelViewPoint(seats));
     }
+
+    IEnumerator ZoomOutFromWholeLevelViewPoint(List<Seat> seats)
+    {
+        if (seats == null || seats.Count == 0)
+            yield break;
+
+        preventPanAndZoom = true;
+
+        Vector3 originalPosition = transform.position;
+        float originalZoom = targetZoom;
+
+        float minX = float.MaxValue;
+        float minY = float.MaxValue;
+        float maxX = float.MinValue;
+        float maxY = float.MinValue;
+
+        foreach (var seat in seats)
+        {
+            Bounds bounds = seat.GetBounds();
+            Vector3 center = seat.transform.position;
+            Vector3 extents = bounds.extents;
+
+            float seatMinX = center.x - extents.x;
+            float seatMinY = center.y - extents.y;
+            float seatMaxX = center.x + extents.x;
+            float seatMaxY = center.y + extents.y;
+
+            minX = Mathf.Min(minX, seatMinX);
+            minY = Mathf.Min(minY, seatMinY);
+            maxX = Mathf.Max(maxX, seatMaxX);
+            maxY = Mathf.Max(maxY, seatMaxY);
+        }
+
+        Vector3 boundsCenter = new Vector3((minX + maxX) / 2f, (minY + maxY) / 2f, originalPosition.z);
+        Vector2 boundsSize = new Vector2(maxX - minX, maxY - minY);
+
+        float desiredZoom = Mathf.Max(
+            boundsSize.y / cam.aspect,
+            boundsSize.x / cam.aspect
+        ) * 0.6f;
+
+        desiredZoom = Mathf.Clamp(desiredZoom, minZoom, maxZoom);
+
+
+        transform.position = boundsCenter;
+        cam.orthographicSize = desiredZoom;
+
+        yield return new WaitForSeconds(.5f);
+
+        for (int i = 0; i < seats.Count; i++)
+        {
+            if (seats[i].isOpenSeat)
+            {
+                seats[i].SetOpenSeat();
+                yield return new WaitForSeconds(.2f);
+            }
+        }
+
+
+        yield return new WaitForSeconds(.5f);
+
+        float duration = 1f;
+        float elapsed = 0f;
+
+        var startPos = transform.position;
+        var startZoom = cam.orthographicSize;
+
+        while (elapsed < duration)
+        {
+            float x = elapsed / duration;
+            x = x * x * x * (x * (6.0f * x - 15.0f) + 10.0f);
+            transform.position = Vector3.Lerp(startPos, originalPosition, x);
+            cam.orthographicSize = Mathf.Lerp(startZoom, originalZoom, x);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = originalPosition;
+        cam.orthographicSize = originalZoom;
+
+        preventPanAndZoom = false;
+    }
+
 }
