@@ -47,12 +47,12 @@ public class CameraDragMove : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Instance = this;
+        cam = Camera.main;
 
     }
 
     void Start()
     {
-        cam = GetComponent<Camera>();
         matchWidth = GetComponent<MatchWidth>();
 
         targetZoom = cam.orthographicSize;
@@ -256,7 +256,8 @@ public class CameraDragMove : MonoBehaviour
 
     IEnumerator ZoomOutFromWholeLevelViewPoint(List<Seat> seats)
     {
-        yield return new WaitUntil(() => { return cam != null; });
+        if (cam == null) { cam = Camera.main; }
+
         if (seats == null || seats.Count == 0)
             yield break;
 

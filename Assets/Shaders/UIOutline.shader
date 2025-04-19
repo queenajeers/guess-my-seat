@@ -1,4 +1,4 @@
-Shader "UI/OutlineUI_Dilate"
+Shader "UI/OutlineUI_DilateWithPadding"
 {
     Properties
     {
@@ -6,6 +6,7 @@ Shader "UI/OutlineUI_Dilate"
         _OutlineColor ("Outline Color", Color) = (0,0,0,1)
         _OutlineThickness ("Outline Thickness", Float) = 2.0
         _Dilate ("Dilate (Grow/Shrink Alpha)", Float) = 0.0
+        _Padding ("Padding", Float) = 1.0  // Added Padding property
     }
 
     SubShader
@@ -30,6 +31,7 @@ Shader "UI/OutlineUI_Dilate"
             float4 _OutlineColor;
             float _OutlineThickness;
             float _Dilate;
+            float _Padding;  // Declare Padding variable
 
             struct appdata_t
             {
@@ -55,11 +57,13 @@ Shader "UI/OutlineUI_Dilate"
             {
                 float result = 0.0;
 
+                // Apply padding by expanding the sampling grid
                 for (int x = -1; x <= 1; x++)
                 {
                     for (int y = -1; y <= 1; y++)
                     {
-                        float2 offset = float2(x, y) * texelSize * (1.0 + dilate);
+                        // Multiply offset by the padding factor to expand the sampling grid
+                        float2 offset = float2(x, y) * texelSize * (1.0 + dilate + _Padding);
                         result = max(result, tex2D(_MainTex, uv + offset).a);
                     }
                 }
