@@ -49,14 +49,21 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Vector3 targetWorldPosition;
 
     public Seat assignedSeat;
-
+    private Vector3 originalScale;
+    private Vector3 iconOriginalScale;
+    [SerializeField] float sizeMultiplier; // applied for contentToDrag and personIconRef when in dragging mode, returning to original again back to scale 1
+    // Get sizeMultipler when ever needed from  MatchWidth.Instance.GetCurrentSizeRatio()
     public Vector2 ContentRefWorldPos
     {
+
+
         get { return Camera.main.ScreenToWorldPoint(contentToDrag.position); }
+
     }
 
     private void Awake()
     {
+
         if (contentToDrag == null)
         {
             Transform found = transform.Find("Content");
@@ -73,6 +80,19 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         if (personIconRef != null)
             personIconRef.gameObject.SetActive(false);
+    }
+
+    void Start()
+    {
+        SetPersonIconRefOriginals();
+    }
+
+    void SetPersonIconRefOriginals()
+    {
+        iconOriginalParent = personIconRef.parent;
+        iconOriginalSiblingIndex = personIconRef.GetSiblingIndex();
+        iconOriginalLocalPosition = personIconRef.localPosition;
+        iconOriginalSizeDelta = personIconRef.sizeDelta;
     }
 
     public void BackToScrollPanel()
@@ -108,6 +128,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+
+
         isDragging = true;
         isVerticalDrag = false;
         isHorizontalDrag = false;
@@ -204,6 +226,13 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             contentToDrag.SetParent(UIManager.Instance.GamePlayPanel, worldPositionStays: false);
             contentToDrag.position = worldPos;
             contentToDrag.sizeDelta = size;
+
+
+
+            // Apply scaling based on sizeMultiplier from MatchWidth
+            sizeMultiplier = MatchWidth.Instance.GetCurrentSizeRatio();
+            originalScale = contentToDrag.localScale;
+            contentToDrag.localScale = Vector3.one * sizeMultiplier;
 
             SoundManager.Play(SoundNames.Pick);
         }
@@ -338,6 +367,12 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         contentToDrag.sizeDelta = originalSizeDelta;
         wasDragged = false;
 
+        // Return scale back to 1
+        contentToDrag.localScale = originalScale;
+
+        if (personIconRef != null)
+            personIconRef.localScale = iconOriginalScale;
+
         ReturnPersonIcon();
         SoundManager.Play(SoundNames.Pick, 1f, 1.4f);
     }
@@ -386,10 +421,9 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             personIconRef.gameObject.SetActive(true);
 
-            iconOriginalParent = personIconRef.parent;
-            iconOriginalSiblingIndex = personIconRef.GetSiblingIndex();
-            iconOriginalLocalPosition = personIconRef.localPosition;
-            iconOriginalSizeDelta = personIconRef.sizeDelta;
+            sizeMultiplier = MatchWidth.Instance.GetCurrentSizeRatio();
+            iconOriginalScale = personIconRef.localScale;
+            personIconRef.localScale = Vector3.one * sizeMultiplier;
 
             MoveToWorldSpace(personIconRef, targetWorldPosition, UIManager.Instance.GamePlayPanel);
 
@@ -416,6 +450,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void ReturnPersonIcon()
     {
         if (personIconRef == null || iconOriginalParent == null) return;
+
+        personIconRef.localScale = iconOriginalScale;
 
         personIconRef.SetParent(iconOriginalParent, worldPositionStays: false);
         personIconRef.SetSiblingIndex(iconOriginalSiblingIndex);

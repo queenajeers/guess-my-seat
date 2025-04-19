@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10.199951}
+  m_AnchoredPosition: {x: 0, y: 18.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1158413715252402675
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6331778424751752850, guid: 2ee208c06484c4ea9981194c94051a80, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2ee208c06484c4ea9981194c94051a80, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contentToDrag: {fileID: 3733697085564425444}
   personIconRef: {fileID: 2006136191620498656}
-  dragOffset: {x: 0, y: 200}
+  dragOffset: {x: 0, y: 275}
   dragThreshold: 10
   smoothFollowSpeed: 10
   returnDuration: 0.25

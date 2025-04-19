@@ -139,7 +139,11 @@ public class LevelLoader : MonoBehaviour
         GameObject seatsCentre = new GameObject("AllSeats");
 
         seatsCenterPos.y = allSeats[0, 0].transform.position.y + (seatBounds[0].GetBounds().size.y / 2f);
-        seatsCenterPos.x = allSeats[0, 0].transform.position.x - (seatBounds[0].GetBounds().size.x / 2f);
+
+        if (seatData.GetLength(1) > 3)
+        {
+            seatsCenterPos.x = allSeats[0, 0].transform.position.x - (seatBounds[0].GetBounds().size.x / 2f);
+        }
 
         seatsCentre.transform.position = seatsCenterPos;
 
@@ -148,9 +152,14 @@ public class LevelLoader : MonoBehaviour
         {
             item.SetParent(seatsCentre.transform);
         }
-
-        //seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
-        seatsCentre.transform.position = VptoWP(0f, 1f) + new Vector2(0.25f, -2f);
+        if (seatData.GetLength(1) <= 3)
+        {
+            seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
+        }
+        else
+        {
+            seatsCentre.transform.position = VptoWP(0f, 1f) + new Vector2(0.25f, -2f);
+        }
 
         for (int p = 0; p < levelData.seats.Count; p++)
         {

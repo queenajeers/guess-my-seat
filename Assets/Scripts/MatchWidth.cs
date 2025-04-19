@@ -5,23 +5,48 @@ using UnityEngine;
 public class MatchWidth : MonoBehaviour
 {
 
+    public static MatchWidth Instance { get; private set; }
     // Set this to the in-world distance between the left & right edges of your scene.
     public float sceneWidth = 10;
+    float desiredWidth;
 
-    Camera _camera;
-    void Start()
+    [HideInInspector]
+    public float DesiredWidth
     {
-        _camera = GetComponent<Camera>();
+        get { return desiredWidth; }
     }
 
-    // Adjust the camera's height so the desired scene width fits in view
-    // even if the screen/window size changes dynamically.
-    void Update()
+    public float DesiredMaxWidth
+    {
+        get { return desiredWidth + 4f; }
+    }
+
+    Camera _camera;
+    void Awake()
+    {
+        Instance = this;
+        _camera = GetComponent<Camera>();
+        desiredWidth = GetDesiredWidth();
+        SetToDesiredHeight();
+    }
+
+    float GetDesiredWidth()
     {
         float unitsPerPixel = sceneWidth / Screen.width;
 
         float desiredHalfHeight = 0.5f * unitsPerPixel * Screen.height;
-
-        _camera.orthographicSize = desiredHalfHeight;
+        return desiredHalfHeight;
     }
+
+    public void SetToDesiredHeight()
+    {
+        _camera.orthographicSize = desiredWidth;
+    }
+
+    public float GetCurrentSizeRatio()
+    {
+        return DesiredWidth / _camera.orthographicSize;
+    }
+
+
 }
