@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Alan
   m_EditorClassIdentifier: 
   personName: Alann
-  personIcon: {fileID: 21300000, guid: 2ee208c06484c4ea9981194c94051a80, type: 3}
-  personIconHappy: {fileID: 21300000, guid: 566ac00cf3494467599e336f719738d0, type: 3}
+  personIcon: {fileID: 21300000, guid: 561afb83ebe7f4b928191e7858366204, type: 3}
+  personIconHappy: {fileID: 21300000, guid: 561afb83ebe7f4b928191e7858366204, type: 3}

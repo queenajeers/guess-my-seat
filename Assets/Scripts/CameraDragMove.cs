@@ -47,6 +47,7 @@ public class CameraDragMove : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Instance = this;
+
     }
 
     void Start()
@@ -255,6 +256,7 @@ public class CameraDragMove : MonoBehaviour
 
     IEnumerator ZoomOutFromWholeLevelViewPoint(List<Seat> seats)
     {
+        yield return new WaitUntil(() => { return cam != null; });
         if (seats == null || seats.Count == 0)
             yield break;
 
@@ -285,6 +287,7 @@ public class CameraDragMove : MonoBehaviour
             maxY = Mathf.Max(maxY, seatMaxY);
         }
 
+
         Vector3 boundsCenter = new Vector3((minX + maxX) / 2f, (minY + maxY) / 2f, originalPosition.z);
         Vector2 boundsSize = new Vector2(maxX - minX, maxY - minY);
 
@@ -294,7 +297,6 @@ public class CameraDragMove : MonoBehaviour
         ) * 0.6f;
 
         desiredZoom = Mathf.Clamp(desiredZoom, minZoom, maxZoom);
-
 
         transform.position = boundsCenter;
         cam.orthographicSize = desiredZoom;

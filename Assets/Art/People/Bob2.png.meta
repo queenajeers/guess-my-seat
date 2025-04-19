@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 011fd668236c44ea9979b408f382bef7
+guid: bf6e7922cf1e94aaeb80eb9995aba998
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5359537829285338581
-    second: myAvatar (5)_0
+      213: -5288370752810518513
+    second: avataaars (3)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 512
+  spritePixelsToUnits: 480
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: myAvatar (5)_0
+      name: avataaars (3)_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 63
         y: 0
-        width: 486
-        height: 500
+        width: 418
+        height: 531
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b22ed258db81f95b0800000000000000
-      internalID: -5359537829285338581
+      spriteID: f08f92eb1deeb96b0800000000000000
+      internalID: -5288370752810518513
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      myAvatar (5)_0: -5359537829285338581
+      avataaars (3)_0: -5288370752810518513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
