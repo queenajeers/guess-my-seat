@@ -321,13 +321,14 @@ MonoBehaviour:
   personIconRef: {fileID: 2006136191620498656}
   dragOffset: {x: 0, y: 275}
   dragThreshold: 10
-  smoothFollowSpeed: 10
+  smoothFollowSpeed: 30
   returnDuration: 0.25
   enableHorizontalScrollTransfer: 1
   parentScrollRect: {fileID: 0}
   horizontalScrollSensitivity: 1
   horizontalScrollVelocityMultiplier: 2
   assignedSeat: {fileID: 0}
+  sizeMultiplier: 0
   personName: 
   personNameIndicator: {fileID: 6377285725807326389}
   personIcon: {fileID: 7414350290899365332}
