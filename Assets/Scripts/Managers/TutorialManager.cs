@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class TutorialManager : MonoBehaviour
     public SpriteRenderer maskBGSpriteRenderer;
     public SpriteRenderer borderSpriteRenderer;
     public GameObject mask;
+    public SpriteRenderer instBG;
 
     public List<string> namesByOrder;
+    [TextArea(10, 20)]
+    public List<string> instructions;
     public int currentNameOrder;
 
     Dictionary<string, Seat> seatsByName = new Dictionary<string, Seat>();
+    [SerializeField] TextMeshPro instruction;
+
 
     public void Start()
     {
@@ -28,6 +34,10 @@ public class TutorialManager : MonoBehaviour
         mask.SetActive(true);
         mask.transform.position = seatsByName[namesByOrder[currentNameOrder]].transform.position;
         FadeIn(borderSpriteRenderer, 1f);
+        FadeIn(instBG, 1f);
+        LoadInstruction(instructions[currentNameOrder]);
+        instBG.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, .6f);
+
 
         yield return null;
     }
@@ -44,6 +54,22 @@ public class TutorialManager : MonoBehaviour
 
     }
 
+    void LoadInstruction(string inst)
+    {
+        instruction.text = inst;
+        FadeIn(instruction, 1f);
+    }
+    void FadeIn(TextMeshPro spriteRenderer, float targetAlpha)
+    {
+        Color c = spriteRenderer.color;
+
+        c.a = 0f;
+        spriteRenderer.color = c;
+        c.a = targetAlpha;
+
+        spriteRenderer.DOColor(c, .4f);
+
+    }
 
     void LoadWorldSeats()
     {
@@ -51,5 +77,11 @@ public class TutorialManager : MonoBehaviour
         {
             seatsByName[item.PersonName] = item;
         }
+    }
+
+    Vector2 VptoWP(float x, float y)
+    {
+        return Camera.main.ViewportToWorldPoint(new(x, y, 0));
+
     }
 }
