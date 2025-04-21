@@ -7,21 +7,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
     public Transform GamePlayPanel;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     public Transform personScrollView;
     public GameObject personItemPrefab;
-
     public TextMeshProUGUI seatsFilledIndicator;
     public Transform seatsFilledIndicatorBG;
-
     public GameObject winConfetti;
-
     public GameObject gamePlayNavBar;
     public GameObject gradientBarPanel;
-
     [SerializeField] Animator gamePlayAnim;
-
     public GameObject tutorialManager;
 
     void Awake()

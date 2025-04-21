@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
-using System.Threading;
-using Unity.Collections;
+
 
 public class Seat : MonoBehaviour
 {
@@ -172,6 +171,13 @@ public class Seat : MonoBehaviour
     {
         return BGRed.bounds;
     }
+
+    public Vector2 GetSP()
+    {
+        return Camera.main.WorldToScreenPoint(transform.position);
+    }
+
+
 
 
 }

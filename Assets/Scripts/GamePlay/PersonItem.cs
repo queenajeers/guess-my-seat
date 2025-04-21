@@ -49,6 +49,11 @@ public class PersonItem : PersonDraggable
         }
     }
 
+    public Vector2 GetSP()
+    {
+        return Camera.main.WorldToScreenPoint(Camera.main.ScreenToWorldPoint(personIcon.transform.position));
+    }
+
 
 
 }

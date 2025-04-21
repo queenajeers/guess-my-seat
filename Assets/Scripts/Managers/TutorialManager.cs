@@ -18,6 +18,8 @@ public class TutorialManager : MonoBehaviour
     public int currentNameOrder;
 
     Dictionary<string, Seat> seatsByName = new Dictionary<string, Seat>();
+    Dictionary<string, PersonItem> personItemsByName = new Dictionary<string, PersonItem>();
+
     [SerializeField] TextMeshPro instruction;
 
 
@@ -31,13 +33,14 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         FadeIn(maskBGSpriteRenderer, .95f);
         LoadWorldSeats();
+        LoadPersonItems();
         mask.SetActive(true);
         mask.transform.position = seatsByName[namesByOrder[currentNameOrder]].transform.position;
         FadeIn(borderSpriteRenderer, 1f);
         FadeIn(instBG, 1f);
         LoadInstruction(instructions[currentNameOrder]);
         instBG.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, .6f);
-
+        FingerMover.Instance.Animate(personItemsByName["Nicky"].GetSP(), seatsByName["Nicky"].GetSP());
 
         yield return null;
     }
@@ -76,6 +79,14 @@ public class TutorialManager : MonoBehaviour
         foreach (var item in FindObjectsByType<Seat>(FindObjectsSortMode.None))
         {
             seatsByName[item.PersonName] = item;
+        }
+    }
+
+    void LoadPersonItems()
+    {
+        foreach (var item in FindObjectsByType<PersonItem>(FindObjectsSortMode.None))
+        {
+            personItemsByName[item.PersonName] = item;
         }
     }
 

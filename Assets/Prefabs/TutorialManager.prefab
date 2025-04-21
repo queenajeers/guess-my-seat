@@ -232,9 +232,8 @@ MonoBehaviour:
   - Lucky
   - Vicky
   instructions:
-  - "The goal is for everyone to sit in \ntheir  assigned spots. One person starts
-    seated,\nrevealing a hint, here we can deduct that,\n\"<u>Nicky</u> should sit
-    next to <u>Ricky</u>.\""
+  - "The goal is for everyone to sit in \ntheir assigned seats. This seat, left a
+    hint for us:\n\"<b><u>Nicky</u> should sit next to <u>Ricky</u></b>\""
   - 
   - 
   currentNameOrder: 0
