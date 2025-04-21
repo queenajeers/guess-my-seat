@@ -22,13 +22,12 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator TutorialCor()
     {
-        yield return new WaitForSeconds(1f);
-        FadeIn(maskBGSpriteRenderer, .4f);
+        yield return new WaitForSeconds(.5f);
+        FadeIn(maskBGSpriteRenderer, .95f);
         LoadWorldSeats();
         mask.SetActive(true);
         mask.transform.position = seatsByName[namesByOrder[currentNameOrder]].transform.position;
-        // maskBGSpriteRenderer.DOColor(color, .4f);
-        // borderSpriteRenderer.DOColor(color, .4f);
+        FadeIn(borderSpriteRenderer, 1f);
 
         yield return null;
     }
