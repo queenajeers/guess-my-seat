@@ -61,6 +61,7 @@ public class LevelLoader : MonoBehaviour
             return;
         }
 
+        GamePlayManager.Instance.SetLevel(levelToLoad);
         LoadLevelData(jsonFile.text);
         InitialiseLevel();
     }
@@ -113,7 +114,7 @@ public class LevelLoader : MonoBehaviour
                     PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{currentSeat.personSeating.Trim()}");
 
                     string hyperHintText = TextStyler.GiveHyperText(currentSeat.hint, allPersons);
-                    seatComponent.LoadData(currentSeat.personSeating, personData.personIconHappy, currentSeat.seatNumber, hyperHintText);
+                    seatComponent.LoadData(currentSeat.personSeating, personData.personIcon, currentSeat.seatNumber, hyperHintText);
 
                     if (!currentSeat.isInitiallyOpened)
                     {

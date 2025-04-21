@@ -107,19 +107,19 @@ public class Seat : MonoBehaviour
     {
         var currentScale = transform.localScale;
 
-        transform.DOScale(currentScale * 1.15f, .15f).OnComplete(() =>
-        {
-            transform.DOScale(currentScale, .15f);
-        });
+        // transform.DOScale(currentScale * 1.15f, .15f).OnComplete(() =>
+        // {
+        //     transform.DOScale(currentScale, .15f);
+        // });
 
 
         checkMark.localScale = Vector3.one;
         seatNumberIndicator.color = correctColor;
 
         // Animate personObject scale from 0 to 1 with bounce
-        personObject.transform.localScale = Vector3.zero;
+        // personObject.transform.localScale = Vector3.zero;
         personObject.SetActive(true);
-        personObject.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+        // personObject.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
 
         // Move seatContainer to correct position
         seatContainer.DOLocalMove(seatCorrectPlacement, 0.5f).SetEase(Ease.OutCubic);

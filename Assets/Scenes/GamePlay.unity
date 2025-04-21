@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &162808117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162808118}
+  - component: {fileID: 162808119}
+  m_Layer: 0
+  m_Name: GamePlayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &162808118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162808117}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 478816996}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &162808119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162808117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2e80628805044b58d59781cea02c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &230293517
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +446,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 162808118}
   - {fileID: 1671350892}
   - {fileID: 892525581}
   - {fileID: 535171783}
@@ -952,12 +997,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 729470525}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.255518, g: 0.4219244, b: 0.6226415, a: 1}
+  m_EffectColor: {r: 0.3460751, g: 0.68017447, b: 0.9528302, a: 1}
   m_EffectDistance: {x: 0, y: -9.6}
   m_UseGraphicAlpha: 1
 --- !u!114 &729470528
@@ -973,7 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19339621, g: 0.63537073, b: 1, a: 1}
+  m_Color: {r: 0.3820755, g: 0.7210342, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1966,7 +2011,10 @@ MonoBehaviour:
   seatsFilledIndicator: {fileID: 1836319916}
   seatsFilledIndicatorBG: {fileID: 871939660}
   winConfetti: {fileID: 1613198864}
+  gamePlayNavBar: {fileID: 729470525}
+  gradientBarPanel: {fileID: 230293517}
   gamePlayAnim: {fileID: 455407227}
+  tutorialManager: {fileID: 2510489114099125976, guid: 842e0df9e033f4dfeb597e92dddbd5d9, type: 3}
 --- !u!1 &1836319914
 GameObject:
   m_ObjectHideFlags: 0
@@ -2456,7 +2504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379828564054223464, guid: 796d5f03b6c794579a0b5d877febebba, type: 3}
       propertyPath: levelToLoad
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

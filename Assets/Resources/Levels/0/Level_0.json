@@ -1,0 +1,38 @@
+{
+  "rows": 2,
+  "cols": 2,
+  "seats": [
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personSeating": "Ricky",
+      "hint": "Nicky and I arrived together",
+      "isInitiallyOpened": true
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personSeating": "Nicky",
+      "hint": "I asked Lucky to take the seat directly behind mine",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "B2",
+      "row": 1,
+      "col": 1,
+      "personSeating": "Lucky",
+      "hint": "Woohoo! I'm super excited for the movie!",
+      "isInitiallyOpened": false
+    },
+    {
+      "seatNumber": "A2",
+      "row": 1,
+      "col": 0,
+      "personSeating": "Vicky",
+      "hint": "Congrats on completing the tutorial!",
+      "isInitiallyOpened": false
+    }
+  ]
+}

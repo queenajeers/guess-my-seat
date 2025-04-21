@@ -17,7 +17,12 @@ public class UIManager : MonoBehaviour
 
     public GameObject winConfetti;
 
+    public GameObject gamePlayNavBar;
+    public GameObject gradientBarPanel;
+
     [SerializeField] Animator gamePlayAnim;
+
+    public GameObject tutorialManager;
 
     void Awake()
     {
@@ -56,6 +61,14 @@ public class UIManager : MonoBehaviour
 
     public void GamePlayElementsIn()
     {
+        if (GamePlayManager.Instance.CurrentLevel == 0)
+        {
+            gamePlayNavBar.SetActive(false);
+            gradientBarPanel.SetActive(false);
+            Instantiate(tutorialManager, Vector2.zero, Quaternion.identity);
+        }
+
         gamePlayAnim.Play("GamePlayIn", 0, 0);
     }
+
 }
