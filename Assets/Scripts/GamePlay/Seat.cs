@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System.Threading;
+using Unity.Collections;
 
 public class Seat : MonoBehaviour
 {
@@ -27,6 +29,7 @@ public class Seat : MonoBehaviour
     public Color normalColor;
 
     public GameObject happyEmoji;
+    [SerializeField] SpriteRenderer ideaIconSR;
     [SerializeField] Transform checkMark;
 
 
@@ -102,6 +105,14 @@ public class Seat : MonoBehaviour
 
     public void SetOpenSeat()
     {
+        var currentScale = transform.localScale;
+
+        transform.DOScale(currentScale * 1.15f, .15f).OnComplete(() =>
+        {
+            transform.DOScale(currentScale, .15f);
+        });
+
+
         checkMark.localScale = Vector3.one;
         seatNumberIndicator.color = correctColor;
 
@@ -122,6 +133,15 @@ public class Seat : MonoBehaviour
         hintIndicator.gameObject.SetActive(true);
 
         hintIndicator.DOFade(1f, 0.5f).SetEase(Ease.InOutQuad);
+
+        ideaIconSR.gameObject.SetActive(true);
+        var currentIconScale = ideaIconSR.transform.localScale;
+        ideaIconSR.transform.localScale = Vector2.one * .4f;
+        ideaIconSR.transform.DOScale(currentIconScale * 1.4f, 1f);
+        var c = ideaIconSR.color;
+        c.a = 0f;
+        ideaIconSR.DOColor(c, .6f);
+
     }
 
 

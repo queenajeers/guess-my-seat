@@ -47,25 +47,25 @@ public class CameraDragMove : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         Instance = this;
-        cam = Camera.main;
 
     }
 
     void Start()
     {
         matchWidth = GetComponent<MatchWidth>();
-
+        cam = Camera.main;
         targetZoom = cam.orthographicSize;
         targetPosition = transform.position;
 
 
         if (matchWidth != null)
         {
-            matchWidth.SetToDesiredHeight();
+            matchWidth.SetToDesiredWidth();
             minZoom = matchWidth.DesiredWidth - 2f;
             maxZoom = matchWidth.DesiredMaxWidth;
             targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
         }
+
     }
 
     void Update()
@@ -256,7 +256,7 @@ public class CameraDragMove : MonoBehaviour
 
     IEnumerator ZoomOutFromWholeLevelViewPoint(List<Seat> seats)
     {
-        if (cam == null) { cam = Camera.main; }
+        yield return new WaitUntil(() => { return cam != null; });
 
         if (seats == null || seats.Count == 0)
             yield break;
@@ -314,9 +314,11 @@ public class CameraDragMove : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
 
-        float duration = 1f;
+        UIManager.Instance.GamePlayElementsIn();
+
+        float duration = .5f;
         float elapsed = 0f;
 
         var startPos = transform.position;

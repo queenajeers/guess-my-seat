@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject winConfetti;
 
+    [SerializeField] Animator gamePlayAnim;
+
     void Awake()
     {
         Instance = this;
@@ -50,5 +52,10 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         SoundManager.Play(SoundNames.Win);
         winConfetti.SetActive(true);
+    }
+
+    public void GamePlayElementsIn()
+    {
+        gamePlayAnim.Play("GamePlayIn", 0, 0);
     }
 }

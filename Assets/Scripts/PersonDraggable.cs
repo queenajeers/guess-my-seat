@@ -234,7 +234,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             originalScale = contentToDrag.localScale;
             contentToDrag.localScale = Vector3.one * sizeMultiplier;
 
-            SoundManager.Play(SoundNames.Pick);
+            SoundManager.Play(SoundNames.Pick, .5f);
         }
     }
 
@@ -374,7 +374,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             personIconRef.localScale = iconOriginalScale;
 
         ReturnPersonIcon();
-        SoundManager.Play(SoundNames.Pick, 1f, 1.4f);
+        SoundManager.Play(SoundNames.Pick, .5f, 1.4f);
     }
 
     private IEnumerator SmoothMoveToTarget(Vector3 worldTarget)

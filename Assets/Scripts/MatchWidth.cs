@@ -27,7 +27,7 @@ public class MatchWidth : MonoBehaviour
         Instance = this;
         _camera = GetComponent<Camera>();
         desiredWidth = GetDesiredWidth();
-        SetToDesiredHeight();
+        SetToDesiredWidth();
     }
 
     float GetDesiredWidth()
@@ -38,8 +38,9 @@ public class MatchWidth : MonoBehaviour
         return desiredHalfHeight;
     }
 
-    public void SetToDesiredHeight()
+    public void SetToDesiredWidth()
     {
+
         _camera.orthographicSize = desiredWidth;
     }
 
