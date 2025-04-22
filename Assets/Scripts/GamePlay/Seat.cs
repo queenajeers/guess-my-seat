@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 
 public class Seat : MonoBehaviour
@@ -31,6 +32,8 @@ public class Seat : MonoBehaviour
     [SerializeField] SpriteRenderer ideaIconSR;
     [SerializeField] Transform checkMark;
 
+    [SerializeField] ClickableWordsHandler clickableWordsHandler;
+
 
     public bool isOpenSeat;
     public bool holdSeat;
@@ -54,6 +57,12 @@ public class Seat : MonoBehaviour
         seatNumberIndicator.text = seatNumber;
         hintIndicator.text = hint;
         this.personName.text = personName;
+    }
+
+    public void makeTextClickable(List<string> words)
+    {
+        clickableWordsHandler.InitializeClickableWords(words);
+
     }
 
 

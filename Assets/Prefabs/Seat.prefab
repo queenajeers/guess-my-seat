@@ -5188,7 +5188,9 @@ GameObject:
   - component: {fileID: 7680722088127033694}
   - component: {fileID: 981711242789107998}
   - component: {fileID: 6626289748493701450}
-  m_Layer: 0
+  - component: {fileID: 719280796453393346}
+  - component: {fileID: 5120875534040577788}
+  m_Layer: 6
   m_Name: Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5353,6 +5355,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 981711242789107998}
   m_maskType: 0
+--- !u!114 &719280796453393346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608719491998942847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbce9764b95554ca1bba18a975d8b550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 6626289748493701450}
+--- !u!65 &5120875534040577788
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608719491998942847}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.440625, y: 0.6025329, z: 0}
+  m_Center: {x: -0.0021999478, y: 0.09077105, z: 0}
 --- !u!1 &1773336089198361386
 GameObject:
   m_ObjectHideFlags: 0
@@ -10494,7 +10530,10 @@ MonoBehaviour:
   happyEmoji: {fileID: 1773336089198361386}
   ideaIconSR: {fileID: 8966888840319357713}
   checkMark: {fileID: 8387623151214453076}
+  clickableWordsHandler: {fileID: 719280796453393346}
   isOpenSeat: 0
+  holdSeat: 0
+  isPlaced: 0
 --- !u!1 &3862038499600171903
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     {
         var personItemComp = Instantiate(personItemPrefab, personScrollView).GetComponent<PersonItem>();
         personItemComp.LoadData(personName, icon);
+        PeopleScrollManager.Instance.personItems.Add(personItemComp);
+
     }
 
     public void SetSeatsIndicator(int seatsFilled, int totalSeats)

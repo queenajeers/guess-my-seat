@@ -115,6 +115,7 @@ public class LevelLoader : MonoBehaviour
 
                     string hyperHintText = TextStyler.GiveHyperText(currentSeat.hint, allPersons);
                     seatComponent.LoadData(currentSeat.personSeating, personData.personIcon, currentSeat.seatNumber, hyperHintText);
+                    seatComponent.makeTextClickable(allPersons);
 
                     if (!currentSeat.isInitiallyOpened)
                     {
