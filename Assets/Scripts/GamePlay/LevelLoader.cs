@@ -142,7 +142,9 @@ public class LevelLoader : MonoBehaviour
 
         seatsCenterPos.y = allSeats[0, 0].transform.position.y + (seatBounds[0].GetBounds().size.y / 2f);
 
-        if (seatData.GetLength(1) > 3)
+        int minSeatsVisible = 3;
+
+        if (seatData.GetLength(1) > minSeatsVisible)
         {
             seatsCenterPos.x = allSeats[0, 0].transform.position.x - (seatBounds[0].GetBounds().size.x / 2f);
         }
@@ -154,7 +156,7 @@ public class LevelLoader : MonoBehaviour
         {
             item.SetParent(seatsCentre.transform);
         }
-        if (seatData.GetLength(1) <= 3)
+        if (seatData.GetLength(1) <= minSeatsVisible)
         {
             seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
         }
