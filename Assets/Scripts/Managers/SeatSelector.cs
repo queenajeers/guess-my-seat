@@ -32,6 +32,7 @@ public class SeatSelector : MonoBehaviour
 
         foreach (var seat in availableSeats)
         {
+            if (seat.holdSeat) continue;
             float dist = Vector2.Distance(currentPersonDraggable.ContentRefWorldPos, seat.SeatingPos);
 
             if (dist < nearestDistance)
@@ -86,11 +87,11 @@ public class SeatSelector : MonoBehaviour
             seatsFilled++;
             UIManager.Instance.SetSeatsIndicator(seatsFilled, totalSeats);
 
-
             if (availableSeats.Count == 0)
             {
                 Debug.Log("LEVEL FINISHED!");
                 UIManager.Instance.FinishActivate();
+                UIManager.Instance.GamePlayElementsOut();
             }
 
         }

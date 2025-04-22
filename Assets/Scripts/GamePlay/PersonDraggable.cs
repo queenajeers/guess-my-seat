@@ -19,7 +19,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public float horizontalScrollSensitivity = 1f;
     public float horizontalScrollVelocityMultiplier = 2f;
 
-    private bool isDragging = false;
+    public bool isDragging = false;
     private bool isVerticalDrag = false;
     private bool isHorizontalDrag = false;
     private bool wasDragged = false;
@@ -45,14 +45,17 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Coroutine returnCoroutine;
     private Coroutine scrollInertiaCoroutine;
 
-    private bool targetFound = false;
+    public bool targetFound = false;
     private Vector3 targetWorldPosition;
 
     public Seat assignedSeat;
     private Vector3 originalScale;
     private Vector3 iconOriginalScale;
     [SerializeField] float sizeMultiplier; // applied for contentToDrag and personIconRef when in dragging mode, returning to original again back to scale 1
-    // Get sizeMultipler when ever needed from  MatchWidth.Instance.GetCurrentSizeRatio()
+                                           // Get sizeMultipler when ever needed from  MatchWidth.Instance.GetCurrentSizeRatio()
+
+    public bool preventFromUse;
+
     public Vector2 ContentRefWorldPos
     {
 
@@ -128,7 +131,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
+        if (preventFromUse) return;
 
         isDragging = true;
         isVerticalDrag = false;
@@ -157,6 +160,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (preventFromUse) return;
+
         Vector2 delta = eventData.position - initialPointerPosition;
         Vector2 frameDelta = eventData.position - lastPointerPosition;
 
@@ -240,6 +245,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (preventFromUse) return;
+
         isDragging = false;
 
         SeatSelector.Instance.CancelDraggable(this); // 👈 ADD THIS

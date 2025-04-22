@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using DG.Tweening;
 
 enum GestureMode { None, Pan, Zoom }
 
@@ -39,15 +40,16 @@ public class CameraDragMove : MonoBehaviour
     private float targetZoom;
     private Vector3 targetPosition;
 
-    bool preventPanAndZoom = false;
+    public bool preventPanAndZoom = false;
 
+    Vector3 zoomedOutPos;
+    float zoomedOutCamSize;
 
 
     void Awake()
     {
         Application.targetFrameRate = 60;
         Instance = this;
-
     }
 
     void Start()
@@ -254,6 +256,8 @@ public class CameraDragMove : MonoBehaviour
         StartCoroutine(ZoomOutFromWholeLevelViewPoint(seats));
     }
 
+
+    List<Seat> allSeats;
     IEnumerator ZoomOutFromWholeLevelViewPoint(List<Seat> seats)
     {
         yield return new WaitUntil(() => { return cam != null; });
@@ -262,6 +266,7 @@ public class CameraDragMove : MonoBehaviour
             yield break;
 
         preventPanAndZoom = true;
+        allSeats = seats;
 
         Vector3 originalPosition = transform.position;
         float originalZoom = targetZoom;
@@ -302,6 +307,10 @@ public class CameraDragMove : MonoBehaviour
         transform.position = boundsCenter;
         cam.orthographicSize = desiredZoom;
 
+        zoomedOutPos = boundsCenter;
+        zoomedOutCamSize = desiredZoom;
+
+
         yield return new WaitForSeconds(.5f);
 
         for (int i = 0; i < seats.Count; i++)
@@ -338,6 +347,48 @@ public class CameraDragMove : MonoBehaviour
         cam.orthographicSize = originalZoom;
 
         preventPanAndZoom = false;
+    }
+
+    public void ZoomOut()
+    {
+        preventPanAndZoom = true;
+
+        if (allSeats == null || allSeats.Count == 0)
+            return;
+
+        // Calculate the overall bounds of all seats to find the topmost seat
+        float maxY = float.MinValue;
+
+        // Loop through all seats and find the highest Y position (topmost seat)
+        foreach (var seat in allSeats)
+        {
+            Bounds seatBounds = seat.GetBounds(); // Assuming GetBounds() gives the seat's world space bounds
+            float seatMaxY = seatBounds.max.y;  // Get the topmost point of each seat
+            maxY = Mathf.Max(maxY, seatMaxY);  // Get the highest point across all seats
+        }
+
+        // Make the top margin a percentage of the orthographic size
+        // For example, 15% of the screen height
+        float topMarginPercentage = 0.25f;
+        float topScreenMargin = zoomedOutCamSize * topMarginPercentage;
+
+        // Calculate the new camera position
+        // In an orthographic camera, the top edge is at cameraY + orthographicSize
+        float newCameraY = maxY - (zoomedOutCamSize - topScreenMargin);
+
+        // Create the new camera position (keeping X and Z from zoomedOutPos)
+        Vector3 newPosition = new Vector3(zoomedOutPos.x, newCameraY, zoomedOutPos.z);
+
+        // Apply the new camera position smoothly
+        transform.DOMove(newPosition, .8f);
+        cam.DOOrthoSize(zoomedOutCamSize, .8f);
+    }
+
+
+    Vector2 VptoWP(float x, float y)
+    {
+        return Camera.main.ViewportToWorldPoint(new(x, y, 0));
+
     }
 
 }

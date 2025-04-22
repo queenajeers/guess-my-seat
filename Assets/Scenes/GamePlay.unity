@@ -702,6 +702,7 @@ MonoBehaviour:
   zoomSpeedMouse: 0.5
   zoomLerpSpeed: 15
   boundaryPadding: 1
+  preventPanAndZoom: 0
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1443,7 +1444,7 @@ MonoBehaviour:
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 0}
+  m_Viewport: {fileID: 2105839768}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 0
@@ -2123,7 +2124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1774458025
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2354,6 +2355,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3817557494372724381, guid: bb818bcd1f8fc4170ad421ddfa84c1e9, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476149695428531946, guid: bb818bcd1f8fc4170ad421ddfa84c1e9, type: 3}
+      propertyPath: _loop
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5476149695428531946, guid: bb818bcd1f8fc4170ad421ddfa84c1e9, type: 3}
@@ -2670,7 +2675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379828564054223464, guid: 796d5f03b6c794579a0b5d877febebba, type: 3}
       propertyPath: levelToLoad
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

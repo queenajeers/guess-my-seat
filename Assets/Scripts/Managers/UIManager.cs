@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
         SoundManager.Play(SoundNames.Win);
+        CameraDragMove.Instance.ZoomOut();
         winConfetti.SetActive(true);
     }
 
@@ -62,6 +63,10 @@ public class UIManager : MonoBehaviour
         }
 
         gamePlayAnim.Play("GamePlayIn", 0, 0);
+    }
+    public void GamePlayElementsOut()
+    {
+        gamePlayAnim.Play("GamePlayOut", 0, 0);
     }
 
 }

@@ -29,9 +29,15 @@ Material:
         m_Offset: {x: 0, y: 0.09}
     m_Ints: []
     m_Floats:
+    - _ColorMask: 15
     - _Dilate: -0.98
     - _OutlineThickness: 19.1
     - _Padding: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0.69
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}

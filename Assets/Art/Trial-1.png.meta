@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: ff6e97c9c5bb145b597fd18e79be6534
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8000357699033412433
+    second: Trial-1_0
+  - first:
+      213: -6614618408062133008
+    second: Trial-1_1
+  - first:
+      213: 495428347936267581
+    second: Trial-1_2
+  - first:
+      213: 8264241127044849892
+    second: Trial-1_3
+  - first:
+      213: 4486014729050135515
+    second: Trial-1_4
+  - first:
+      213: 1792691524452802614
+    second: Trial-1_5
+  - first:
+      213: 8744228449483318454
+    second: Trial-1_6
+  - first:
+      213: -8165584065738078996
+    second: Trial-1_7
+  - first:
+      213: 6198634291910029106
+    second: Trial-1_8
+  - first:
+      213: 3087651734309952485
+    second: Trial-1_9
+  - first:
+      213: 3189198951979930149
+    second: Trial-1_10
+  - first:
+      213: 6513755530820803779
+    second: Trial-1_11
+  - first:
+      213: -8466838315070297440
+    second: Trial-1_12
+  - first:
+      213: -1791249100218377066
+    second: Trial-1_13
+  - first:
+      213: 3399323382690061060
+    second: Trial-1_14
+  - first:
+      213: -459875619967546649
+    second: Trial-1_15
+  - first:
+      213: 3648002175191037056
+    second: Trial-1_16
+  - first:
+      213: -8524917317025264552
+    second: Trial-1_17
+  - first:
+      213: -2181911682471406702
+    second: Trial-1_18
+  - first:
+      213: -8639889316779358403
+    second: Trial-1_19
+  - first:
+      213: 8616237424917271860
+    second: Trial-1_20
+  - first:
+      213: -508099086806284561
+    second: Trial-1_21
+  - first:
+      213: 4550585172726512043
+    second: Trial-1_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 109, y: 98, z: 145, w: 91}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Trial-1_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 44
+        width: 1795
+        height: 1015
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 153b2f680faf60f60800000000000000
+      internalID: 8000357699033412433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_1
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 955
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fc52b68a972434a0800000000000000
+      internalID: -6614618408062133008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_2
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 955
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3d5662257d10e600800000000000000
+      internalID: 495428347936267581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_3
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 950
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e0aeabe48b70b270800000000000000
+      internalID: 8264241127044849892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_4
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 777
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdb143ec0a6814e30800000000000000
+      internalID: 4486014729050135515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 756
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 630ecd2817be0e810800000000000000
+      internalID: 1792691524452802614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_6
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 698
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b46156227db95970800000000000000
+      internalID: 8744228449483318454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_7
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 611
+        width: 6
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce4871a2e840eae80800000000000000
+      internalID: -8165584065738078996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_8
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 571
+        width: 6
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23f2ad5fb09f50650800000000000000
+      internalID: 6198634291910029106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_9
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 551
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ebd9ada4ea89da20800000000000000
+      internalID: 3087651734309952485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_10
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 508
+        width: 7
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 522dfcabc8f424c20800000000000000
+      internalID: 3189198951979930149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_11
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 462
+        width: 7
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cc5f48d422856a50800000000000000
+      internalID: 6513755530820803779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_12
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 413
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aa6193696fbf7a80800000000000000
+      internalID: -8466838315070297440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_13
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 388
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69cde3d0f643427e0800000000000000
+      internalID: -1791249100218377066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_14
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 357
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40b9bed2b92dc2f20800000000000000
+      internalID: 3399323382690061060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_15
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 325
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eac8f66f813e99f0800000000000000
+      internalID: -459875619967546649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_16
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 319
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0843d1086ae40a230800000000000000
+      internalID: 3648002175191037056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_17
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 305
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85c022bfdd861b980800000000000000
+      internalID: -8524917317025264552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_18
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 294
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 293540392ea48b1e0800000000000000
+      internalID: -2181911682471406702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_19
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 119
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d378ca64172f81880800000000000000
+      internalID: -8639889316779358403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_20
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 123
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 435de948946039770800000000000000
+      internalID: 8616237424917271860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_21
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 120
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe60634929ed2f8f0800000000000000
+      internalID: -508099086806284561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Trial-1_22
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 121
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba9f584ca1de62f30800000000000000
+      internalID: 4550585172726512043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Trial-1_0: 8000357699033412433
+      Trial-1_1: -6614618408062133008
+      Trial-1_10: 3189198951979930149
+      Trial-1_11: 6513755530820803779
+      Trial-1_12: -8466838315070297440
+      Trial-1_13: -1791249100218377066
+      Trial-1_14: 3399323382690061060
+      Trial-1_15: -459875619967546649
+      Trial-1_16: 3648002175191037056
+      Trial-1_17: -8524917317025264552
+      Trial-1_18: -2181911682471406702
+      Trial-1_19: -8639889316779358403
+      Trial-1_2: 495428347936267581
+      Trial-1_20: 8616237424917271860
+      Trial-1_21: -508099086806284561
+      Trial-1_22: 4550585172726512043
+      Trial-1_3: 8264241127044849892
+      Trial-1_4: 4486014729050135515
+      Trial-1_5: 1792691524452802614
+      Trial-1_6: 8744228449483318454
+      Trial-1_7: -8165584065738078996
+      Trial-1_8: 6198634291910029106
+      Trial-1_9: 3087651734309952485
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -33,6 +33,9 @@ public class Seat : MonoBehaviour
 
 
     public bool isOpenSeat;
+    public bool holdSeat;
+
+    public bool isPlaced;
 
     public string PersonName
     {
@@ -59,6 +62,7 @@ public class Seat : MonoBehaviour
 
     public void CorrectPlacement()
     {
+        isPlaced = true;
         personObject.SetActive(true);
         BGBottom.gameObject.SetActive(true);
         happyEmoji.SetActive(true);
