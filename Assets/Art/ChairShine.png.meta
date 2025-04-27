@@ -1,0 +1,858 @@
+fileFormatVersion: 2
+guid: 75a16df9b8fa148a58616dce1af1a6f2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1639912044445238664
+    second: ChairShine_0
+  - first:
+      213: -3579341065870484850
+    second: ChairShine_1
+  - first:
+      213: -6324215639517219580
+    second: ChairShine_2
+  - first:
+      213: -136855629281298952
+    second: ChairShine_3
+  - first:
+      213: 2148862636525162928
+    second: ChairShine_4
+  - first:
+      213: 7072248988897946764
+    second: ChairShine_5
+  - first:
+      213: -3125320897592478339
+    second: ChairShine_6
+  - first:
+      213: -8407683598281178006
+    second: ChairShine_7
+  - first:
+      213: 5048372042080412906
+    second: ChairShine_8
+  - first:
+      213: -2185573680269197458
+    second: ChairShine_9
+  - first:
+      213: -6301382451808521766
+    second: ChairShine_10
+  - first:
+      213: -5623296288677906182
+    second: ChairShine_11
+  - first:
+      213: 4584995842882971106
+    second: ChairShine_12
+  - first:
+      213: 4275772261195720468
+    second: ChairShine_13
+  - first:
+      213: -4724714744594387407
+    second: ChairShine_14
+  - first:
+      213: 6930434945364537926
+    second: ChairShine_15
+  - first:
+      213: -8434037434526359344
+    second: ChairShine_16
+  - first:
+      213: -5395217124142854756
+    second: ChairShine_17
+  - first:
+      213: -3691849119508099115
+    second: ChairShine_18
+  - first:
+      213: 1678456874942384824
+    second: ChairShine_19
+  - first:
+      213: -3185764290493258132
+    second: ChairShine_20
+  - first:
+      213: -9079477867354551090
+    second: ChairShine_21
+  - first:
+      213: -4959069099390366321
+    second: ChairShine_22
+  - first:
+      213: 2735812044959231390
+    second: ChairShine_23
+  - first:
+      213: 8391837934397318603
+    second: ChairShine_24
+  - first:
+      213: -3351950953243225297
+    second: ChairShine_25
+  - first:
+      213: -8283405376942350884
+    second: ChairShine_26
+  - first:
+      213: -2229979460123960752
+    second: ChairShine_27
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChairShine_0
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 847
+        width: 55
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87af4f72facdd39e0800000000000000
+      internalID: -1639912044445238664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_1
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 933
+        width: 339
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a52d6c340a35ec0800000000000000
+      internalID: -3579341065870484850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_2
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 876
+        width: 137
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4053b9b026fdb38a0800000000000000
+      internalID: -6324215639517219580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_3
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 893
+        width: 262
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f5fc2fb78ac91ef0800000000000000
+      internalID: -136855629281298952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_4
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 847
+        width: 42
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b11139ce2b42dd10800000000000000
+      internalID: 2148862636525162928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_5
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 720
+        width: 41
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ca06a2cfca52260800000000000000
+      internalID: 7072248988897946764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_6
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 723
+        width: 37
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7535e9c331a0a4d0800000000000000
+      internalID: -3125320897592478339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_7
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 717
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64829c2058e15b80800000000000000
+      internalID: -8407683598281178006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_8
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 475
+        width: 48
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae46736ff9b6f0640800000000000000
+      internalID: 5048372042080412906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_9
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 344
+        width: 97
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6f7c1541584ba1e0800000000000000
+      internalID: -2185573680269197458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_10
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 344
+        width: 124
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1b216db0efc88a0800000000000000
+      internalID: -6301382451808521766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_11
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 493
+        width: 44
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af8b496a1d906f1b0800000000000000
+      internalID: -5623296288677906182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_12
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 127
+        width: 70
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e5aeaf3d6d21af30800000000000000
+      internalID: 4584995842882971106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_13
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 116
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4172a01b738965b30800000000000000
+      internalID: 4275772261195720468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_14
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 251
+        width: 151
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13ea66fe8f07e6eb0800000000000000
+      internalID: -4724714744594387407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_15
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 255
+        width: 76
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64238612dd9dd2060800000000000000
+      internalID: 6930434945364537926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_16
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 255
+        width: 79
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d0a5b483a744fa80800000000000000
+      internalID: -8434037434526359344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_17
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 124
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9d4c555c965025b0800000000000000
+      internalID: -5395217124142854756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_18
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 138
+        width: 55
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5df816b39cae3ccc0800000000000000
+      internalID: -3691849119508099115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_19
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 333
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bac0c982a31b4710800000000000000
+      internalID: 1678456874942384824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_20
+      rect:
+        serializedVersion: 2
+        x: 1016
+        y: 338
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c666607b144e9c3d0800000000000000
+      internalID: -3185764290493258132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_21
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 94
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecc8f4a1cf63ff180800000000000000
+      internalID: -9079477867354551090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_22
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 94
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8d883aade8dd2bb0800000000000000
+      internalID: -4959069099390366321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_23
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 104
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9da7085f8e87f520800000000000000
+      internalID: 2735812044959231390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_24
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 86
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc56664b32cc57470800000000000000
+      internalID: 8391837934397318603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_25
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 43
+        width: 522
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23d76f0e5a7b71d0800000000000000
+      internalID: -3351950953243225297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_26
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 90
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd5ac072be6b0d80800000000000000
+      internalID: -8283405376942350884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChairShine_27
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 44
+        width: 218
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05ad4e6fe758d01e0800000000000000
+      internalID: -2229979460123960752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ChairShine_0: -1639912044445238664
+      ChairShine_1: -3579341065870484850
+      ChairShine_10: -6301382451808521766
+      ChairShine_11: -5623296288677906182
+      ChairShine_12: 4584995842882971106
+      ChairShine_13: 4275772261195720468
+      ChairShine_14: -4724714744594387407
+      ChairShine_15: 6930434945364537926
+      ChairShine_16: -8434037434526359344
+      ChairShine_17: -5395217124142854756
+      ChairShine_18: -3691849119508099115
+      ChairShine_19: 1678456874942384824
+      ChairShine_2: -6324215639517219580
+      ChairShine_20: -3185764290493258132
+      ChairShine_21: -9079477867354551090
+      ChairShine_22: -4959069099390366321
+      ChairShine_23: 2735812044959231390
+      ChairShine_24: 8391837934397318603
+      ChairShine_25: -3351950953243225297
+      ChairShine_26: -8283405376942350884
+      ChairShine_27: -2229979460123960752
+      ChairShine_3: -136855629281298952
+      ChairShine_4: 2148862636525162928
+      ChairShine_5: 7072248988897946764
+      ChairShine_6: -3125320897592478339
+      ChairShine_7: -8407683598281178006
+      ChairShine_8: 5048372042080412906
+      ChairShine_9: -2185573680269197458
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
