@@ -10601,7 +10601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0825ac373e794e398aa4d9d02e79eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySeatSR: {fileID: 2394984082169645302}
+  mySeatSR: {fileID: 7207537326597886077}
   personSR: {fileID: 1035970400168146662}
   seatNumberIndicator: {fileID: 447038391251768845}
   hintIndicator: {fileID: 6626289748493701450}
