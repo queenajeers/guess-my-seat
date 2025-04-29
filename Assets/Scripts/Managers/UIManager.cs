@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Animator gamePlayAnim;
     public GameObject tutorialManager;
 
+    public GameObject winPage;
+
     void Awake()
     {
         Instance = this;
@@ -53,6 +55,8 @@ public class UIManager : MonoBehaviour
         SoundManager.Play(SoundNames.Win);
         CameraDragMove.Instance.ZoomOut();
         winConfetti.SetActive(true);
+        yield return new WaitForSeconds(.4f);
+        winPage.SetActive(true);
     }
 
     public void GamePlayElementsIn()
