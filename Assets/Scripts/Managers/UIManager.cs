@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
         SoundManager.Play(SoundNames.Win);
         CameraDragMove.Instance.ZoomOut();
         winConfetti.SetActive(true);
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(.8f);
         winPage.SetActive(true);
     }
 
