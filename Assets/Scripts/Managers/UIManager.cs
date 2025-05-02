@@ -24,10 +24,10 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SpawnNewPerson(Sprite icon, string personName)
+    public void SpawnNewPerson(Sprite icon, string personName, Gender gender)
     {
         var personItemComp = Instantiate(personItemPrefab, personScrollView).GetComponent<PersonItem>();
-        personItemComp.LoadData(personName, icon);
+        personItemComp.LoadData(personName, gender, icon);
         PeopleScrollManager.Instance.personItems.Add(personItemComp);
 
     }

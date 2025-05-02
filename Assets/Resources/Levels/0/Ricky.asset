@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ricky
   m_EditorClassIdentifier: 
   personName: Ricky
-  personIcon: {fileID: 21300000, guid: 771f11999abbc46a9bbc6b027de5f4cf, type: 3}
+  personIcon: {fileID: 21300000, guid: 86e5b46d3e26a440ea165c39bdd4657c, type: 3}

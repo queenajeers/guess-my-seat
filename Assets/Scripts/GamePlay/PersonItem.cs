@@ -18,12 +18,24 @@ public class PersonItem : PersonDraggable
     public Image personIcon;
     public Image personRefIcon;
 
-    public void LoadData(string personName, Sprite personIcon)
+    public GameObject maleIcon;
+    public GameObject femaleIcon;
+
+    public void LoadData(string personName, Gender gender, Sprite personIcon)
     {
         this.personName = personName;
         this.personIcon.sprite = personIcon;
         this.personRefIcon.sprite = personIcon;
         personNameIndicator.text = personName;
+
+        if (gender == Gender.Male)
+        {
+            maleIcon.SetActive(true);
+        }
+        else
+        {
+            femaleIcon.SetActive(true);
+        }
 
     }
 

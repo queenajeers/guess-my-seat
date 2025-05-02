@@ -24,8 +24,15 @@ public class Seat : MonoBehaviour
     [SerializeField] Vector2 seatCorrectPlacement;
 
     string assignedToPerson;
+    public Gender gender;
 
-    public Color correctColor;
+    Color CorrectColor
+    {
+        get { return gender == Gender.Male ? correctColorMale : correctColorFemale; }
+
+    }
+    public Color correctColorMale;
+    public Color correctColorFemale;
     public Color normalColor;
 
     public GameObject happyEmoji;
@@ -50,10 +57,11 @@ public class Seat : MonoBehaviour
         get { return mySeatSR.transform.position; }
     }
 
-    public void LoadData(string personName, Sprite personIcon, string seatNumber, string hint)
+    public void LoadData(string personName, Gender gender, Sprite personIcon, string seatNumber, string hint)
     {
         personSR.sprite = personIcon;
         assignedToPerson = personName;
+        this.gender = gender;
         seatNumberIndicator.text = seatNumber;
         hintIndicator.text = hint;
         this.personName.text = personName;
@@ -75,8 +83,9 @@ public class Seat : MonoBehaviour
         personObject.SetActive(true);
         BGBottom.gameObject.SetActive(true);
         happyEmoji.SetActive(true);
-
-        checkMark.DOScale(1f, 1f).SetDelay(.2f).SetEase(Ease.OutBounce);
+        checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
+        checkMark.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
+        checkMark.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
 
         // Move seatContainer to seatCorrectPlacement
         seatContainer.DOLocalMove(seatCorrectPlacement, 0.35f).SetEase(Ease.OutQuad);
@@ -97,9 +106,9 @@ public class Seat : MonoBehaviour
         hintIndicator.DOFade(1f, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
         BGBottom.DOFade(1f, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
 
-        seatNumberIndicator.DOColor(correctColor, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
+        seatNumberIndicator.DOColor(CorrectColor, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
 
-        BGRed.color = correctColor;
+        BGRed.color = CorrectColor;
         BGRed.DOKill();
 
         Color bgColor = BGRed.color;
@@ -108,25 +117,22 @@ public class Seat : MonoBehaviour
 
 
         // Fade in and out BGRed
-        BGRed.DOFade(.8f, 0.4f) // Fade in quickly
-            .OnComplete(() =>
-            {
-                BGRed.DOFade(0f, 0.5f).SetDelay(.2f); // Then fade out more slowly
-            });
+        BGRed.DOFade(1f, 0.4f); // Fade in quickly
+                                // .OnComplete(() =>
+                                // {
+                                //     BGRed.DOFade(0f, 0.5f).SetDelay(.2f); // Then fade out more slowly
+                                // });
     }
 
     public void SetOpenSeat()
     {
         var currentScale = transform.localScale;
 
-        // transform.DOScale(currentScale * 1.15f, .15f).OnComplete(() =>
-        // {
-        //     transform.DOScale(currentScale, .15f);
-        // });
 
-
-        checkMark.localScale = Vector3.one;
-        seatNumberIndicator.color = correctColor;
+        checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
+        checkMark.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
+        checkMark.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
+        seatNumberIndicator.color = CorrectColor;
 
         // Animate personObject scale from 0 to 1 with bounce
         // personObject.transform.localScale = Vector3.zero;
@@ -153,6 +159,8 @@ public class Seat : MonoBehaviour
         var c = ideaIconSR.color;
         c.a = 0f;
         ideaIconSR.DOColor(c, .6f);
+
+        BGRed.color = CorrectColor;
 
     }
 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Vicky
   m_EditorClassIdentifier: 
   personName: Vicky
-  personIcon: {fileID: 21300000, guid: f4f7344fd8b554bac9e674e5f4fa902c, type: 3}
+  personIcon: {fileID: 21300000, guid: d3055365e2cc4426bb1285cead2d5eba, type: 3}

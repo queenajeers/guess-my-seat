@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lucky
   m_EditorClassIdentifier: 
   personName: Lucky
-  personIcon: {fileID: 21300000, guid: 8972403afb32a45aa8e1b306d5b7409c, type: 3}
+  personIcon: {fileID: 21300000, guid: 86ab94d7ea7104fe89c5d34234818774, type: 3}

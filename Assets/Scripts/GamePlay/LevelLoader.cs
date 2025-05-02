@@ -114,7 +114,7 @@ public class LevelLoader : MonoBehaviour
                     PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{currentSeat.personSeating.Trim()}");
 
                     string hyperHintText = TextStyler.GiveHyperText(currentSeat.hint, allPersons);
-                    seatComponent.LoadData(currentSeat.personSeating, personData.personIcon, currentSeat.seatNumber, hyperHintText);
+                    seatComponent.LoadData(currentSeat.personSeating, personData.gender, personData.personIcon, currentSeat.seatNumber, hyperHintText);
                     seatComponent.makeTextClickable(allPersons);
 
                     if (!currentSeat.isInitiallyOpened)
@@ -171,7 +171,7 @@ public class LevelLoader : MonoBehaviour
             PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{levelData.seats[p].personSeating.Trim()}");
             if (personData != null && !openPersons.Contains(personData.personName))
             {
-                UIManager.Instance.SpawnNewPerson(personData.personIcon, personData.personName);
+                UIManager.Instance.SpawnNewPerson(personData.personIcon, personData.personName, personData.gender);
             }
         }
 
