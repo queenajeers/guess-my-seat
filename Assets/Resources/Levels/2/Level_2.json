@@ -1,0 +1,73 @@
+{
+  "levelName": "Level_3",
+  "rows": 2,
+  "cols": 3,
+  "seats": [
+    {
+      "seatNumber": "A2",
+      "row": 1,
+      "col": 0,
+      "personName": "John",
+      "personGender": "",
+      "hint": "The first letter of my name is the same as the person sitting in front of me",
+      "isInitiallyOpened": true,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "C2",
+      "row": 1,
+      "col": 2,
+      "personName": "William",
+      "personGender": "",
+      "hint": "Robert doesn't sit next to me or James",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "C1",
+      "row": 0,
+      "col": 2,
+      "personName": "Robert",
+      "personGender": "",
+      "hint": "I am only friends with Michael",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personName": "James",
+      "personGender": "",
+      "hint": "William is not in my row. He sits quite a distance from me.",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "B2",
+      "row": 1,
+      "col": 1,
+      "personName": "David",
+      "personGender": "",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personName": "Michael",
+      "personGender": "",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    }
+  ]
+}
