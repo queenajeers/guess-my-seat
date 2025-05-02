@@ -8,7 +8,6 @@ using DG.Tweening;
 enum GestureMode { None, Pan, Zoom }
 
 
-
 [RequireComponent(typeof(Camera))]
 public class CameraDragMove : MonoBehaviour
 {

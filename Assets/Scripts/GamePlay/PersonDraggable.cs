@@ -16,8 +16,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     [Header("Scroll Settings")]
     public bool enableHorizontalScrollTransfer = true;
     public ScrollRect parentScrollRect;
-    public float horizontalScrollSensitivity = 1f;
-    public float horizontalScrollVelocityMultiplier = 2f;
 
     public bool isDragging = false;
     private bool isVerticalDrag = false;
@@ -26,7 +24,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Vector2 initialPointerPosition;
     private Vector2 lastPointerPosition;
     private float pointerDeltaTime;
-    private Vector2 scrollVelocity;
     private float lastDragTime;
 
     private Canvas rootCanvas;
@@ -43,7 +40,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private Coroutine smoothFollowCoroutine;
     private Coroutine returnCoroutine;
-    private Coroutine scrollInertiaCoroutine;
 
     public bool targetFound = false;
     private Vector3 targetWorldPosition;
@@ -51,22 +47,14 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public Seat assignedSeat;
     private Vector3 originalScale;
     private Vector3 iconOriginalScale;
-    [SerializeField] float sizeMultiplier; // applied for contentToDrag and personIconRef when in dragging mode, returning to original again back to scale 1
-                                           // Get sizeMultipler when ever needed from  MatchWidth.Instance.GetCurrentSizeRatio()
+    [SerializeField] float sizeMultiplier;
 
     public bool preventFromUse;
 
-    public Vector2 ContentRefWorldPos
-    {
-
-
-        get { return Camera.main.ScreenToWorldPoint(contentToDrag.position); }
-
-    }
+    public Vector2 ContentRefWorldPos => Camera.main.ScreenToWorldPoint(contentToDrag.position);
 
     private void Awake()
     {
-
         if (contentToDrag == null)
         {
             Transform found = transform.Find("Content");
@@ -142,21 +130,13 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         lastDragTime = Time.unscaledTime;
         pointerDeltaTime = 0;
 
-        SeatSelector.Instance.SelectedCurrentDraggable(this); // 👈 ADD THIS
+        SeatSelector.Instance.SelectedCurrentDraggable(this);
 
-        if (scrollInertiaCoroutine != null)
+        if (isHorizontalDrag && parentScrollRect != null && enableHorizontalScrollTransfer)
         {
-            StopCoroutine(scrollInertiaCoroutine);
-            scrollInertiaCoroutine = null;
-        }
-
-        if (parentScrollRect != null && enableHorizontalScrollTransfer)
-        {
-            scrollVelocity = parentScrollRect.velocity;
-            parentScrollRect.StopMovement();
+            ExecuteEvents.Execute(parentScrollRect.gameObject, eventData, ExecuteEvents.beginDragHandler);
         }
     }
-
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -184,27 +164,24 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 if (parentScrollRect != null && enableHorizontalScrollTransfer)
                 {
                     parentScrollRect.horizontal = true;
+                    ExecuteEvents.Execute(parentScrollRect.gameObject, eventData, ExecuteEvents.beginDragHandler);
                 }
             }
         }
 
         if (isHorizontalDrag && parentScrollRect != null && enableHorizontalScrollTransfer)
         {
-            scrollVelocity.x = frameDelta.x / pointerDeltaTime;
-
-            float normalizedDelta = frameDelta.x / Screen.width * horizontalScrollSensitivity;
-            parentScrollRect.horizontalNormalizedPosition -= normalizedDelta;
+            ExecuteEvents.Execute(parentScrollRect.gameObject, eventData, ExecuteEvents.dragHandler);
             return;
         }
 
         if (isVerticalDrag && contentToDrag != null)
         {
-            Vector3 targetWorldPos;
             RectTransformUtility.ScreenPointToWorldPointInRectangle(
                 rootCanvas.transform as RectTransform,
                 eventData.position + dragOffset,
                 eventData.pressEventCamera,
-                out targetWorldPos
+                out Vector3 targetWorldPos
             );
 
             if (smoothFollowCoroutine != null)
@@ -232,9 +209,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             contentToDrag.position = worldPos;
             contentToDrag.sizeDelta = size;
 
-
-
-            // Apply scaling based on sizeMultiplier from MatchWidth
             sizeMultiplier = MatchWidth.Instance.GetCurrentSizeRatio();
             originalScale = contentToDrag.localScale;
             contentToDrag.localScale = Vector3.one * sizeMultiplier;
@@ -249,22 +223,11 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         isDragging = false;
 
-        SeatSelector.Instance.CancelDraggable(this); // 👈 ADD THIS
+        SeatSelector.Instance.CancelDraggable(this);
 
         if (isHorizontalDrag && parentScrollRect != null && enableHorizontalScrollTransfer)
         {
-            Vector2 finalVelocity = scrollVelocity * horizontalScrollVelocityMultiplier;
-            finalVelocity.x = Mathf.Clamp(finalVelocity.x, -3000f, 3000f);
-
-            if (Mathf.Abs(finalVelocity.x) > 50f)
-            {
-                parentScrollRect.velocity = finalVelocity;
-
-                if (scrollInertiaCoroutine != null)
-                    StopCoroutine(scrollInertiaCoroutine);
-
-                scrollInertiaCoroutine = StartCoroutine(HandleScrollInertia());
-            }
+            ExecuteEvents.Execute(parentScrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
         }
 
         if (isVerticalDrag && contentToDrag != null)
@@ -275,14 +238,9 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             if (returnCoroutine != null)
                 StopCoroutine(returnCoroutine);
 
-            if (targetFound)
-            {
-                returnCoroutine = StartCoroutine(SmoothMoveToTarget(targetWorldPosition));
-            }
-            else
-            {
-                returnCoroutine = StartCoroutine(SmoothReturn());
-            }
+            returnCoroutine = targetFound
+                ? StartCoroutine(SmoothMoveToTarget(targetWorldPosition))
+                : StartCoroutine(SmoothReturn());
 
             if (personIconRef != null && personIconRef.gameObject.activeSelf)
             {
@@ -296,51 +254,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         isVerticalDrag = false;
         isHorizontalDrag = false;
-    }
-
-
-    private IEnumerator HandleScrollInertia()
-    {
-        float startTime = Time.unscaledTime;
-        while (Time.unscaledTime - startTime < 0.5f &&
-               (Mathf.Abs(parentScrollRect.velocity.x) > 0.1f ||
-                Mathf.Abs(parentScrollRect.velocity.y) > 0.1f))
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        float normalizedPos = parentScrollRect.horizontalNormalizedPosition;
-        if (normalizedPos < 0)
-        {
-            StartCoroutine(SnapScrollPosition(normalizedPos, 0));
-        }
-        else if (normalizedPos > 1)
-        {
-            StartCoroutine(SnapScrollPosition(normalizedPos, 1));
-        }
-    }
-
-    private IEnumerator SnapScrollPosition(float from, float to)
-    {
-        float duration = 0.2f;
-        float elapsed = 0;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            parentScrollRect.horizontalNormalizedPosition = Mathf.Lerp(from, to, EaseOutCubic(t));
-            yield return null;
-        }
-
-        parentScrollRect.horizontalNormalizedPosition = to;
-    }
-
-    private float EaseOutCubic(float t)
-    {
-        return 1 - Mathf.Pow(1 - t, 3);
     }
 
     private IEnumerator SmoothFollow(Vector3 targetWorldPos)
@@ -373,8 +286,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         contentToDrag.localPosition = originalLocalPosition;
         contentToDrag.sizeDelta = originalSizeDelta;
         wasDragged = false;
-
-        // Return scale back to 1
         contentToDrag.localScale = originalScale;
 
         if (personIconRef != null)
@@ -387,10 +298,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private IEnumerator SmoothMoveToTarget(Vector3 worldTarget)
     {
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(worldTarget);
-        Vector2 localPoint;
-
-        RectTransform parentRect = contentToDrag.parent as RectTransform;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, screenPoint, null, out localPoint);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            contentToDrag.parent as RectTransform, screenPoint, null, out Vector2 localPoint);
 
         Vector3 startPos = contentToDrag.localPosition;
         Vector3 endPos = new Vector3(localPoint.x, localPoint.y, startPos.z);
@@ -411,18 +320,14 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
     }
 
-    public virtual void TargetReached()
-    {
-
-    }
+    public virtual void TargetReached() { }
 
     public void SetTargetStatus(bool found, Vector3 worldPosition)
     {
         targetFound = found;
         targetWorldPosition = worldPosition;
 
-        if (personIconRef == null) return;
-        if (!isVerticalDrag) return;
+        if (personIconRef == null || !isVerticalDrag) return;
 
         if (found)
         {
@@ -433,9 +338,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             personIconRef.localScale = Vector3.one * sizeMultiplier;
 
             MoveToWorldSpace(personIconRef, targetWorldPosition, UIManager.Instance.GamePlayPanel);
-
-            // 👇 Make sure personIconRef is rendered behind the contentToDrag
-            personIconRef.SetSiblingIndex(0); // or any lower index than contentToDrag
+            personIconRef.SetSiblingIndex(0);
         }
         else
         {
@@ -446,11 +349,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private void MoveToWorldSpace(RectTransform element, Vector3 targetWorldPosition, Transform newParent)
     {
         Vector2 size = element.sizeDelta;
-
         element.SetParent(newParent, worldPositionStays: false);
-
         element.sizeDelta = size;
-
         element.position = Camera.main.WorldToScreenPoint(targetWorldPosition);
     }
 
@@ -459,7 +359,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (personIconRef == null || iconOriginalParent == null) return;
 
         personIconRef.localScale = iconOriginalScale;
-
         personIconRef.SetParent(iconOriginalParent, worldPositionStays: false);
         personIconRef.SetSiblingIndex(iconOriginalSiblingIndex);
         personIconRef.localPosition = iconOriginalLocalPosition;
