@@ -10,7 +10,6 @@ public enum Gender
 public class PersonData : ScriptableObject
 {
 
-    public string personName;
     public Gender gender;
     public Sprite personIcon;
 

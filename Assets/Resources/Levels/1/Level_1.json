@@ -1,0 +1,81 @@
+{
+  "levelName": "Level_2",
+  "rows": 2,
+  "cols": 3,
+  "seats": [
+    {
+      "seatNumber": "A2",
+      "row": 1,
+      "col": 0,
+      "personName": "John",
+      "personGender": "Male",
+      "hint": "Robert and William are seated in the same column. William is at the end of this row.",
+      "isInitiallyOpened": true,
+      "linkedSeats": [
+        "C1",
+        "C2"
+      ],
+      "tags": []
+    },
+    {
+      "seatNumber": "C2",
+      "row": 1,
+      "col": 2,
+      "personName": "William",
+      "personGender": "Male",
+      "hint": "Michael is sitting above a doctor in the second column",
+      "isInitiallyOpened": false,
+      "linkedSeats": [
+        "B1",
+        "B2"
+      ],
+      "tags": []
+    },
+    {
+      "seatNumber": "C1",
+      "row": 0,
+      "col": 2,
+      "personName": "Robert",
+      "personGender": "Male",
+      "hint": "I am going to meet my friend David, who will assist me with my back issue.",
+      "isInitiallyOpened": false,
+      "linkedSeats": [
+        "B2"
+      ],
+      "tags": []
+    },
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personName": "James",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "B2",
+      "row": 1,
+      "col": 1,
+      "personName": "David",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personName": "Michael",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    }
+  ]
+}
