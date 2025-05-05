@@ -390,4 +390,31 @@ public class CameraDragMove : MonoBehaviour
 
     }
 
+    public IEnumerator MoveToPosition(Vector2 newTargetPos, float duration)
+    {
+        preventPanAndZoom = true;
+
+        // Clamp target position within boundaries
+
+        Vector3 startTarget = transform.position;
+        Vector3 target = new(newTargetPos.x, newTargetPos.y, transform.position.z);
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            t = t * t * (3f - 2f * t); // Smoothstep
+
+            transform.position = Vector3.Lerp(startTarget, target, t);
+            targetPosition = transform.position;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        preventPanAndZoom = false;
+    }
+
+
+
 }

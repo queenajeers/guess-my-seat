@@ -77,16 +77,33 @@ public class UIManager : MonoBehaviour
         gamePlayAnim.Play("GamePlayOut", 0, 0);
     }
 
+    bool hintAnimationInPlay = false;
     public void UseOneHint()
     {
-        if (LevelLoader.Instance.SolveOneEligiblePersonItemsYetToBeSolved())
+        if (hintAnimationInPlay) return;
+
+
+        var toBeSolvedSeatData = LevelLoader.Instance.SolveOneEligiblePersonItemsYetToBeSolved();
+
+        if (toBeSolvedSeatData.Item1 != null)
         {
-            Debug.Log("USE ONE HINT");
+            StartCoroutine(UseOneHintCor(toBeSolvedSeatData));
         }
         else
         {
             Debug.Log("No seats to solve!");
         }
+    }
+
+    IEnumerator UseOneHintCor((Seat, PersonItem) toBeSolvedSeatData)
+    {
+        hintAnimationInPlay = true;
+
+        yield return StartCoroutine(CameraDragMove.Instance.MoveToPosition(toBeSolvedSeatData.Item1.transform.position, .5f));
+
+        toBeSolvedSeatData.Item2.SolveIt();
+
+        hintAnimationInPlay = false;
     }
 
 }

@@ -64,6 +64,8 @@ public class LevelLoader : MonoBehaviour
     Dictionary<string, PersonItem> personItemsByIds = new Dictionary<string, PersonItem>();
     Dictionary<string, string> personSeatIdsByName = new Dictionary<string, string>();
 
+    Dictionary<string, Seat> seatCompsByName = new Dictionary<string, Seat>();
+
 
     void Awake()
     {
@@ -139,6 +141,7 @@ public class LevelLoader : MonoBehaviour
                     seatComponent.makeTextClickable(allPersons);
 
                     personSeatIdsByName[currentSeat.personName] = currentSeat.seatNumber;
+                    seatCompsByName[currentSeat.personName] = seatComponent;
 
                     if (!currentSeat.isInitiallyOpened)
                     {
@@ -256,7 +259,7 @@ public class LevelLoader : MonoBehaviour
         return null;
     }
 
-    public bool SolveOneEligiblePersonItemsYetToBeSolved()
+    public (Seat, PersonItem) SolveOneEligiblePersonItemsYetToBeSolved()
     {
         List<string> seatIds = new List<string>();
 
@@ -291,13 +294,12 @@ public class LevelLoader : MonoBehaviour
 
         if (eligiblePersonItems.Count > 0)
         {
-            eligiblePersonItems[0].SolveIt();
-            return true;
+            return (seatCompsByName[eligiblePersonItems[0].PersonName], eligiblePersonItems[0]);
         }
         else
         {
             Debug.Log("No eligible person items to solve.");
-            return false;
+            return (null, null);
         }
 
     }
