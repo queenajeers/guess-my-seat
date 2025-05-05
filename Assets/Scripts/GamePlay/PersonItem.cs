@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,13 @@ public class PersonItem : PersonDraggable
     public GameObject maleIcon;
     public GameObject femaleIcon;
 
+    Vector2 personIconOriginalPosition;
+
+    public override void Start()
+    {
+        base.Start();
+        personIconOriginalPosition = personIcon.transform.localPosition;
+    }
     public void LoadData(string personName, Gender gender, Sprite personIcon)
     {
         this.personName = personName;
@@ -37,6 +45,19 @@ public class PersonItem : PersonDraggable
             femaleIcon.SetActive(true);
         }
 
+    }
+
+    public void SolveIt()
+    {
+        Seat targetSeat = LevelLoader.Instance.GetSeatFromName(personName);
+
+        if (targetSeat == null) return;
+
+        targetSeat.CorrectPlacement();
+        SeatSelector.Instance.SeatPlaced(targetSeat);
+        Destroy(contentToDrag.gameObject);
+        Destroy(personIconRef.gameObject);
+        Destroy(gameObject);
     }
 
     public override void TargetReached()
@@ -63,6 +84,14 @@ public class PersonItem : PersonDraggable
 
     public void MakeIconJump()
     {
+        // Kill any existing tweens on the icon
+        personIcon.transform.DOKill();
+        personIcon.transform.localPosition = personIconOriginalPosition;
+        // Create a jump sequence
+        personIcon.transform.DOLocalMove(personIconOriginalPosition + new Vector2(0, 30f), .2f).OnComplete(() =>
+        {
+            personIcon.transform.DOLocalMove(personIconOriginalPosition, .2f).SetEase(Ease.OutBounce);
+        });
 
     }
 

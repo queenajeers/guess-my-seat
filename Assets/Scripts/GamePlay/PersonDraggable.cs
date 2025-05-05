@@ -73,7 +73,7 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             personIconRef.gameObject.SetActive(false);
     }
 
-    void Start()
+    public virtual void Start()
     {
         SetPersonIconRefOriginals();
     }
@@ -327,7 +327,9 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         targetFound = found;
         targetWorldPosition = worldPosition;
 
-        if (personIconRef == null || !isVerticalDrag) return;
+        Debug.Log("Setting target status: " + found);
+
+        if (personIconRef == null && !isVerticalDrag) return;
 
         if (found)
         {
@@ -356,7 +358,8 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private void ReturnPersonIcon()
     {
-        if (personIconRef == null || iconOriginalParent == null) return;
+
+        if ((personIconRef == null) || (iconOriginalParent == null)) return;
 
         personIconRef.localScale = iconOriginalScale;
         personIconRef.SetParent(iconOriginalParent, worldPositionStays: false);
@@ -364,5 +367,6 @@ public class PersonDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         personIconRef.localPosition = iconOriginalLocalPosition;
         personIconRef.sizeDelta = iconOriginalSizeDelta;
         personIconRef.gameObject.SetActive(false);
+
     }
 }

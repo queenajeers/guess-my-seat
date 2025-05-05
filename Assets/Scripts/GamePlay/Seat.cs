@@ -22,6 +22,7 @@ public class Seat : MonoBehaviour
     [SerializeField] GameObject personObject;
 
     [SerializeField] Vector2 seatCorrectPlacement;
+    Vector2 personIconOriginalPosition;
 
     string assignedToPerson;
     public Gender gender;
@@ -34,10 +35,13 @@ public class Seat : MonoBehaviour
     public Color correctColorMale;
     public Color correctColorFemale;
     public Color normalColor;
+    public Color solvedHintColor;
 
     public GameObject happyEmoji;
     [SerializeField] SpriteRenderer ideaIconSR;
     [SerializeField] Transform checkMark;
+    [SerializeField] Transform checkMarkSolved;
+    [SerializeField] Transform personIcon;
 
     [SerializeField] ClickableWordsHandler clickableWordsHandler;
 
@@ -46,6 +50,11 @@ public class Seat : MonoBehaviour
     public bool holdSeat;
 
     public bool isPlaced;
+    public bool isSeatSolved;
+
+    public List<string> linkedSeatIDs;
+    public string mySeatID;
+
 
     public string PersonName
     {
@@ -55,6 +64,12 @@ public class Seat : MonoBehaviour
     public Vector2 SeatingPos
     {
         get { return mySeatSR.transform.position; }
+    }
+
+    void Start()
+    {
+        personIconOriginalPosition = personIcon.transform.localPosition;
+        ClickableWordsHandler.OnWordClicked += MakeIconJump;
     }
 
     public void LoadData(string personName, Gender gender, Sprite personIcon, string seatNumber, string hint)
@@ -67,24 +82,40 @@ public class Seat : MonoBehaviour
         this.personName.text = personName;
     }
 
+    public void SetLinkedSeats(List<string> linkedSeats)
+    {
+        linkedSeatIDs.AddRange(linkedSeats);
+    }
+
     public void makeTextClickable(List<string> words)
     {
         clickableWordsHandler.InitializeClickableWords(words);
 
     }
 
-
-
     // Make sure DOTween is imported
+
+    public void SeatSolved()
+    {
+        if (!isSeatSolved)
+        {
+            isSeatSolved = true;
+            hintIndicator.DOColor(solvedHintColor, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
+            checkMarkSolved.transform.localRotation = Quaternion.Euler(0, 0, -185);
+            checkMarkSolved.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
+            checkMarkSolved.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
+        }
+    }
 
     public void CorrectPlacement()
     {
+        LevelLoader.Instance.SeatPlaced(mySeatID);
         isPlaced = true;
         personObject.SetActive(true);
         BGBottom.gameObject.SetActive(true);
         happyEmoji.SetActive(true);
         checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
-        checkMark.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
+        checkMark.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
         checkMark.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
 
         // Move seatContainer to seatCorrectPlacement
@@ -128,7 +159,6 @@ public class Seat : MonoBehaviour
     {
         var currentScale = transform.localScale;
 
-
         checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
         checkMark.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
         checkMark.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
@@ -164,7 +194,6 @@ public class Seat : MonoBehaviour
 
     }
 
-
     public void WrongAnimation()
     {
         BGRed.DOKill();
@@ -196,6 +225,22 @@ public class Seat : MonoBehaviour
     public Vector2 GetSP()
     {
         return Camera.main.WorldToScreenPoint(transform.position);
+    }
+
+    public void MakeIconJump(string personName)
+    {
+        if (personName.Contains(assignedToPerson) && (personName.Length == assignedToPerson.Length))
+        {
+            // Kill any existing tweens on the icon
+            personIcon.transform.DOKill();
+            personIcon.transform.localPosition = personIconOriginalPosition;
+            // Create a jump sequence
+            personIcon.transform.DOLocalMove(personIconOriginalPosition + new Vector2(0, .5f), .2f).OnComplete(() =>
+            {
+                personIcon.transform.DOLocalMove(personIconOriginalPosition, .2f).SetEase(Ease.OutBounce);
+            });
+        }
+
     }
 
 

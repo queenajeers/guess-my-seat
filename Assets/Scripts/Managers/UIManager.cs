@@ -24,11 +24,13 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
-    public void SpawnNewPerson(Sprite icon, string personName, Gender gender)
+    public PersonItem SpawnNewPerson(Sprite icon, string personName, Gender gender)
     {
         var personItemComp = Instantiate(personItemPrefab, personScrollView).GetComponent<PersonItem>();
         personItemComp.LoadData(personName, gender, icon);
         PeopleScrollManager.Instance.personItems.Add(personItemComp);
+
+        return personItemComp;
 
     }
 
@@ -73,6 +75,18 @@ public class UIManager : MonoBehaviour
     public void GamePlayElementsOut()
     {
         gamePlayAnim.Play("GamePlayOut", 0, 0);
+    }
+
+    public void UseOneHint()
+    {
+        if (LevelLoader.Instance.SolveOneEligiblePersonItemsYetToBeSolved())
+        {
+            Debug.Log("USE ONE HINT");
+        }
+        else
+        {
+            Debug.Log("No seats to solve!");
+        }
     }
 
 }

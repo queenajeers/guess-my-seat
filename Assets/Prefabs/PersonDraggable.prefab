@@ -403,8 +403,6 @@ MonoBehaviour:
   returnDuration: 0.25
   enableHorizontalScrollTransfer: 1
   parentScrollRect: {fileID: 0}
-  horizontalScrollSensitivity: 1
-  horizontalScrollVelocityMultiplier: 2
   isDragging: 0
   targetFound: 0
   assignedSeat: {fileID: 0}

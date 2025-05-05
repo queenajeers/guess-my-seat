@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelLoader : MonoBehaviour
 {
+    public static LevelLoader Instance { get; private set; }
 
     [Serializable]
     public class SeatData
@@ -56,6 +58,17 @@ public class LevelLoader : MonoBehaviour
 
     private LevelData levelData;
 
+    List<Seat> allSeatComponents = new List<Seat>();
+    List<string> placedSeats = new List<string>();
+
+    Dictionary<string, PersonItem> personItemsByIds = new Dictionary<string, PersonItem>();
+    Dictionary<string, string> personSeatIdsByName = new Dictionary<string, string>();
+
+
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         var jsonFile = Resources.Load<TextAsset>($"Levels/{levelToLoad}/Level_{levelToLoad}");
@@ -110,6 +123,7 @@ public class LevelLoader : MonoBehaviour
 
                 if (seatObj.TryGetComponent<Seat>(out var seatComponent))
                 {
+                    allSeatComponents.Add(seatComponent);
                     var seatBound = seatComponent.GetBounds();
                     seatBounds.Add(seatComponent);
 
@@ -120,7 +134,11 @@ public class LevelLoader : MonoBehaviour
 
                     string hyperHintText = TextStyler.GiveHyperText(currentSeat.hint, allPersons);
                     seatComponent.LoadData(currentSeat.personName.Trim(), personData.gender, personData.personIcon, currentSeat.seatNumber, hyperHintText);
+                    seatComponent.SetLinkedSeats(currentSeat.linkedSeats);
+                    seatComponent.mySeatID = currentSeat.seatNumber;
                     seatComponent.makeTextClickable(allPersons);
+
+                    personSeatIdsByName[currentSeat.personName] = currentSeat.seatNumber;
 
                     if (!currentSeat.isInitiallyOpened)
                     {
@@ -130,7 +148,6 @@ public class LevelLoader : MonoBehaviour
                     {
                         openPersons.Add(currentSeat.personName.Trim());
                         seatComponent.isOpenSeat = true;
-
                     }
                 }
                 else
@@ -177,7 +194,8 @@ public class LevelLoader : MonoBehaviour
             PersonData personData = Resources.Load<PersonData>($"Levels/{levelToLoad}/{personName}");
             if (personData != null && !openPersons.Contains(personName))
             {
-                UIManager.Instance.SpawnNewPerson(personData.personIcon, personName, personData.gender);
+                var personItem = UIManager.Instance.SpawnNewPerson(personData.personIcon, personName, personData.gender);
+                personItemsByIds[personSeatIdsByName[personName]] = personItem;
             }
         }
 
@@ -191,4 +209,113 @@ public class LevelLoader : MonoBehaviour
         return Camera.main.ViewportToWorldPoint(new(x, y, 0));
 
     }
+
+    public void SeatPlaced(string seatID)
+    {
+        placedSeats.Add(seatID);
+        CheckForSolvedSeats();
+    }
+
+    public void CheckForSolvedSeats()
+    {
+        foreach (var item in allSeatComponents)
+        {
+            bool solvedAllLinkedSeats = false;
+            foreach (var seatID in item.linkedSeatIDs)
+            {
+                if (placedSeats.Contains(seatID))
+                {
+                    solvedAllLinkedSeats = true;
+
+                }
+                else
+                {
+                    solvedAllLinkedSeats = false;
+                    break;
+                }
+            }
+
+            if (solvedAllLinkedSeats)
+            {
+                item.SeatSolved();
+            }
+        }
+    }
+
+    public Seat GetSeatFromName(string personName)
+    {
+
+        foreach (var seat in allSeatComponents)
+        {
+            if (seat.PersonName == personName)
+            {
+                return seat;
+            }
+        }
+
+        return null;
+    }
+
+    public bool SolveOneEligiblePersonItemsYetToBeSolved()
+    {
+        List<string> seatIds = new List<string>();
+
+        foreach (var seat in allSeatComponents)
+        {
+            if (seat.isPlaced || seat.isOpenSeat)
+            {
+
+                seatIds.AddRange(seat.linkedSeatIDs);
+            }
+        }
+
+        foreach (var seat in allSeatComponents)
+        {
+            if (!seat.isPlaced)
+            {
+                seatIds.Add(seat.mySeatID);
+            }
+        }
+
+        seatIds = RemoveDuplicatesPreserveOrder(seatIds);
+
+        List<PersonItem> eligiblePersonItems = new List<PersonItem>();
+
+        foreach (var seatId in seatIds)
+        {
+            if (personItemsByIds.ContainsKey(seatId) && (personItemsByIds[seatId] != null))
+            {
+                eligiblePersonItems.Add(personItemsByIds[seatId]);
+            }
+        }
+
+        if (eligiblePersonItems.Count > 0)
+        {
+            eligiblePersonItems[0].SolveIt();
+            return true;
+        }
+        else
+        {
+            Debug.Log("No eligible person items to solve.");
+            return false;
+        }
+
+    }
+
+    List<string> RemoveDuplicatesPreserveOrder(List<string> list)
+    {
+
+        List<string> result = new List<string>();
+
+        foreach (string item in list)
+        {
+            if (!result.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+
+        return result;
+    }
+
 }
