@@ -188,7 +188,6 @@ public class Seat : MonoBehaviour
         var c = ideaIconSR.color;
         c.a = 0f;
         ideaIconSR.DOColor(c, .6f);
-
         BGRed.color = CorrectColor;
 
     }
