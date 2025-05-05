@@ -157,7 +157,6 @@ public class Seat : MonoBehaviour
 
     public void SetOpenSeat()
     {
-        var currentScale = transform.localScale;
 
         checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
         checkMark.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
@@ -192,6 +191,16 @@ public class Seat : MonoBehaviour
 
         BGRed.color = CorrectColor;
 
+    }
+
+    public void PopUp()
+    {
+        var currentScale = transform.localScale;
+
+        transform.DOScale(currentScale * 1.06f, .2f).OnComplete(() =>
+        {
+            transform.DOScale(currentScale, .4f).SetEase(Ease.OutBack);
+        });
     }
 
     public void WrongAnimation()
