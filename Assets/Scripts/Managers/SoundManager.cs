@@ -7,7 +7,6 @@ public enum SoundNames
     Correct,
     Wrong,
     Error,
-
     Win
 }
 
@@ -87,4 +86,5 @@ public class SoundManager : MonoBehaviour
         // No free sources
         Debug.Log("All audio sources are busy, sound skipped.");
     }
+
 }

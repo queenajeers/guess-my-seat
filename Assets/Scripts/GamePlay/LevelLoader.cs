@@ -66,6 +66,11 @@ public class LevelLoader : MonoBehaviour
 
     Dictionary<string, Seat> seatCompsByName = new Dictionary<string, Seat>();
 
+    public int Lives
+    {
+        get { return PlayerPrefs.GetInt("Lives", 2); }
+        set { PlayerPrefs.SetInt("Lives", value); }
+    }
 
     void Awake()
     {
@@ -210,7 +215,6 @@ public class LevelLoader : MonoBehaviour
     Vector2 VptoWP(float x, float y)
     {
         return Camera.main.ViewportToWorldPoint(new(x, y, 0));
-
     }
 
     public void SeatPlaced(string seatID)
@@ -238,8 +242,9 @@ public class LevelLoader : MonoBehaviour
                 }
             }
 
-            if (solvedAllLinkedSeats)
+            if (solvedAllLinkedSeats && (item.isPlaced || item.isOpenSeat))
             {
+                Debug.Log("RRRRR");
                 item.SeatSolved();
             }
         }

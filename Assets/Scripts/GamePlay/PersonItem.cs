@@ -76,8 +76,10 @@ public class PersonItem : PersonDraggable
         {
             assignedSeat.WrongAnimation();
             BackToScrollPanel();
-            //SoundManager.Play(SoundNames.Wrong);
+
             SoundManager.Play(SoundNames.Error);
+
+            UIManager.Instance.LoseLife();
 
         }
     }

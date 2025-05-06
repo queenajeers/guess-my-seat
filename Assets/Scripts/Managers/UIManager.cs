@@ -1,7 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
 
 public class UIManager : MonoBehaviour
 {
@@ -18,10 +22,20 @@ public class UIManager : MonoBehaviour
     public GameObject tutorialManager;
 
     public GameObject winPage;
+    public GameObject outOfLivesPage;
+
+
+    public GameObject restartPage;
+
+    public List<GameObject> lives;
 
     void Awake()
     {
         Instance = this;
+    }
+    void Start()
+    {
+        UpdateLivesUI();
     }
 
     public PersonItem SpawnNewPerson(Sprite icon, string personName, Gender gender)
@@ -105,6 +119,108 @@ public class UIManager : MonoBehaviour
         toBeSolvedSeatData.Item1.PopUp();
 
         hintAnimationInPlay = false;
+    }
+
+
+    public void LoseLife()
+    {
+        int livesLeft = LevelLoader.Instance.Lives;
+        if (livesLeft > 0)
+        {
+            var target = lives[livesLeft - 1];
+            target.transform.DOScale(0, .4f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                target.SetActive(false);
+            });
+
+            livesLeft--;
+            LevelLoader.Instance.Lives--;
+        }
+
+        if (livesLeft == 0)
+        {
+            Debug.Log("Game Over");
+            OutOfLives();
+        }
+    }
+
+    void OutOfLives()
+    {
+        outOfLivesPage.SetActive(true);
+        PreventPersonItemsFromUse();
+        CameraDragMove.Instance.preventPanAndZoom = true;
+    }
+
+    void PreventPersonItemsFromUse()
+    {
+        foreach (var item in PeopleScrollManager.Instance.personItems)
+        {
+            if (item != null)
+            {
+                item.preventFromUse = true;
+            }
+        }
+    }
+
+    void UpdateLivesUI()
+    {
+        foreach (var item in lives)
+        {
+            item.SetActive(false);
+        }
+        for (int i = 0; i < LevelLoader.Instance.Lives; i++)
+        {
+            lives[i].SetActive(true);
+        }
+
+    }
+
+    public void ActivateRestartPage()
+    {
+        restartPage.SetActive(true);
+    }
+
+    void RefillLives()
+    {
+        LevelLoader.Instance.Lives = 2;
+    }
+
+    public void ReloadCurrentScene()
+    {
+        RefillLives();
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().name);
+    }
+
+    public void ContinuePlaying()
+    {
+        var cg = outOfLivesPage.GetComponent<CanvasGroup>();
+        cg.DOFade(0f, .3f).OnComplete(() =>
+        {
+            outOfLivesPage.SetActive(false);
+            cg.alpha = 1f;
+            ActivatePersonItemsAndCameraMovement();
+        });
+    }
+
+    public void ActivatePersonItemsAndCameraMovement()
+    {
+        foreach (var item in PeopleScrollManager.Instance.personItems)
+        {
+            if (item != null)
+            {
+                item.preventFromUse = false;
+            }
+        }
+
+        CameraDragMove.Instance.preventPanAndZoom = false;
+
+        RefillLives();
+        UpdateLivesUI();
+        foreach (var item in lives)
+        {
+            item.transform.DOScale(1, .4f).SetEase(Ease.OutBack);
+        }
     }
 
 }

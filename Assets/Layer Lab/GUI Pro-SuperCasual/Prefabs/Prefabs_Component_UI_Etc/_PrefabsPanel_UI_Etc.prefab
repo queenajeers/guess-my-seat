@@ -5855,6 +5855,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1248154752438310959, guid: 72a8c4de1be5d4737a4adb3b67257e35, type: 3}
+      propertyPath: m_text
+      value: 307
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248154752438310959, guid: 72a8c4de1be5d4737a4adb3b67257e35, type: 3}
+      propertyPath: m_fontSize
+      value: 38.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248154752438310959, guid: 72a8c4de1be5d4737a4adb3b67257e35, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
       objectReference: {fileID: 0}

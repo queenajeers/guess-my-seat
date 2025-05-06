@@ -66,10 +66,20 @@ public class Seat : MonoBehaviour
         get { return mySeatSR.transform.position; }
     }
 
+    public int Lives
+    {
+        get { return PlayerPrefs.GetInt("Lives", 2); }
+    }
+
     void Start()
     {
         personIconOriginalPosition = personIcon.transform.localPosition;
         ClickableWordsHandler.OnWordClicked += MakeIconJump;
+    }
+
+    void OnDestroy()
+    {
+        ClickableWordsHandler.OnWordClicked -= MakeIconJump;
     }
 
     public void LoadData(string personName, Gender gender, Sprite personIcon, string seatNumber, string hint)
