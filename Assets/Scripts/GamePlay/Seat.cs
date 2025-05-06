@@ -120,6 +120,8 @@ public class Seat : MonoBehaviour
     public void CorrectPlacement()
     {
         LevelLoader.Instance.SeatPlaced(mySeatID);
+
+
         isPlaced = true;
         personObject.SetActive(true);
         BGBottom.gameObject.SetActive(true);
@@ -163,6 +165,8 @@ public class Seat : MonoBehaviour
                                 // {
                                 //     BGRed.DOFade(0f, 0.5f).SetDelay(.2f); // Then fade out more slowly
                                 // });
+
+        LevelLoader.Instance.MakeSeatOpen(mySeatID);
     }
 
     public void SetOpenSeat()

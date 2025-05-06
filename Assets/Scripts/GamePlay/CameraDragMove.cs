@@ -317,12 +317,14 @@ public class CameraDragMove : MonoBehaviour
             if (seats[i].isOpenSeat)
             {
                 seats[i].SetOpenSeat();
-                yield return new WaitForSeconds(.2f);
+                yield return new WaitForSeconds(.01f);
             }
         }
 
+        LevelLoader.Instance.CheckForSolvedSeats();
 
         yield return new WaitForSeconds(1f);
+
 
         UIManager.Instance.GamePlayElementsIn();
 
@@ -346,6 +348,9 @@ public class CameraDragMove : MonoBehaviour
         cam.orthographicSize = originalZoom;
 
         preventPanAndZoom = false;
+
+
+
     }
 
     public void ZoomOut()

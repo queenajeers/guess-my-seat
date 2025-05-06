@@ -92,6 +92,7 @@ public class SeatSelector : MonoBehaviour
                 Debug.Log("LEVEL FINISHED!");
                 UIManager.Instance.FinishActivate();
                 UIManager.Instance.GamePlayElementsOut();
+                LevelLoader.Instance.DeletePersistentLevelFile();
             }
 
         }

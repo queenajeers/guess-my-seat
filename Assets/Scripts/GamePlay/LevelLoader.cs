@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelLoader : MonoBehaviour
@@ -75,26 +75,86 @@ public class LevelLoader : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        levelToLoad = PlayerPrefs.GetInt("LevelToLoad", 1);
     }
     void Start()
     {
-        var jsonFile = Resources.Load<TextAsset>($"Levels/{levelToLoad}/Level_{levelToLoad}");
+        string persistentLevelPath = Path.Combine(Application.persistentDataPath, "Levels", levelToLoad.ToString(), $"Level_{levelToLoad}.json");
+        string json;
 
-        if (jsonFile == null || seatPrefab == null)
+        if (File.Exists(persistentLevelPath))
         {
-            Debug.LogError("Missing JSON file or Seat Prefab in inspector.");
-            return;
+            json = File.ReadAllText(persistentLevelPath);
+            Debug.Log("Loaded level data from persistent path.");
+        }
+        else
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>($"Levels/{levelToLoad}/Level_{levelToLoad}");
+            if (jsonFile == null || seatPrefab == null)
+            {
+                Debug.LogError("Missing JSON file or Seat Prefab in inspector.");
+                return;
+            }
+
+            json = jsonFile.text;
+
+            // Create directories if they don't exist
+            string dirPath = Path.GetDirectoryName(persistentLevelPath);
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+
+            File.WriteAllText(persistentLevelPath, json);
+            Debug.Log("Created persistent level file from resources.");
         }
 
         GamePlayManager.Instance.SetLevel(levelToLoad);
-        LoadLevelData(jsonFile.text);
+        LoadLevelData(json);
         InitialiseLevel();
     }
 
-    public void UpdateSeatData()
-    {
 
+    public void MakeSeatOpen(string seatID)
+    {
+        var seat = levelData.seats.FirstOrDefault(s => s.seatNumber == seatID);
+        if (seat != null)
+        {
+            seat.isInitiallyOpened = true;
+
+            // Save updated JSON back to persistent path
+            string persistentLevelPath = Path.Combine(Application.persistentDataPath, "Levels", levelToLoad.ToString(), $"Level_{levelToLoad}.json");
+
+            string updatedJson = JsonUtility.ToJson(levelData, true);
+            File.WriteAllText(persistentLevelPath, updatedJson);
+
+            Debug.Log($"Seat {seatID} marked as open and saved to persistent file.");
+        }
+        else
+        {
+            Debug.LogWarning($"Seat ID {seatID} not found in level data.");
+        }
     }
+
+
+
+    public void DeletePersistentLevelFile()
+    {
+        int levelNumber = levelToLoad;
+        string filePath = Path.Combine(Application.persistentDataPath, "Levels", levelNumber.ToString(), $"Level_{levelNumber}.json");
+
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            Debug.Log($"Deleted persistent file for level {levelNumber}");
+        }
+        else
+        {
+            Debug.LogWarning($"No persistent file found for level {levelNumber} to delete.");
+        }
+    }
+
+
 
     public void LoadLevelData(string json)
     {
@@ -161,6 +221,8 @@ public class LevelLoader : MonoBehaviour
                     {
                         openPersons.Add(currentSeat.personName.Trim());
                         seatComponent.isOpenSeat = true;
+                        seatComponent.isPlaced = true;
+                        placedSeats.Add(currentSeat.seatNumber);
                     }
                 }
                 else
