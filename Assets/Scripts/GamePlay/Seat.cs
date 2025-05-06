@@ -38,7 +38,7 @@ public class Seat : MonoBehaviour
     public Color solvedHintColor;
 
     public GameObject happyEmoji;
-    [SerializeField] SpriteRenderer ideaIconSR;
+
     [SerializeField] Transform checkMark;
     [SerializeField] Transform checkMarkSolved;
     [SerializeField] Transform personIcon;
@@ -191,13 +191,7 @@ public class Seat : MonoBehaviour
 
         hintIndicator.DOFade(1f, 0.5f).SetEase(Ease.InOutQuad);
 
-        ideaIconSR.gameObject.SetActive(true);
-        var currentIconScale = ideaIconSR.transform.localScale;
-        ideaIconSR.transform.localScale = Vector2.one * .4f;
-        ideaIconSR.transform.DOScale(currentIconScale * 1.4f, 1f);
-        var c = ideaIconSR.color;
-        c.a = 0f;
-        ideaIconSR.DOColor(c, .6f);
+
         BGRed.color = CorrectColor;
 
     }
