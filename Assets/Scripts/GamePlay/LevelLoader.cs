@@ -91,6 +91,11 @@ public class LevelLoader : MonoBehaviour
         InitialiseLevel();
     }
 
+    public void UpdateSeatData()
+    {
+
+    }
+
     public void LoadLevelData(string json)
     {
         levelData = JsonUtility.FromJson<LevelData>(json);
