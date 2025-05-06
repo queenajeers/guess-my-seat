@@ -261,8 +261,13 @@ public class CameraDragMove : MonoBehaviour
     {
         yield return new WaitUntil(() => { return cam != null; });
 
+
+
         if (seats == null || seats.Count == 0)
             yield break;
+
+        UIManager.Instance.DisablePersonItems();
+
 
         preventPanAndZoom = true;
         allSeats = seats;
@@ -323,8 +328,7 @@ public class CameraDragMove : MonoBehaviour
 
         LevelLoader.Instance.CheckForSolvedSeats();
 
-        yield return new WaitForSeconds(1f);
-
+        yield return new WaitForSeconds(.4f);
 
         UIManager.Instance.GamePlayElementsIn();
 
@@ -349,6 +353,8 @@ public class CameraDragMove : MonoBehaviour
 
         preventPanAndZoom = false;
 
+        UIManager.Instance.EnablePersonItems();
+        UIManager.Instance.CheckForOutOfLives();
 
 
     }

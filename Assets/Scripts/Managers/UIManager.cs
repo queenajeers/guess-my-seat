@@ -144,6 +144,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void CheckForOutOfLives()
+    {
+        if (LevelLoader.Instance.Lives <= 0)
+        {
+            OutOfLives();
+        }
+    }
+
     void OutOfLives()
     {
         outOfLivesPage.SetActive(true);
@@ -177,6 +185,7 @@ public class UIManager : MonoBehaviour
 
     public void ActivateRestartPage()
     {
+        LevelLoader.Instance.DeletePersistentLevelFile();
         restartPage.SetActive(true);
     }
 
@@ -201,6 +210,28 @@ public class UIManager : MonoBehaviour
             cg.alpha = 1f;
             ActivatePersonItemsAndCameraMovement();
         });
+    }
+
+    public void DisablePersonItems()
+    {
+        foreach (var item in PeopleScrollManager.Instance.personItems)
+        {
+            if (item != null)
+            {
+                item.preventFromUse = true;
+            }
+        }
+    }
+
+    public void EnablePersonItems()
+    {
+        foreach (var item in PeopleScrollManager.Instance.personItems)
+        {
+            if (item != null)
+            {
+                item.preventFromUse = false;
+            }
+        }
     }
 
     public void ActivatePersonItemsAndCameraMovement()
