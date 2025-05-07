@@ -90,6 +90,12 @@ public class Seat : MonoBehaviour
         seatNumberIndicator.text = seatNumber;
         hintIndicator.text = hint;
         this.personName.text = personName;
+
+        if (hint.Length == 0)
+        {
+            hintIndicator.text = "------\n------";
+            hintIndicator.color = solvedHintColor;
+        }
     }
 
     public void SetLinkedSeats(List<string> linkedSeats)
@@ -119,10 +125,11 @@ public class Seat : MonoBehaviour
 
     public void CorrectPlacement()
     {
+        isPlaced = true;
+
         LevelLoader.Instance.SeatPlaced(mySeatID);
 
 
-        isPlaced = true;
         personObject.SetActive(true);
         BGBottom.gameObject.SetActive(true);
         happyEmoji.SetActive(true);
@@ -167,27 +174,23 @@ public class Seat : MonoBehaviour
                                 // });
 
         LevelLoader.Instance.MakeSeatOpen(mySeatID);
+
+        UIManager.Instance.SayComplement();
     }
 
-    public void SetOpenSeat()
+    public void SetOpenSeatOld()
     {
-
         checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
         checkMark.DORotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
         checkMark.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
         seatNumberIndicator.color = CorrectColor;
 
-        // Animate personObject scale from 0 to 1 with bounce
-        // personObject.transform.localScale = Vector3.zero;
         personObject.SetActive(true);
-        // personObject.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
 
-        // Move seatContainer to correct position
         seatContainer.DOLocalMove(seatCorrectPlacement, 0.5f).SetEase(Ease.OutCubic);
 
         BGBottom.gameObject.SetActive(true);
 
-        // Fade in hintIndicator (TextMeshProUGUI)
         Color hintColor = hintIndicator.color;
         hintColor.a = 0f;
         hintIndicator.color = hintColor;
@@ -195,9 +198,26 @@ public class Seat : MonoBehaviour
 
         hintIndicator.DOFade(1f, 0.5f).SetEase(Ease.InOutQuad);
 
+        BGRed.color = CorrectColor;
+    }
+
+    public void SetOpenSeat()
+    {
+        checkMark.transform.localRotation = Quaternion.Euler(0, 0, -185);
+        checkMark.localRotation = Quaternion.Euler(0, 0, 0);
+        checkMark.localScale = Vector3.one;
+
+        seatNumberIndicator.color = CorrectColor;
+
+        personObject.SetActive(true);
+
+        seatContainer.localPosition = seatCorrectPlacement;
+
+        BGBottom.gameObject.SetActive(true);
+
+        hintIndicator.gameObject.SetActive(true);
 
         BGRed.color = CorrectColor;
-
     }
 
     public void PopUp()

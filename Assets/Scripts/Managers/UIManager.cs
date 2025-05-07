@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
@@ -26,13 +25,19 @@ public class UIManager : MonoBehaviour
 
 
     public GameObject restartPage;
+    public GameObject goToMenuPage;
 
     public List<GameObject> lives;
+
+    public GameObject complementBG;
+    public TextMeshProUGUI complementText;
+    public List<string> complements;
 
     void Awake()
     {
         Instance = this;
     }
+
     void Start()
     {
         UpdateLivesUI();
@@ -185,13 +190,21 @@ public class UIManager : MonoBehaviour
 
     public void ActivateRestartPage()
     {
-        LevelLoader.Instance.DeletePersistentLevelFile();
-        restartPage.SetActive(true);
+        if (!continuePlayClicked)
+        {
+            LevelLoader.Instance.DeletePersistentLevelFile();
+            restartPage.SetActive(true);
+        }
     }
 
     void RefillLives()
     {
         LevelLoader.Instance.Lives = 2;
+    }
+
+    public void GoToHomeScene()
+    {
+        goToMenuPage.SetActive(true);
     }
 
     public void ReloadCurrentScene()
@@ -200,14 +213,23 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(
             SceneManager.GetActiveScene().name);
     }
+    public void LoadMenuScene()
+    {
+        RefillLives();
+        SceneManager.LoadScene(0);
+    }
+
+    bool continuePlayClicked = false;
 
     public void ContinuePlaying()
     {
         var cg = outOfLivesPage.GetComponent<CanvasGroup>();
+        continuePlayClicked = true;
         cg.DOFade(0f, .3f).OnComplete(() =>
         {
             outOfLivesPage.SetActive(false);
             cg.alpha = 1f;
+            continuePlayClicked = false;
             ActivatePersonItemsAndCameraMovement();
         });
     }
@@ -252,6 +274,13 @@ public class UIManager : MonoBehaviour
         {
             item.transform.DOScale(1, .4f).SetEase(Ease.OutBack);
         }
+    }
+
+    public void SayComplement()
+    {
+        complementBG.SetActive(true);
+        complementText.text = complements[Random.Range(0, complements.Count)];
+
     }
 
 }

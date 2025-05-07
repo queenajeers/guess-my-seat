@@ -315,24 +315,24 @@ public class CameraDragMove : MonoBehaviour
         zoomedOutCamSize = desiredZoom;
 
 
-        yield return new WaitForSeconds(.5f);
+        // yield return new WaitForSeconds(.5f);
 
         for (int i = 0; i < seats.Count; i++)
         {
             if (seats[i].isOpenSeat)
             {
                 seats[i].SetOpenSeat();
-                yield return new WaitForSeconds(.01f);
+                // yield return new WaitForSeconds(.01f);
             }
         }
 
         LevelLoader.Instance.CheckForSolvedSeats();
 
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(.7f);
 
         UIManager.Instance.GamePlayElementsIn();
 
-        float duration = .5f;
+        float duration = .8f;
         float elapsed = 0f;
 
         var startPos = transform.position;

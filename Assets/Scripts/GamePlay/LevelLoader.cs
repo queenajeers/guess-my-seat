@@ -140,6 +140,7 @@ public class LevelLoader : MonoBehaviour
 
     public void DeletePersistentLevelFile()
     {
+
         int levelNumber = levelToLoad;
         string filePath = Path.Combine(Application.persistentDataPath, "Levels", levelNumber.ToString(), $"Level_{levelNumber}.json");
 
@@ -152,9 +153,8 @@ public class LevelLoader : MonoBehaviour
         {
             Debug.LogWarning($"No persistent file found for level {levelNumber} to delete.");
         }
+
     }
-
-
 
     public void LoadLevelData(string json)
     {
@@ -297,6 +297,7 @@ public class LevelLoader : MonoBehaviour
             bool solvedAllLinkedSeats = false;
             foreach (var seatID in item.linkedSeatIDs)
             {
+
                 if (placedSeats.Contains(seatID))
                 {
                     solvedAllLinkedSeats = true;
@@ -311,9 +312,9 @@ public class LevelLoader : MonoBehaviour
 
             if (solvedAllLinkedSeats && (item.isPlaced || item.isOpenSeat))
             {
-                Debug.Log("RRRRR");
                 item.SeatSolved();
             }
+
         }
     }
 
