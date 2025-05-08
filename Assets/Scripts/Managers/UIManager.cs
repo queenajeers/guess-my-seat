@@ -46,6 +46,8 @@ public class UIManager : MonoBehaviour
     private bool hintAnimationInPlay = false;
     private bool continuePlayClicked = false;
 
+    [SerializeField] TextMeshProUGUI coinsIndicator;
+
     void Awake()
     {
         Instance = this;
@@ -56,7 +58,10 @@ public class UIManager : MonoBehaviour
         coinsForAHintIndicator.text = GameData.CoinsToUseHint.ToString();
         UpdateLivesUI();
         UpdateHintsUI();
+        UpdateNavBarCoins();
     }
+
+
 
     public PersonItem SpawnNewPerson(Sprite icon, string personName, Gender gender)
     {
@@ -137,6 +142,7 @@ public class UIManager : MonoBehaviour
                 else
                 {
                     GameData.Coins -= GameData.CoinsToUseHint;
+                    UpdateNavBarCoins();
                 }
 
                 UpdateHintsUI();
@@ -225,6 +231,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateNavBarCoins()
+    {
+        coinsIndicator.text = GameData.Coins.ToString();
+    }
+
     public void UpdateHintsUI()
     {
         hintsIndicator.text = GameData.Hints.ToString();
@@ -263,6 +274,11 @@ public class UIManager : MonoBehaviour
     {
         RefillLives();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ActivateMenuRestartPage()
+    {
+        goToMenuPage.SetActive(true);
     }
 
     public void LoadMenuScene()

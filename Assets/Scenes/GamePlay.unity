@@ -7348,6 +7348,8 @@ MonoBehaviour:
   iconCoin: {fileID: 1265209076}
   iconPiggy: {fileID: 1951822461}
   iconHammer: {fileID: 656134118}
+  coinsIndicator: {fileID: 1913322243}
+  reward_coinsMainIndicator: {fileID: 1384360031}
 --- !u!114 &998439339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13954,6 +13956,7 @@ MonoBehaviour:
   levelNumberIndicator: {fileID: 5067718195928127814}
   coinsShopPagePrefab: {fileID: 6951533416461876274, guid: b9fb7fa2695ea496ba877c69b95e8c5b, type: 3}
   GamePlayPanel: {fileID: 455407224}
+  coinsIndicator: {fileID: 1296429615}
 --- !u!1 &1676053266
 GameObject:
   m_ObjectHideFlags: 0
@@ -14397,7 +14400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

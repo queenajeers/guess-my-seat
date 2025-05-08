@@ -34,6 +34,7 @@ public class CoinsShopPage : MonoBehaviour
         coinsRewardText.text = coins.ToString();
         coinsRewardPage.SetActive(true);
 
+        UIManager.Instance.UpdateNavBarCoins();
         UIManager.Instance.UpdateHintsUI();
 
     }

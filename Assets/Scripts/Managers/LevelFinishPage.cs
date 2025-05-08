@@ -1,5 +1,7 @@
+using System.Collections;
 using AssetKits.ParticleImage;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class LevelFinishPage : MonoBehaviour
@@ -12,14 +14,31 @@ public class LevelFinishPage : MonoBehaviour
     public Transform iconPiggy;
     public Transform iconHammer;
 
+    public TextMeshProUGUI coinsIndicator;
 
+    public TextMeshProUGUI reward_coinsMainIndicator;
+
+    int coins;
+    int hammers;
+    int piggy;
+
+    void Start()
+    {
+        coinsIndicator.text = GameData.Coins.ToString();
+        MakeRewardReady();
+    }
+
+    void MakeRewardReady()
+    {
+        coins = Random.Range(4, 9);
+        hammers = Random.Range(4, 9);
+        piggy = Random.Range(4, 9);
+
+        reward_coinsMainIndicator.text = coins.ToString();
+    }
 
     public void BurstResources()
     {
-        int coins = Random.Range(4, 9);
-        int hammers = Random.Range(4, 9);
-        int piggy = Random.Range(4, 9);
-
 
         for (int i = 0; i < coins; i++)
         {
@@ -50,11 +69,17 @@ public class LevelFinishPage : MonoBehaviour
         hammers_ps.onAnyParticleFinished.AddListener(AddToHammer);
         piggy_coins_ps.onAnyParticleFinished.AddListener(AddToPiggy);
 
+        main_coins_ps.onLastParticleFinished.AddListener(GoToMenuScene);
+
+
+
     }
 
     void AddToCoin()
     {
         PopTransform(iconCoin);
+        GameData.Coins++;
+        coinsIndicator.text = GameData.Coins.ToString();
     }
     void AddToHammer()
     {
@@ -72,5 +97,15 @@ public class LevelFinishPage : MonoBehaviour
 
         t.DOShakeScale(1, .2f).SetEase(Ease.OutBack);
     }
+    void GoToMenuScene()
+    {
+        StartCoroutine(GoToMenuSceneCor());
+    }
+    IEnumerator GoToMenuSceneCor()
+    {
+        yield return new WaitForSeconds(1f);
+        UIManager.Instance.ActivateMenuRestartPage();
+    }
+
 
 }
