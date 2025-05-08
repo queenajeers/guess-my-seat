@@ -353,9 +353,12 @@ public class CameraDragMove : MonoBehaviour
 
         preventPanAndZoom = false;
 
-        UIManager.Instance.EnablePersonItems();
-        UIManager.Instance.CheckForOutOfLives();
+        if (GameData.CurrentLevel > 0)
+        {
+            UIManager.Instance.EnablePersonItems();
 
+            UIManager.Instance.CheckForOutOfLives();
+        }
 
     }
 

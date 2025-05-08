@@ -9,29 +9,42 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
+
+    [SerializeField] private Transform canvasTransform;
+    [SerializeField] private Transform personScrollView;
+    [SerializeField] private GameObject personItemPrefab;
+    [SerializeField] private TextMeshProUGUI seatsFilledIndicator;
+    [SerializeField] private Transform seatsFilledIndicatorBG;
+    [SerializeField] private GameObject winConfetti;
+    [SerializeField] private GameObject gamePlayNavBar;
+    [SerializeField] private GameObject gradientBarPanel;
+    [SerializeField] private Animator gamePlayAnim;
+    [SerializeField] private GameObject tutorialManager;
+
+    [SerializeField] private GameObject winPage;
+    [SerializeField] private GameObject outOfLivesPage;
+    [SerializeField] private GameObject restartPage;
+    [SerializeField] private GameObject goToMenuPage;
+
+    [SerializeField] private List<GameObject> lives;
+
+    [SerializeField] private GameObject complementBG;
+    [SerializeField] private TextMeshProUGUI complementText;
+    [SerializeField] private List<string> complements;
+
+    [SerializeField] private TextMeshProUGUI hintsIndicator;
+    [SerializeField] private TextMeshProUGUI coinsForAHintIndicator;
+
+    [SerializeField] private GameObject useHintsForHints;
+    [SerializeField] private GameObject useCoinsForHints;
+    [SerializeField] private TextMeshProUGUI levelNumberIndicator;
+
+    [SerializeField] private GameObject coinsShopPagePrefab;
+
     public Transform GamePlayPanel;
-    public Transform personScrollView;
-    public GameObject personItemPrefab;
-    public TextMeshProUGUI seatsFilledIndicator;
-    public Transform seatsFilledIndicatorBG;
-    public GameObject winConfetti;
-    public GameObject gamePlayNavBar;
-    public GameObject gradientBarPanel;
-    [SerializeField] Animator gamePlayAnim;
-    public GameObject tutorialManager;
 
-    public GameObject winPage;
-    public GameObject outOfLivesPage;
-
-
-    public GameObject restartPage;
-    public GameObject goToMenuPage;
-
-    public List<GameObject> lives;
-
-    public GameObject complementBG;
-    public TextMeshProUGUI complementText;
-    public List<string> complements;
+    private bool hintAnimationInPlay = false;
+    private bool continuePlayClicked = false;
 
     void Awake()
     {
@@ -40,7 +53,9 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        coinsForAHintIndicator.text = GameData.CoinsToUseHint.ToString();
         UpdateLivesUI();
+        UpdateHintsUI();
     }
 
     public PersonItem SpawnNewPerson(Sprite icon, string personName, Gender gender)
@@ -50,7 +65,6 @@ public class UIManager : MonoBehaviour
         PeopleScrollManager.Instance.personItems.Add(personItemComp);
 
         return personItemComp;
-
     }
 
     public void SetSeatsIndicator(int seatsFilled, int totalSeats)
@@ -59,7 +73,6 @@ public class UIManager : MonoBehaviour
         seatsFilledIndicatorBG.DOKill();
         seatsFilledIndicatorBG.DOScale(1.1f, .1f).OnComplete(() =>
         {
-
             seatsFilledIndicatorBG.DOScale(1f, .2f).SetEase(Ease.InBack);
         });
     }
@@ -71,12 +84,22 @@ public class UIManager : MonoBehaviour
 
     IEnumerator FinishActivateCor()
     {
-
         yield return new WaitForSeconds(.5f);
         SoundManager.Play(SoundNames.Win);
         CameraDragMove.Instance.ZoomOut();
         winConfetti.SetActive(true);
         yield return new WaitForSeconds(.8f);
+
+        if (GameData.CurrentLevel == 0)
+        {
+            levelNumberIndicator.text = "Tutorial";
+        }
+        else
+        {
+            levelNumberIndicator.text = $"Level {GameData.CurrentLevel}";
+        }
+
+        GameData.CurrentLevel++;
         winPage.SetActive(true);
     }
 
@@ -91,26 +114,42 @@ public class UIManager : MonoBehaviour
 
         gamePlayAnim.Play("GamePlayIn", 0, 0);
     }
+
     public void GamePlayElementsOut()
     {
         gamePlayAnim.Play("GamePlayOut", 0, 0);
     }
 
-    bool hintAnimationInPlay = false;
     public void UseOneHint()
     {
         if (hintAnimationInPlay) return;
 
-
-        var toBeSolvedSeatData = LevelLoader.Instance.SolveOneEligiblePersonItemsYetToBeSolved();
-
-        if (toBeSolvedSeatData.Item1 != null)
+        if ((GameData.Hints > 0) || (GameData.Coins >= GameData.CoinsToUseHint))
         {
-            StartCoroutine(UseOneHintCor(toBeSolvedSeatData));
+            var toBeSolvedSeatData = LevelLoader.Instance.SolveOneEligiblePersonItemsYetToBeSolved();
+
+            if (toBeSolvedSeatData.Item1 != null)
+            {
+                if (GameData.Hints > 0)
+                {
+                    GameData.Hints--;
+                }
+                else
+                {
+                    GameData.Coins -= GameData.CoinsToUseHint;
+                }
+
+                UpdateHintsUI();
+                StartCoroutine(UseOneHintCor(toBeSolvedSeatData));
+            }
+            else
+            {
+                Debug.Log("No seats to solve!");
+            }
         }
         else
         {
-            Debug.Log("No seats to solve!");
+            OpenShopPage();
         }
     }
 
@@ -126,10 +165,9 @@ public class UIManager : MonoBehaviour
         hintAnimationInPlay = false;
     }
 
-
     public void LoseLife()
     {
-        int livesLeft = LevelLoader.Instance.Lives;
+        int livesLeft = GameData.Lives;
         if (livesLeft > 0)
         {
             var target = lives[livesLeft - 1];
@@ -139,7 +177,7 @@ public class UIManager : MonoBehaviour
             });
 
             livesLeft--;
-            LevelLoader.Instance.Lives--;
+            GameData.Lives--;
         }
 
         if (livesLeft == 0)
@@ -151,7 +189,7 @@ public class UIManager : MonoBehaviour
 
     public void CheckForOutOfLives()
     {
-        if (LevelLoader.Instance.Lives <= 0)
+        if (GameData.Lives <= 0)
         {
             OutOfLives();
         }
@@ -181,11 +219,25 @@ public class UIManager : MonoBehaviour
         {
             item.SetActive(false);
         }
-        for (int i = 0; i < LevelLoader.Instance.Lives; i++)
+        for (int i = 0; i < GameData.Lives; i++)
         {
             lives[i].SetActive(true);
         }
+    }
 
+    public void UpdateHintsUI()
+    {
+        hintsIndicator.text = GameData.Hints.ToString();
+        if (GameData.Hints <= 0)
+        {
+            useHintsForHints.SetActive(false);
+            useCoinsForHints.SetActive(true);
+        }
+        else
+        {
+            useHintsForHints.SetActive(true);
+            useCoinsForHints.SetActive(false);
+        }
     }
 
     public void ActivateRestartPage()
@@ -199,7 +251,7 @@ public class UIManager : MonoBehaviour
 
     void RefillLives()
     {
-        LevelLoader.Instance.Lives = 2;
+        GameData.Lives = 2;
     }
 
     public void GoToHomeScene()
@@ -210,16 +262,14 @@ public class UIManager : MonoBehaviour
     public void ReloadCurrentScene()
     {
         RefillLives();
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     public void LoadMenuScene()
     {
         RefillLives();
         SceneManager.LoadScene(0);
     }
-
-    bool continuePlayClicked = false;
 
     public void ContinuePlaying()
     {
@@ -278,9 +328,13 @@ public class UIManager : MonoBehaviour
 
     public void SayComplement()
     {
+        if (GameData.CurrentLevel == 0) return;
         complementBG.SetActive(true);
         complementText.text = complements[Random.Range(0, complements.Count)];
-
     }
 
+    public void OpenShopPage()
+    {
+        Instantiate(coinsShopPagePrefab, canvasTransform);
+    }
 }

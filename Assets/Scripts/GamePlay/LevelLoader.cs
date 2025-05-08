@@ -50,9 +50,6 @@ public class LevelLoader : MonoBehaviour
     }
 
 
-    [Header("JSON Level File")]
-    public int levelToLoad;
-
     [Header("Level Building Blocks")]
     [SerializeField] private GameObject seatPrefab;
 
@@ -66,19 +63,23 @@ public class LevelLoader : MonoBehaviour
 
     Dictionary<string, Seat> seatCompsByName = new Dictionary<string, Seat>();
 
-    public int Lives
-    {
-        get { return PlayerPrefs.GetInt("Lives", 2); }
-        set { PlayerPrefs.SetInt("Lives", value); }
-    }
+
+    [SerializeField] int levelToLoad;
 
     void Awake()
     {
         Instance = this;
-        levelToLoad = PlayerPrefs.GetInt("LevelToLoad", 1);
+        levelToLoad = GameData.CurrentLevel;
+
     }
     void Start()
     {
+        if (GameData.CurrentLevel == 0)
+        {
+            levelToLoad = 0;
+            DeletePersistentLevelFile();
+        }
+
         string persistentLevelPath = Path.Combine(Application.persistentDataPath, "Levels", levelToLoad.ToString(), $"Level_{levelToLoad}.json");
         string json;
 
@@ -138,6 +139,23 @@ public class LevelLoader : MonoBehaviour
 
 
 
+    public void SaveLevelData()
+    {
+        string json = JsonUtility.ToJson(levelData, true);
+        string filePath = Path.Combine(Application.persistentDataPath, "Levels", levelToLoad.ToString(), $"Level_{levelToLoad}.json");
+
+        // Create directories if they don't exist
+        string dirPath = Path.GetDirectoryName(filePath);
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
+
+        File.WriteAllText(filePath, json);
+        Debug.Log($"Level data saved to {filePath}");
+    }
+
+    [ContextMenu("Delete Persistent Level File")]
     public void DeletePersistentLevelFile()
     {
 

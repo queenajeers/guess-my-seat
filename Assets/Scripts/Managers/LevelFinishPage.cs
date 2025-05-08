@@ -40,6 +40,8 @@ public class LevelFinishPage : MonoBehaviour
         hammers_ps.gameObject.SetActive(true);
         piggy_coins_ps.gameObject.SetActive(true);
 
+
+
         main_coins_ps.Play();
         hammers_ps.Play();
         piggy_coins_ps.Play();

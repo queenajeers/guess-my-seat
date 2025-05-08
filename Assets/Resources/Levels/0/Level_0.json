@@ -6,7 +6,7 @@
       "seatNumber": "A1",
       "row": 0,
       "col": 0,
-      "personSeating": "Ricky",
+      "personName": "Ricky",
       "hint": "Nicky and I arrived together",
       "isInitiallyOpened": true
     },
@@ -14,7 +14,7 @@
       "seatNumber": "B1",
       "row": 0,
       "col": 1,
-      "personSeating": "Nicky",
+      "personName": "Nicky",
       "hint": "I asked Lucky to take the seat directly behind mine",
       "isInitiallyOpened": false
     },
@@ -22,7 +22,7 @@
       "seatNumber": "B2",
       "row": 1,
       "col": 1,
-      "personSeating": "Lucky",
+      "personName": "Lucky",
       "hint": "Woohoo! I'm super excited for the movie!",
       "isInitiallyOpened": false
     },
@@ -30,7 +30,7 @@
       "seatNumber": "A2",
       "row": 1,
       "col": 0,
-      "personSeating": "Vicky",
+      "personName": "Vicky",
       "hint": "Congrats on completing the tutorial!",
       "isInitiallyOpened": false
     }

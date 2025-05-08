@@ -54,7 +54,6 @@ public class SeatSelector : MonoBehaviour
             currentPersonDraggable.SetTargetStatus(false, Vector2.zero);
         }
 
-
     }
 
     public void SelectedCurrentDraggable(PersonDraggable personDraggable)
@@ -93,6 +92,7 @@ public class SeatSelector : MonoBehaviour
                 UIManager.Instance.FinishActivate();
                 UIManager.Instance.GamePlayElementsOut();
                 LevelLoader.Instance.DeletePersistentLevelFile();
+
             }
 
         }

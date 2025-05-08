@@ -318,13 +318,11 @@ MonoBehaviour:
   mask2: {fileID: 405331247605705606}
   instBG: {fileID: 8081752698929953639}
   instructions:
-  - "The <b>goal</b> is for everyone to sit in \ntheir <b>assigned seats.</b> This
-    seat, left a\n hint for us: \"<b><u>Nicky</u> should sit next to <u>Ricky</u></b>\""
-  - '<b>Great!</b> A <b>new hint</b> is unlocked,
-
-    now drag <b><u>Lucky</u></b>
-    to his seat!'
-  - "<b>You're picking this up FAST!</b> \nNow you know where to place <u><b>Vicky</b></u>"
+  - "The <b>goal</b> is for everyone  \nto sit in their <b>assigned seats.</b>  \nThis
+    seat left a hint for us:  \n\"<b><u>Nicky</u> should sit next to <u>Ricky</u></b>\"\n"
+  - "<b>Great!</b> A <b>new hint</b>  \nis unlocked. Now drag  \n<b><u>Lucky</u></b>
+    to his seat!\n"
+  - "<b>You're picking this up FAST!</b>  \nNow you know where to  \nplace <u><b>Vicky</b></u>\n"
   instruction: {fileID: 3418196339699887646}
   blackBG: {fileID: 8433281212328371347}
 --- !u!1 &2624104151704413153
@@ -546,8 +544,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.81
-  m_fontSizeBase: 0.81
+  m_fontSize: 1.05
+  m_fontSizeBase: 1.05
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
