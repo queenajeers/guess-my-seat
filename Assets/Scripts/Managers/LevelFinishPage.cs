@@ -42,17 +42,17 @@ public class LevelFinishPage : MonoBehaviour
 
         for (int i = 0; i < coins; i++)
         {
-            main_coins_ps.AddBurst(0f + (i * 0.14f), 1);
+            main_coins_ps.AddBurst(0f + (i * 0.1f), 1);
         }
 
         for (int i = 0; i < hammers; i++)
         {
-            hammers_ps.AddBurst(0f + (i * 0.14f), 1);
+            hammers_ps.AddBurst(0f + (i * 0.1f), 1);
         }
 
         for (int i = 0; i < piggy; i++)
         {
-            piggy_coins_ps.AddBurst(0f + (i * 0.14f), 1);
+            piggy_coins_ps.AddBurst(0f + (i * 0.1f), 1);
         }
 
         main_coins_ps.gameObject.SetActive(true);
@@ -75,11 +75,15 @@ public class LevelFinishPage : MonoBehaviour
 
     }
 
+
+
     void AddToCoin()
     {
         PopTransform(iconCoin);
         GameData.Coins++;
         coinsIndicator.text = GameData.Coins.ToString();
+
+        SoundManager.Play(SoundNames.Coin, .5f);
     }
     void AddToHammer()
     {

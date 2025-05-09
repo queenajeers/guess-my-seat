@@ -1341,7 +1341,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.8639706
+  orthographic size: 1.7583334
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2018,7 +2018,7 @@ MonoBehaviour:
   - name: 0
     clip: {fileID: 8300000, guid: 09bb359b12a7747cfa7da3e00009150f, type: 3}
   - name: 1
-    clip: {fileID: 8300000, guid: be408548d9adb457988104764d118907, type: 3}
+    clip: {fileID: 8300000, guid: b584cd75e047c4f0884e1d0437ba8302, type: 3}
   - name: 2
     clip: {fileID: 8300000, guid: e7cc3a373c5a849bb8cf2c772356412c, type: 3}
   - name: 3
@@ -2026,7 +2026,13 @@ MonoBehaviour:
   - name: 4
     clip: {fileID: 8300000, guid: 0c05af924175f4ac4b983e379a762682, type: 3}
   - name: 5
-    clip: {fileID: 8300000, guid: 67e0a78889c85460fb1ce56a13cf0299, type: 3}
+    clip: {fileID: 8300000, guid: 84831a3de649c4897afe04dbb622aca9, type: 3}
+  - name: 6
+    clip: {fileID: 8300000, guid: 8a671fc926e494ffd9e68ffa738eae96, type: 3}
+  - name: 7
+    clip: {fileID: 8300000, guid: 31a4b98c9b04043a79ff30ce7810274c, type: 3}
+  - name: 8
+    clip: {fileID: 8300000, guid: ca96e6d6946264d2c8accea9ec966580, type: 3}
 --- !u!4 &1753209499
 Transform:
   m_ObjectHideFlags: 0
@@ -2077,7 +2083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1881169436

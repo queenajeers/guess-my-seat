@@ -169,8 +169,10 @@ public class UIManager : MonoBehaviour
 
         yield return StartCoroutine(CameraDragMove.Instance.MoveToPosition(toBeSolvedSeatData.Item1.transform.position, .5f));
 
+
         toBeSolvedSeatData.Item2.SolveIt();
         toBeSolvedSeatData.Item1.PopUp();
+        SoundManager.Play(SoundNames.HintRevealed);
 
         hintAnimationInPlay = false;
     }

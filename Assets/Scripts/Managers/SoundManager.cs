@@ -8,7 +8,13 @@ public enum SoundNames
     Wrong,
     Error,
     Win,
-    Click
+    Click,
+
+    HintRevealed,
+
+    Win2,
+    Coin
+
 }
 
 public class SoundManager : MonoBehaviour

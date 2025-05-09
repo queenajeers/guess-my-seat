@@ -9,6 +9,7 @@ public class LettersAnimation : MonoBehaviour
 
     void OnEnable()
     {
+        SoundManager.Play(SoundNames.Win2);
         foreach (var letter in letters)
         {
             letter.transform.localScale = Vector2.zero;
