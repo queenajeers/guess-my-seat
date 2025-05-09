@@ -80,6 +80,27 @@ public class LevelLoader : MonoBehaviour
             DeletePersistentLevelFile();
         }
 
+        // Get all level JSON files in Resources/Levels and find max level number
+        TextAsset[] allLevelFiles = Resources.LoadAll<TextAsset>("Levels");
+        int maxLevel = allLevelFiles
+            .Select(file =>
+            {
+                string name = Path.GetFileNameWithoutExtension(file.name);
+                string[] parts = name.Split('_');
+                if (parts.Length == 2 && int.TryParse(parts[1], out int num))
+                    return num;
+                return -1;
+            })
+            .Where(num => num > 0) // skip 0
+            .DefaultIfEmpty(0)
+            .Max();
+
+        // Wrap levelToLoad: if > maxLevel, start back at 1
+        if (levelToLoad > maxLevel)
+        {
+            levelToLoad = ((levelToLoad - 1) % maxLevel) + 1;
+        }
+
         string persistentLevelPath = Path.Combine(Application.persistentDataPath, "Levels", levelToLoad.ToString(), $"Level_{levelToLoad}.json");
         string json;
 
@@ -99,7 +120,7 @@ public class LevelLoader : MonoBehaviour
 
             json = jsonFile.text;
 
-            // Create directories if they don't exist
+            // Ensure directory exists
             string dirPath = Path.GetDirectoryName(persistentLevelPath);
             if (!Directory.Exists(dirPath))
             {

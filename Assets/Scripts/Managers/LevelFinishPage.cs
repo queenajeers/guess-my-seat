@@ -103,7 +103,7 @@ public class LevelFinishPage : MonoBehaviour
     }
     IEnumerator GoToMenuSceneCor()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         UIManager.Instance.ActivateMenuRestartPage();
     }
 
