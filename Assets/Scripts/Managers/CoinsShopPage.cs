@@ -48,11 +48,14 @@ public class CoinsShopPage : MonoBehaviour
             OutOfLivesPage.Instance.UpdateCoins();
         }
 
+        SoundManager.Play(SoundNames.Click, .6f);
+
     }
 
 
     public void ClosePage()
     {
+        SoundManager.Play(SoundNames.Click, .6f);
         Destroy(gameObject);
     }
 }

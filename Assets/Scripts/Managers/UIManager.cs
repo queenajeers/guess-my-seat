@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     private bool continuePlayClicked = false;
 
     [SerializeField] TextMeshProUGUI coinsIndicator;
+    [SerializeField] TextMeshProUGUI levelIndicator;
 
     [SerializeField] GameObject lifeLostIndicator;
 
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         coinsForAHintIndicator.text = GameData.CoinsToUseHint.ToString();
+        levelIndicator.text = $"Level {GameData.CurrentLevel}";
         UpdateLivesUI();
         UpdateHintsUI();
         UpdateNavBarCoins();
@@ -354,5 +356,10 @@ public class UIManager : MonoBehaviour
     public void OpenShopPage()
     {
         Instantiate(coinsShopPagePrefab, canvasTransform);
+    }
+
+    public void ClickSound()
+    {
+        SoundManager.Play(SoundNames.Click, .6f);
     }
 }

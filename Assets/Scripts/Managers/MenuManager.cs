@@ -67,4 +67,9 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
 
     }
+
+    public void ClickSound()
+    {
+        SoundManager.Play(SoundNames.Click, .6f);
+    }
 }

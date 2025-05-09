@@ -9,7 +9,7 @@
       "col": 0,
       "personName": "John",
       "personGender": "",
-      "hint": "The first letter of my name is the same as the person sitting in front of me",
+      "hint": "Everyone seated in this column has names that start with the same letter",
       "isInitiallyOpened": true,
       "linkedSeats": [],
       "tags": []

@@ -7,7 +7,8 @@ public enum SoundNames
     Correct,
     Wrong,
     Error,
-    Win
+    Win,
+    Click
 }
 
 public class SoundManager : MonoBehaviour

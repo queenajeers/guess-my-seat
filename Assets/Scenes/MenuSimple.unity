@@ -507,7 +507,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
-  duration: 0.2
+  duration: 0.1
   easeType: 6
   easeCurve:
     serializedVersion: 2
@@ -924,6 +924,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1971715202}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &621794572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,6 +1095,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1971715202}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenCoinsShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1971715202}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1317,7 +1341,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.2786517
+  orthographic size: 1.8639706
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1961,6 +1985,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469399512}
   m_CullTransparentMesh: 1
+--- !u!1 &1753209497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1753209499}
+  - component: {fileID: 1753209498}
+  m_Layer: 0
+  m_Name: SoundManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1753209498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753209497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e4430f9cf1d4ee79b9d9e46b9e5e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: 0
+    clip: {fileID: 8300000, guid: 09bb359b12a7747cfa7da3e00009150f, type: 3}
+  - name: 1
+    clip: {fileID: 8300000, guid: be408548d9adb457988104764d118907, type: 3}
+  - name: 2
+    clip: {fileID: 8300000, guid: e7cc3a373c5a849bb8cf2c772356412c, type: 3}
+  - name: 3
+    clip: {fileID: 8300000, guid: 056649e9bc8dc4d829ff027c9b3689e2, type: 3}
+  - name: 4
+    clip: {fileID: 8300000, guid: 0c05af924175f4ac4b983e379a762682, type: 3}
+  - name: 5
+    clip: {fileID: 8300000, guid: 67e0a78889c85460fb1ce56a13cf0299, type: 3}
+--- !u!4 &1753209499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753209497}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 537.3345, y: 522.4796, z: -7.0605555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881169434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,7 +2951,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2134182047}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1971715202}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2134182047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3400,6 +3493,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1971715202}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenCoinsShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1971715202}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3995,3 +4100,4 @@ SceneRoots:
   - {fileID: 1971715201}
   - {fileID: 1432819712}
   - {fileID: 295341032}
+  - {fileID: 1753209499}

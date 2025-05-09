@@ -7,7 +7,6 @@ using DG.Tweening;
 
 enum GestureMode { None, Pan, Zoom }
 
-
 [RequireComponent(typeof(Camera))]
 public class CameraDragMove : MonoBehaviour
 {
@@ -26,8 +25,7 @@ public class CameraDragMove : MonoBehaviour
     public float maxZoom = 20f;
     public float zoomSpeedTouch = 0.1f;
     public float zoomSpeedMouse = 5f;
-    public float zoomLerpSpeed = 10f; // Controls smoothness
-
+    public float zoomLerpSpeed = 10f;
     public float boundaryPadding = 1f;
 
     private Vector2 lastPanPosition;
@@ -44,7 +42,6 @@ public class CameraDragMove : MonoBehaviour
     Vector3 zoomedOutPos;
     float zoomedOutCamSize;
 
-
     void Awake()
     {
         Application.targetFrameRate = 60;
@@ -58,7 +55,6 @@ public class CameraDragMove : MonoBehaviour
         targetZoom = cam.orthographicSize;
         targetPosition = transform.position;
 
-
         if (matchWidth != null)
         {
             matchWidth.SetToDesiredWidth();
@@ -66,7 +62,6 @@ public class CameraDragMove : MonoBehaviour
             maxZoom = matchWidth.DesiredMaxWidth;
             targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
         }
-
     }
 
     void Update()
@@ -78,14 +73,19 @@ public class CameraDragMove : MonoBehaviour
         HandleMouseDrag();
         HandleMouseZoom();
 #else
-    HandleTouchDrag();
-    HandleTouchZoom();
+        HandleTouchDrag();
+        HandleTouchZoom();
 #endif
 
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime * zoomLerpSpeed);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * zoomLerpSpeed);
-    }
 
+        // Reset gesture mode when no input
+        if (!Input.GetMouseButton(0) && Input.touchCount == 0 && Mathf.Abs(Input.GetAxis("Mouse ScrollWheel")) < 0.01f)
+        {
+            currentGesture = GestureMode.None;
+        }
+    }
 
     void HandleMouseDrag()
     {
@@ -96,8 +96,9 @@ public class CameraDragMove : MonoBehaviour
 
             lastPanPosition = Input.mousePosition;
             isDragging = true;
+            currentGesture = GestureMode.Pan;
         }
-        else if (Input.GetMouseButton(0) && isDragging)
+        else if (Input.GetMouseButton(0) && isDragging && currentGesture == GestureMode.Pan)
         {
             if (startedOverUI) return;
 
@@ -109,6 +110,7 @@ public class CameraDragMove : MonoBehaviour
         {
             isDragging = false;
             startedOverUI = false;
+            currentGesture = GestureMode.None;
         }
     }
 
@@ -148,14 +150,22 @@ public class CameraDragMove : MonoBehaviour
         }
     }
 
-
     void HandleMouseZoom()
     {
+        if (Input.GetMouseButton(0)) return; // Disable zoom during drag
+
         float scroll = Input.GetAxis("Mouse ScrollWheel");
+
         if (Mathf.Abs(scroll) > 0.01f)
         {
+            currentGesture = GestureMode.Zoom;
+
             float scaledSpeed = zoomSpeedMouse * (cam.orthographicSize / maxZoom);
             ZoomCamera(-scroll * scaledSpeed);
+        }
+        else if (currentGesture == GestureMode.Zoom)
+        {
+            currentGesture = GestureMode.None;
         }
     }
 
@@ -163,7 +173,7 @@ public class CameraDragMove : MonoBehaviour
     {
         if (Input.touchCount == 2)
         {
-            if (currentGesture == GestureMode.None)
+            if (currentGesture != GestureMode.Pan)
                 currentGesture = GestureMode.Zoom;
 
             Touch touch0 = Input.GetTouch(0);
@@ -181,11 +191,9 @@ public class CameraDragMove : MonoBehaviour
         }
         else if (currentGesture == GestureMode.Zoom)
         {
-            // Reset gesture mode when fingers lifted
             currentGesture = GestureMode.None;
         }
     }
-
 
     void ZoomCamera(float increment)
     {
@@ -203,7 +211,6 @@ public class CameraDragMove : MonoBehaviour
 
         targetPosition = newPosition;
     }
-
 
     void OnDrawGizmosSelected()
     {
@@ -255,20 +262,15 @@ public class CameraDragMove : MonoBehaviour
         StartCoroutine(ZoomOutFromWholeLevelViewPoint(seats));
     }
 
-
     List<Seat> allSeats;
     IEnumerator ZoomOutFromWholeLevelViewPoint(List<Seat> seats)
     {
-        yield return new WaitUntil(() => { return cam != null; });
-
-
+        yield return new WaitUntil(() => cam != null);
 
         if (seats == null || seats.Count == 0)
             yield break;
 
         UIManager.Instance.DisablePersonItems();
-
-
         preventPanAndZoom = true;
         allSeats = seats;
 
@@ -297,15 +299,10 @@ public class CameraDragMove : MonoBehaviour
             maxY = Mathf.Max(maxY, seatMaxY);
         }
 
-
         Vector3 boundsCenter = new Vector3((minX + maxX) / 2f, (minY + maxY) / 2f, originalPosition.z);
         Vector2 boundsSize = new Vector2(maxX - minX, maxY - minY);
 
-        float desiredZoom = Mathf.Max(
-            boundsSize.y / cam.aspect,
-            boundsSize.x / cam.aspect
-        ) * 0.6f;
-
+        float desiredZoom = Mathf.Max(boundsSize.y / cam.aspect, boundsSize.x / cam.aspect) * 0.6f;
         desiredZoom = Mathf.Clamp(desiredZoom, minZoom, maxZoom);
 
         transform.position = boundsCenter;
@@ -314,29 +311,21 @@ public class CameraDragMove : MonoBehaviour
         zoomedOutPos = boundsCenter;
         zoomedOutCamSize = desiredZoom;
 
-
-        // yield return new WaitForSeconds(.5f);
-
         for (int i = 0; i < seats.Count; i++)
         {
             if (seats[i].isOpenSeat)
-            {
                 seats[i].SetOpenSeat();
-                // yield return new WaitForSeconds(.01f);
-            }
         }
 
         LevelLoader.Instance.CheckForSolvedSeats();
-
         yield return new WaitForSeconds(.7f);
-
         UIManager.Instance.GamePlayElementsIn();
 
         float duration = .8f;
         float elapsed = 0f;
 
-        var startPos = transform.position;
-        var startZoom = cam.orthographicSize;
+        Vector3 startPos = transform.position;
+        float startZoom = cam.orthographicSize;
 
         while (elapsed < duration)
         {
@@ -356,10 +345,8 @@ public class CameraDragMove : MonoBehaviour
         if (GameData.CurrentLevel > 0)
         {
             UIManager.Instance.EnablePersonItems();
-
             UIManager.Instance.CheckForOutOfLives();
         }
-
     }
 
     public void ZoomOut()
@@ -369,46 +356,33 @@ public class CameraDragMove : MonoBehaviour
         if (allSeats == null || allSeats.Count == 0)
             return;
 
-        // Calculate the overall bounds of all seats to find the topmost seat
         float maxY = float.MinValue;
 
-        // Loop through all seats and find the highest Y position (topmost seat)
         foreach (var seat in allSeats)
         {
-            Bounds seatBounds = seat.GetBounds(); // Assuming GetBounds() gives the seat's world space bounds
-            float seatMaxY = seatBounds.max.y;  // Get the topmost point of each seat
-            maxY = Mathf.Max(maxY, seatMaxY);  // Get the highest point across all seats
+            Bounds seatBounds = seat.GetBounds();
+            float seatMaxY = seatBounds.max.y;
+            maxY = Mathf.Max(maxY, seatMaxY);
         }
 
-        // Make the top margin a percentage of the orthographic size
-        // For example, 15% of the screen height
         float topMarginPercentage = 0.25f;
         float topScreenMargin = zoomedOutCamSize * topMarginPercentage;
-
-        // Calculate the new camera position
-        // In an orthographic camera, the top edge is at cameraY + orthographicSize
         float newCameraY = maxY - (zoomedOutCamSize - topScreenMargin);
 
-        // Create the new camera position (keeping X and Z from zoomedOutPos)
         Vector3 newPosition = new Vector3(zoomedOutPos.x, newCameraY, zoomedOutPos.z);
 
-        // Apply the new camera position smoothly
         transform.DOMove(newPosition, .8f);
         cam.DOOrthoSize(zoomedOutCamSize, .8f);
     }
 
-
     Vector2 VptoWP(float x, float y)
     {
         return Camera.main.ViewportToWorldPoint(new(x, y, 0));
-
     }
 
     public IEnumerator MoveToPosition(Vector2 newTargetPos, float duration)
     {
         preventPanAndZoom = true;
-
-        // Clamp target position within boundaries
 
         Vector3 startTarget = transform.position;
         Vector3 target = new(newTargetPos.x, newTargetPos.y, transform.position.z);
@@ -419,7 +393,6 @@ public class CameraDragMove : MonoBehaviour
         {
             float t = elapsed / duration;
             t = t * t * (3f - 2f * t); // Smoothstep
-
             transform.position = Vector3.Lerp(startTarget, target, t);
             targetPosition = transform.position;
             elapsed += Time.deltaTime;
@@ -428,7 +401,4 @@ public class CameraDragMove : MonoBehaviour
 
         preventPanAndZoom = false;
     }
-
-
-
 }
