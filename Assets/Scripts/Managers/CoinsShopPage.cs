@@ -34,8 +34,19 @@ public class CoinsShopPage : MonoBehaviour
         coinsRewardText.text = coins.ToString();
         coinsRewardPage.SetActive(true);
 
-        UIManager.Instance.UpdateNavBarCoins();
-        UIManager.Instance.UpdateHintsUI();
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.UpdateNavBarCoins();
+            UIManager.Instance.UpdateHintsUI();
+        }
+        if (MenuManager.Instance != null)
+        {
+            MenuManager.Instance.UpdateMenuCoins();
+        }
+        if (OutOfLivesPage.Instance != null)
+        {
+            OutOfLivesPage.Instance.UpdateCoins();
+        }
 
     }
 

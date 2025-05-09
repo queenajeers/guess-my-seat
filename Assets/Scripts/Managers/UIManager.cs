@@ -48,6 +48,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI coinsIndicator;
 
+    [SerializeField] GameObject lifeLostIndicator;
+
     void Awake()
     {
         Instance = this;
@@ -184,6 +186,7 @@ public class UIManager : MonoBehaviour
 
             livesLeft--;
             GameData.Lives--;
+            lifeLostIndicator.SetActive(true);
         }
 
         if (livesLeft == 0)
@@ -260,7 +263,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void RefillLives()
+    public void RefillLives()
     {
         GameData.Lives = 2;
     }
@@ -283,7 +286,6 @@ public class UIManager : MonoBehaviour
 
     public void LoadMenuScene()
     {
-        RefillLives();
         SceneManager.LoadScene(0);
     }
 
