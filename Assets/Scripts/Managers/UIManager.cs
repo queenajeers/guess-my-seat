@@ -362,6 +362,11 @@ public class UIManager : MonoBehaviour
 
     public void ClickSound()
     {
-        SoundManager.Play(SoundNames.Click, .6f);
+        SoundManager.Play(SoundNames.Click, 1f);
+    }
+
+    public void CoinSpawned()
+    {
+        SoundManager.Play(SoundNames.CoinSpawn);
     }
 }

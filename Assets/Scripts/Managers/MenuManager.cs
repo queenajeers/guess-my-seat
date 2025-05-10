@@ -70,6 +70,6 @@ public class MenuManager : MonoBehaviour
 
     public void ClickSound()
     {
-        SoundManager.Play(SoundNames.Click, .6f);
+        SoundManager.Play(SoundNames.Click, 1f);
     }
 }

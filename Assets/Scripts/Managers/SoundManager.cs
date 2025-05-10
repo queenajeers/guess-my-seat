@@ -13,7 +13,9 @@ public enum SoundNames
     HintRevealed,
 
     Win2,
-    Coin
+    Coin,
+    CoinSpawn,
+    LevelOpen
 
 }
 
@@ -32,7 +34,7 @@ public class SoundManager : MonoBehaviour
 
     private Dictionary<SoundNames, AudioClip> soundDict;
     private AudioSource[] audioSources;
-    private const int audioSourceCount = 5;
+    private const int audioSourceCount = 7;
 
     void Awake()
     {

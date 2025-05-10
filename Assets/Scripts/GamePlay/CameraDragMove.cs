@@ -317,8 +317,15 @@ public class CameraDragMove : MonoBehaviour
                 seats[i].SetOpenSeat();
         }
 
+
+
         LevelLoader.Instance.CheckForSolvedSeats();
+
         yield return new WaitForSeconds(.7f);
+
+        SoundManager.Play(SoundNames.LevelOpen);
+
+
         UIManager.Instance.GamePlayElementsIn();
 
         float duration = .8f;
