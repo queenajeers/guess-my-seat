@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelIndicator;
 
     [SerializeField] GameObject lifeLostIndicator;
+    [SerializeField] GameObject safeAreaExtraPanel;
 
     void Awake()
     {
@@ -63,6 +64,11 @@ public class UIManager : MonoBehaviour
         UpdateLivesUI();
         UpdateHintsUI();
         UpdateNavBarCoins();
+
+        if (GameData.CurrentLevel > 0)
+        {
+            safeAreaExtraPanel.SetActive(true);
+        }
     }
 
 

@@ -30,6 +30,9 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator TutorialCor()
     {
+        float offset = SafeAreaUtils.GetSafeAreaTopOffsetWorld(Camera.main, Screen.safeArea);
+
+
         yield return new WaitForSeconds(.5f);
         CameraDragMove.Instance.preventPanAndZoom = true;
         FadeIn(maskBGSpriteRenderer, .95f);
@@ -46,7 +49,7 @@ public class TutorialManager : MonoBehaviour
         FadeIn(instBG, 1f);
         LoadInstruction(instructions[0]);
 
-        instBG.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, .6f);
+        instBG.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, .6f) - new Vector2(0, offset);
         seatsByName["Nicky"].holdSeat = false;
         personItemsByName["Nicky"].preventFromUse = false;
         FingerMover.Instance.ActivateFinger();

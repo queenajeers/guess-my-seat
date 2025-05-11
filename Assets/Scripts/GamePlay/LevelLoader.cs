@@ -205,6 +205,9 @@ public class LevelLoader : MonoBehaviour
 
     void InitialiseLevel()
     {
+        float offset = SafeAreaUtils.GetSafeAreaTopOffsetWorld(Camera.main, Screen.safeArea);
+
+
         var seatData = levelData.seatsGrid;
         var allPersons = new List<string>();
         var openPersons = new List<string>();
@@ -295,12 +298,13 @@ public class LevelLoader : MonoBehaviour
         }
         if (seatData.GetLength(1) <= minSeatsVisible)
         {
-            seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f);
+            seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f) - new Vector2(0, offset);
         }
         else
         {
-            seatsCentre.transform.position = VptoWP(0f, 1f) + new Vector2(0.25f, -2f);
+            seatsCentre.transform.position = VptoWP(0f, 1f) + new Vector2(0.25f, -2f) - new Vector2(0, offset);
         }
+
 
         for (int p = 0; p < levelData.seats.Count; p++)
         {
