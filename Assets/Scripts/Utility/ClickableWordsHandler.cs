@@ -64,5 +64,7 @@ public class ClickableWordsHandler : MonoBehaviour, IPointerClickHandler
                 OnWordClicked?.Invoke(word);
             }
         }
+
+        SoundManager.Play(SoundNames.Click, 1f);
     }
 }

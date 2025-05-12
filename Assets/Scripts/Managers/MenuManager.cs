@@ -64,7 +64,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadGamePlay()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 
     }
 

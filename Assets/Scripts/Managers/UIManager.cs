@@ -94,6 +94,7 @@ public class UIManager : MonoBehaviour
 
     public void FinishActivate()
     {
+        RefillLives();
         StartCoroutine(FinishActivateCor());
     }
 
@@ -116,6 +117,7 @@ public class UIManager : MonoBehaviour
 
         GameData.CurrentLevel++;
         winPage.SetActive(true);
+
     }
 
     public void GamePlayElementsIn()
@@ -268,7 +270,7 @@ public class UIManager : MonoBehaviour
     {
         if (!continuePlayClicked)
         {
-            LevelLoader.Instance.DeletePersistentLevelFile();
+            LevelLoader.Instance.DeletePersistentLevelsPath();
             restartPage.SetActive(true);
         }
     }
@@ -296,7 +298,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadMenuScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void ContinuePlaying()

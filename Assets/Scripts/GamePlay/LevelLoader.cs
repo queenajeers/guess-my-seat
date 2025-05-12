@@ -74,10 +74,17 @@ public class LevelLoader : MonoBehaviour
     }
     void Start()
     {
+        if (PlayerPrefs.GetInt("FirstTime", 0) == 0)
+        {
+            PlayerPrefs.SetInt("FirstTime", 1);
+            PlayerPrefs.Save();
+            DeletePersistentLevelsPath();
+        }
+
         if (GameData.CurrentLevel == 0)
         {
             levelToLoad = 0;
-            DeletePersistentLevelFile();
+            DeletePersistentLevelsPath();
         }
 
         // Get all level JSON files in Resources/Levels and find max level number
@@ -176,23 +183,20 @@ public class LevelLoader : MonoBehaviour
         Debug.Log($"Level data saved to {filePath}");
     }
 
-    [ContextMenu("Delete Persistent Level File")]
-    public void DeletePersistentLevelFile()
+    [ContextMenu("Delete Persistent Levels Path")]
+    public void DeletePersistentLevelsPath()
     {
+        string levelsPath = Path.Combine(Application.persistentDataPath, "Levels");
 
-        int levelNumber = levelToLoad;
-        string filePath = Path.Combine(Application.persistentDataPath, "Levels", levelNumber.ToString(), $"Level_{levelNumber}.json");
-
-        if (File.Exists(filePath))
+        if (Directory.Exists(levelsPath))
         {
-            File.Delete(filePath);
-            Debug.Log($"Deleted persistent file for level {levelNumber}");
+            Directory.Delete(levelsPath, true);
+            Debug.Log("Deleted entire persistent levels path.");
         }
         else
         {
-            Debug.LogWarning($"No persistent file found for level {levelNumber} to delete.");
+            Debug.LogWarning("No persistent levels path found to delete.");
         }
-
     }
 
     public void LoadLevelData(string json)

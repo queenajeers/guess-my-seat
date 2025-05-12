@@ -347,10 +347,11 @@ public class CameraDragMove : MonoBehaviour
         transform.position = originalPosition;
         cam.orthographicSize = originalZoom;
 
-        preventPanAndZoom = false;
+
 
         if (GameData.CurrentLevel > 0)
         {
+            preventPanAndZoom = false;
             UIManager.Instance.EnablePersonItems();
             UIManager.Instance.CheckForOutOfLives();
         }
