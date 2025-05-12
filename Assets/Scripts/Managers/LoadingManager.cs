@@ -12,6 +12,10 @@ public class LoadingManager : MonoBehaviour
 
     public TextMeshProUGUI loadingText;
 
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     private void Start()
     {
         // Start the loading bar animation and text animation when the script starts

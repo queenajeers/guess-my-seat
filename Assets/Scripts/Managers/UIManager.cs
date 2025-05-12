@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject lifeLostIndicator;
     [SerializeField] GameObject safeAreaExtraPanel;
 
+    [SerializeField] GameObject hintObj;
+
     void Awake()
     {
         Instance = this;
@@ -67,6 +69,7 @@ public class UIManager : MonoBehaviour
 
         if (GameData.CurrentLevel > 0)
         {
+            hintObj.SetActive(true);
             safeAreaExtraPanel.SetActive(true);
         }
     }

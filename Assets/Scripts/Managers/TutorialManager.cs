@@ -155,8 +155,10 @@ public class TutorialManager : MonoBehaviour
 
     void LoadInstruction(string inst)
     {
-        instruction.text = inst;
+        // instruction.text = inst;
         FadeIn(instruction, 1f);
+        StopCoroutine(nameof(TypeInstruction)); // Optional: Stop previous typing if needed
+        StartCoroutine(TypeInstruction(inst));
     }
     void FadeIn(TextMeshPro spriteRenderer, float targetAlpha)
     {
@@ -192,4 +194,22 @@ public class TutorialManager : MonoBehaviour
     {
         return Camera.main.ViewportToWorldPoint(new(x, y, 0));
     }
+
+
+    IEnumerator TypeInstruction(string fullText)
+    {
+        instruction.text = fullText;
+        instruction.maxVisibleCharacters = 0;
+
+        yield return null; // Wait one frame to ensure TMP is ready
+
+        int totalChars = instruction.textInfo.characterCount;
+
+        for (int i = 0; i <= totalChars; i++)
+        {
+            instruction.maxVisibleCharacters = i;
+            yield return new WaitForSeconds(0.003f); // Typing speed
+        }
+    }
+
 }
