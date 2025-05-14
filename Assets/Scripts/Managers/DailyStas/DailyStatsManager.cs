@@ -30,6 +30,9 @@ public class DailyStatsManager : MonoBehaviour
     [SerializeField] private Image fill_solvedOnFirstTry;
     [SerializeField] private Image fill_minuitesPlayed;
 
+    [SerializeField] private Slider fill_overallFill;
+
+
     [SerializeField] private TextMeshProUGUI levelsPlayedTargetText;
     [SerializeField] private TextMeshProUGUI solvedOnFirstTryTargetText;
     [SerializeField] private TextMeshProUGUI minuitesPlayedTargetText;
@@ -39,6 +42,15 @@ public class DailyStatsManager : MonoBehaviour
     [SerializeField] private int levelsPlayedTarget = 15;
     [SerializeField] private int solvedOnFirstTryTarget = 5;
     [SerializeField] private int minuitesPlayedTarget = 20;
+
+
+    [SerializeField] private TextMeshProUGUI currentIQ;
+    [SerializeField] private TextMeshProUGUI prevIQ;
+    [SerializeField] private TextMeshProUGUI nextIQ;
+
+
+
+
 
     void Start()
     {
@@ -64,6 +76,9 @@ public class DailyStatsManager : MonoBehaviour
 
     void InitialsieUI()
     {
+
+        currentIQ.text = $"IQ {GameData.IQ}";
+
         int levelsPlayed = GameData.LevelsPlayed;
         int solvedOnFirstTry = GameData.SolvedOnFirstTry;
         int minuitesPlayed = GameData.MinutesPlayed;
@@ -71,6 +86,9 @@ public class DailyStatsManager : MonoBehaviour
         levelsPlayedTargetText.text = $"{levelsPlayed}/{levelsPlayedTarget}";
         solvedOnFirstTryTargetText.text = $"{solvedOnFirstTry}/{solvedOnFirstTryTarget}";
         minuitesPlayedTargetText.text = $"{minuitesPlayed}/{minuitesPlayedTarget}";
+        prevIQ.text = GameData.IQ.ToString();
+        nextIQ.text = (GameData.IQ + 1).ToString();
+
         StartCoroutine(FillMeters());
 
     }
@@ -79,12 +97,10 @@ public class DailyStatsManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // Wait for the UI to be visible
 
-        transform.DOScale(1.05f, 0.14f).SetEase(Ease.OutBack).OnComplete(() =>
-        {
-            transform.DOScale(1f, 0.5f).SetEase(Ease.OutBack);
-        });
 
-        float duration = 2.0f; // Duration of the animation
+
+
+        float duration = 1.5f; // Duration of the animation
         float elapsed = 0f;
 
         int levelsPlayed = GameData.LevelsPlayed;
@@ -94,6 +110,16 @@ public class DailyStatsManager : MonoBehaviour
         float targetFillLevels = Mathf.Clamp01((float)levelsPlayed / levelsPlayedTarget);
         float targetFillFirstTry = Mathf.Clamp01((float)solvedOnFirstTry / solvedOnFirstTryTarget);
         float targetFillMinutes = Mathf.Clamp01((float)minutesPlayed / minuitesPlayedTarget);
+        float targetFillOverall = (targetFillLevels + targetFillFirstTry + targetFillMinutes) / 3f;
+
+
+        if (targetFillOverall > 0)
+        {
+            transform.DOScale(1.05f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                transform.DOScale(1f, .5f).SetEase(Ease.OutBack);
+            });
+        }
 
         while (elapsed < duration)
         {
@@ -104,6 +130,7 @@ public class DailyStatsManager : MonoBehaviour
             fill_levelsPlayed.fillAmount = easedT * targetFillLevels;
             fill_solvedOnFirstTry.fillAmount = easedT * targetFillFirstTry;
             fill_minuitesPlayed.fillAmount = easedT * targetFillMinutes;
+            fill_overallFill.value = easedT * targetFillOverall;
 
             yield return null;
         }
@@ -112,6 +139,9 @@ public class DailyStatsManager : MonoBehaviour
         fill_levelsPlayed.fillAmount = targetFillLevels;
         fill_solvedOnFirstTry.fillAmount = targetFillFirstTry;
         fill_minuitesPlayed.fillAmount = targetFillMinutes;
+        fill_overallFill.value = targetFillOverall;
+
+
     }
 
     private float EaseOutCubic(float t)

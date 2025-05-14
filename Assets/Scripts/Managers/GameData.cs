@@ -31,20 +31,25 @@ public static class GameData
 
     public static int LevelsPlayed
     {
-        get => PlayerPrefs.GetInt("LevelsPlayed", 5); // Default: 0
+        get => PlayerPrefs.GetInt("LevelsPlayed", 0); // Default: 0
         set => PlayerPrefs.SetInt("LevelsPlayed", value);
     }
     public static int SolvedOnFirstTry
     {
-        get => PlayerPrefs.GetInt("SolvedOnFirstTry", 3); // Default: 0
+        get => PlayerPrefs.GetInt("SolvedOnFirstTry", 0); // Default: 0
         set => PlayerPrefs.SetInt("SolvedOnFirstTry", value);
     }
     public static int MinutesPlayed
     {
-        get => PlayerPrefs.GetInt("MinutesPlayed", 12); // Default: 0
+        get => PlayerPrefs.GetInt("MinutesPlayed", 0); // Default: 0
         set => PlayerPrefs.SetInt("MinutesPlayed", value);
     }
 
+    public static int IQ
+    {
+        get => PlayerPrefs.GetInt("IQ", 70); // Default: 0
+        set => PlayerPrefs.SetInt("IQ", value);
+    }
 
     public static bool IsNewLevel(int levelNumber)
     {
