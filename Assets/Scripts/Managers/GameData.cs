@@ -29,9 +29,28 @@ public static class GameData
         set => PlayerPrefs.SetInt("Lives", value);
     }
 
+    public static int LevelsPlayed
+    {
+        get => PlayerPrefs.GetInt("LevelsPlayed", 5); // Default: 0
+        set => PlayerPrefs.SetInt("LevelsPlayed", value);
+    }
+    public static int SolvedOnFirstTry
+    {
+        get => PlayerPrefs.GetInt("SolvedOnFirstTry", 3); // Default: 0
+        set => PlayerPrefs.SetInt("SolvedOnFirstTry", value);
+    }
+    public static int MinutesPlayed
+    {
+        get => PlayerPrefs.GetInt("MinutesPlayed", 12); // Default: 0
+        set => PlayerPrefs.SetInt("MinutesPlayed", value);
+    }
+
+
     public static bool IsNewLevel(int levelNumber)
     {
         string path = Path.Combine(Application.persistentDataPath, "Levels", levelNumber.ToString(), $"Level_{levelNumber}.json");
         return !File.Exists(path); // If it doesn't exist, it's a new level (new to the player)
     }
+
+
 }
