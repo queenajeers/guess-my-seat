@@ -7,9 +7,12 @@ public class RadialFillCapper : MonoBehaviour
     public Image radialFillImage; // The main radial filled image
     public RectTransform startCap; // Circle image for start of the fill
     public RectTransform endCap;   // Circle image for end of the fill
+    public RectTransform endCapArrow; // Arrow image for end cap
+
 
     [Header("Settings")]
     public float radius = 100f; // Distance from center to cap
+
 
     private void Start()
     {
@@ -24,6 +27,20 @@ public class RadialFillCapper : MonoBehaviour
 
             if (endCapImage != null)
                 endCapImage.color = radialFillImage.color;
+        }
+
+        if (radialFillImage != null && endCapArrow != null)
+        {
+            // Set a lighter version of the fill color to the end cap arrow Image
+            Image endCapArrowImage = endCapArrow.GetComponent<Image>();
+
+            if (endCapArrowImage != null)
+            {
+                Color fillColor = radialFillImage.color;
+                Color lighterColor = fillColor * 1.2f; // Increase brightness
+                lighterColor.a = fillColor.a; // Preserve original alpha
+                endCapArrowImage.color = lighterColor;
+            }
         }
     }
 
@@ -56,5 +73,19 @@ public class RadialFillCapper : MonoBehaviour
         // Optional: Rotate the cap to align it if needed
         startCap.localRotation = Quaternion.Euler(0, 0, -startAngle);
         endCap.localRotation = Quaternion.Euler(0, 0, -endAngle);
+
+        // Rotate the end cap arrow to align with the tangent
+        if (endCapArrow != null)
+        {
+            fill = Mathf.Clamp01(radialFillImage.fillAmount);
+            endAngle = 360f * fill;
+            endRad = Mathf.Deg2Rad * endAngle;
+
+            // Tangent vector (clockwise direction)
+            Vector2 tangent = new Vector2(Mathf.Cos(endRad), -Mathf.Sin(endRad));
+
+            endCapArrow.transform.right = tangent;
+
+        }
     }
 }
