@@ -7,7 +7,7 @@ public static class GameData
 
     public static int CurrentLevel
     {
-        get => PlayerPrefs.GetInt("CurrentLevel", 0); // Default: 1
+        get => PlayerPrefs.GetInt("CurrentLevel", 1); // Default: 1
         set => PlayerPrefs.SetInt("CurrentLevel", value);
     }
 

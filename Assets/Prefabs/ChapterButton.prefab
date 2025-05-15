@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 7253402414894466674}
   - component: {fileID: 1732660767750437202}
   - component: {fileID: 7213168743723140454}
+  - component: {fileID: 1251683159894842040}
   m_Layer: 0
   m_Name: ChapterButton
   m_TagString: Untagged
@@ -200,6 +201,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1251683159894842040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541068834177348205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565ffba394cb54243b22688665e7b56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posterImage: {fileID: 5894585460421408545}
+  chapterNameText: {fileID: 4268476996864985843}
+  finishedUI: {fileID: 5419731763833946526}
+  lockedUI: {fileID: 7926016513469257580}
+  playUI: {fileID: 1894756346530839099}
 --- !u!1 &1894756346530839099
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -883,7 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.7169812, b: 0.2312842, a: 1}
+  m_Color: {r: 0, g: 0.7176471, b: 0.52692765, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

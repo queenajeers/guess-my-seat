@@ -35,7 +35,7 @@ namespace TS.PageSlider
         /// A list of PageContainer components representing the pages managed by the PageSlider.
         /// </summary>
         [Tooltip("A list of PageContainer components representing the pages managed by the PageSlider")]
-        [SerializeField] private List<PageContainer> _pages;
+        [SerializeField] public List<PageContainer> _pages;
 
         [Header("Configuration")]
         /// <summary>
