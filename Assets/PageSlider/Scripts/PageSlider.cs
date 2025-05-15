@@ -42,7 +42,7 @@ namespace TS.PageSlider
         /// The index of the page to show at start.
         /// </summary>
         [Tooltip("The index of the page to show at start")]
-        [SerializeField] private int _startPageIndex;
+        [SerializeField] public int _startPageIndex;
 
         [Header("Events")]
 
