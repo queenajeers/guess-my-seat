@@ -15,6 +15,8 @@ public class MenuManager : MonoBehaviour
 
     public TextMeshProUGUI playButtonText;
 
+    public GameObject takeToGamePlayPage;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -66,6 +68,12 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(2);
 
+    }
+
+    public void TakeToGamePlay()
+    {
+        takeToGamePlayPage.SetActive(true);
+        ClickSound();
     }
 
     public void ClickSound()

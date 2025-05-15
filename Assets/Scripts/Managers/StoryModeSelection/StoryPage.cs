@@ -19,10 +19,13 @@ public class StoryPage : MonoBehaviour
             int currentChapter = (index * 3) + i + 1; // Assuming 3 chapters per story page
 
             GameObject chapterButton = Instantiate(chapterButtonPrefab, chapterButtonContainer);
+
             if (currentChapter == GameData.CurrentLevel)
             {
+                Debug.Log("RRR");
                 chapterButton.GetComponent<ChapterButton>().Initialize(story.chapters[i], false, false, currentChapter);
                 targetChapterButton = chapterButton.GetComponent<ChapterButton>();
+
             }
             else if (currentChapter < GameData.CurrentLevel)
             {
@@ -33,6 +36,7 @@ public class StoryPage : MonoBehaviour
                 chapterButton.GetComponent<ChapterButton>().Initialize(story.chapters[i], false, true, currentChapter);
             }
         }
+
         return targetChapterButton;
     }
 }

@@ -165,8 +165,6 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-
-
     public void SaveLevelData()
     {
         string json = JsonUtility.ToJson(levelData, true);

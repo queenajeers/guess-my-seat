@@ -6159,9 +6159,9 @@ RectTransform:
   - {fileID: 1105656227}
   - {fileID: 2230961183830243493}
   - {fileID: 234883304}
-  - {fileID: 190090357}
   - {fileID: 1417312155}
   - {fileID: 1881169435}
+  - {fileID: 190090357}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6185,6 +6185,7 @@ MonoBehaviour:
   canvasTransform: {fileID: 1971715201}
   shopPagePrefab: {fileID: 6951533416461876274, guid: b9fb7fa2695ea496ba877c69b95e8c5b, type: 3}
   playButtonText: {fileID: 133338258}
+  takeToGamePlayPage: {fileID: 190090356}
 --- !u!114 &1971715203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9194,7 +9195,7 @@ RectTransform:
   m_GameObject: {fileID: 2230961183023324678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.96000004, y: 0.96000004, z: 0.96000004}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2230961183911348862}

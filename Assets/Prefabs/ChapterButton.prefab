@@ -232,6 +232,7 @@ MonoBehaviour:
   lockedUI: {fileID: 7926016513469257580}
   playUI: {fileID: 1894756346530839099}
   center: {fileID: 8311019153812305378}
+  tickIcon: {fileID: 5184455135821077530}
 --- !u!1 &1894756346530839099
 GameObject:
   m_ObjectHideFlags: 0
