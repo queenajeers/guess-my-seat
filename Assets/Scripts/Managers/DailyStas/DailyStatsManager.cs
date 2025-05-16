@@ -95,34 +95,51 @@ public class DailyStatsManager : MonoBehaviour
 
     IEnumerator FillMeters()
     {
-        yield return new WaitForSeconds(0.5f); // Wait for the UI to be visible
+        // Previous values
+        int prevLevelsPlayed = GameData.PreviousLevelsPlayed;
+        int prevSolvedOnFirstTry = GameData.PreviousSolvedOnFirstTry;
+        int prevMinutesPlayed = GameData.PreviousMinutesPlayed;
 
-        float duration = 1f; // Duration of the animation
+        // Initial fill amounts based on previous values
+        float startFillLevels = Mathf.Clamp01((float)prevLevelsPlayed / levelsPlayedTarget);
+        float startFillFirstTry = Mathf.Clamp01((float)prevSolvedOnFirstTry / solvedOnFirstTryTarget);
+        float startFillMinutes = Mathf.Clamp01((float)prevMinutesPlayed / minuitesPlayedTarget);
+        float startFillOverall = (startFillLevels + startFillFirstTry + startFillMinutes) / 3f;
+
+        // ⬇️ Set initial fill values (before waiting and animating)
+        fill_levelsPlayed.fillAmount = startFillLevels;
+        fill_solvedOnFirstTry.fillAmount = startFillFirstTry;
+        fill_minuitesPlayed.fillAmount = startFillMinutes;
+        fill_overallFill.value = startFillOverall;
+
+        // Small delay to allow user to see initial state
+        yield return new WaitForSeconds(0.5f);
+
+        float duration = 1f;
         float elapsed = 0f;
 
+        // Current values
         int levelsPlayed = GameData.LevelsPlayed;
         int solvedOnFirstTry = GameData.SolvedOnFirstTry;
         int minutesPlayed = GameData.MinutesPlayed;
 
-        float targetFillLevels = Mathf.Clamp01((float)levelsPlayed / levelsPlayedTarget);
-        float targetFillFirstTry = Mathf.Clamp01((float)solvedOnFirstTry / solvedOnFirstTryTarget);
-        float targetFillMinutes = Mathf.Clamp01((float)minutesPlayed / minuitesPlayedTarget);
-        float targetFillOverall = (targetFillLevels + targetFillFirstTry + targetFillMinutes) / 3f;
+        float endFillLevels = Mathf.Clamp01((float)levelsPlayed / levelsPlayedTarget);
+        float endFillFirstTry = Mathf.Clamp01((float)solvedOnFirstTry / solvedOnFirstTryTarget);
+        float endFillMinutes = Mathf.Clamp01((float)minutesPlayed / minuitesPlayedTarget);
+        float endFillOverall = (endFillLevels + endFillFirstTry + endFillMinutes) / 3f;
 
-        if (targetFillOverall >= 1f)
+        if (endFillOverall >= 1f)
         {
-            targetFillOverall = 1f;
-
+            endFillOverall = 1f;
             newIQText.text = $"{GameData.IQ + 1}";
             GameData.IQ++;
             GameData.TimeSpentInSeconds = 0;
             GameData.SolvedOnFirstTry = 0;
             GameData.LevelsPlayed = 0;
             GameData.MinutesPlayed = 0;
-
         }
 
-        if (targetFillOverall > 0)
+        if (endFillOverall > startFillOverall)
         {
             transform.DOScale(1.05f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
             {
@@ -130,31 +147,39 @@ public class DailyStatsManager : MonoBehaviour
             });
         }
 
+        // Animate from previous (start) to current (end)
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
             float easedT = EaseOutCubic(t);
 
-            fill_levelsPlayed.fillAmount = easedT * targetFillLevels;
-            fill_solvedOnFirstTry.fillAmount = easedT * targetFillFirstTry;
-            fill_minuitesPlayed.fillAmount = easedT * targetFillMinutes;
-            fill_overallFill.value = easedT * targetFillOverall;
+            fill_levelsPlayed.fillAmount = Mathf.Lerp(startFillLevels, endFillLevels, easedT);
+            fill_solvedOnFirstTry.fillAmount = Mathf.Lerp(startFillFirstTry, endFillFirstTry, easedT);
+            fill_minuitesPlayed.fillAmount = Mathf.Lerp(startFillMinutes, endFillMinutes, easedT);
+            fill_overallFill.value = Mathf.Lerp(startFillOverall, endFillOverall, easedT);
 
             yield return null;
         }
 
         // Snap to final values
-        fill_levelsPlayed.fillAmount = targetFillLevels;
-        fill_solvedOnFirstTry.fillAmount = targetFillFirstTry;
-        fill_minuitesPlayed.fillAmount = targetFillMinutes;
-        fill_overallFill.value = targetFillOverall;
-        if (targetFillOverall >= 1f)
+        fill_levelsPlayed.fillAmount = endFillLevels;
+        fill_solvedOnFirstTry.fillAmount = endFillFirstTry;
+        fill_minuitesPlayed.fillAmount = endFillMinutes;
+        fill_overallFill.value = endFillOverall;
+
+        if (endFillOverall >= 1f)
         {
             IQUpPage.SetActive(true);
         }
 
+        // Save current as previous
+        GameData.PreviousLevelsPlayed = levelsPlayed;
+        GameData.PreviousSolvedOnFirstTry = solvedOnFirstTry;
+        GameData.PreviousMinutesPlayed = minutesPlayed;
     }
+
+
 
     private float EaseOutCubic(float t)
     {

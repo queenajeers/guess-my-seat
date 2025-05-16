@@ -32,17 +32,17 @@ public static class GameData
     #region Game Progress
     public static int LevelsPlayed
     {
-        get => PlayerPrefs.GetInt("LevelsPlayed", 14); // Default: 0
+        get => PlayerPrefs.GetInt("LevelsPlayed", 0); // Default: 0
         set => PlayerPrefs.SetInt("LevelsPlayed", value);
     }
     public static int SolvedOnFirstTry
     {
-        get => PlayerPrefs.GetInt("SolvedOnFirstTry", 9); // Default: 0
+        get => PlayerPrefs.GetInt("SolvedOnFirstTry", 0); // Default: 0
         set => PlayerPrefs.SetInt("SolvedOnFirstTry", value);
     }
     public static int MinutesPlayed
     {
-        get => PlayerPrefs.GetInt("MinutesPlayed", 15); // Default: 0
+        get => PlayerPrefs.GetInt("MinutesPlayed", 0); // Default: 0
         set => PlayerPrefs.SetInt("MinutesPlayed", value);
     }
 
@@ -70,7 +70,7 @@ public static class GameData
 
     public static float TimeSpentInSeconds
     {
-        get => PlayerPrefs.GetFloat("TimeSpentInSeconds", 10000f); // Default: 0
+        get => PlayerPrefs.GetFloat("TimeSpentInSeconds", 0f); // Default: 0
         set => PlayerPrefs.SetFloat("TimeSpentInSeconds", value);
     }
 
