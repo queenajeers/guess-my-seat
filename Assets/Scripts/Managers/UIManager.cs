@@ -121,6 +121,11 @@ public class UIManager : MonoBehaviour
         GameData.CurrentLevel++;
         winPage.SetActive(true);
 
+        if (DailyStatsDataManager.Instance != null)
+        {
+            DailyStatsDataManager.Instance.LevelFinished();
+        }
+
     }
 
     public void GamePlayElementsIn()

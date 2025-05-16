@@ -74,12 +74,18 @@ public class PersonItem : PersonDraggable
         }
         else
         {
+
             assignedSeat.WrongAnimation();
             BackToScrollPanel();
 
             SoundManager.Play(SoundNames.Error);
 
             UIManager.Instance.LoseLife();
+
+            if (DailyStatsDataManager.Instance != null)
+            {
+                DailyStatsDataManager.Instance.WrongChoice();
+            }
 
         }
     }

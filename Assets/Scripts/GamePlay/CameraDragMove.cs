@@ -87,11 +87,33 @@ public class CameraDragMove : MonoBehaviour
         }
     }
 
+    bool IsPointerOverHintCollider(Vector2 screenPosition)
+    {
+        var targetLayer = LayerMask.NameToLayer("Hint");
+        Ray ray = cam.ScreenPointToRay(screenPosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << targetLayer))
+        {
+            Debug.Log("Pointer is over hint collider, ignoring drag.");
+            return true;
+        }
+
+        Debug.Log("Pointer is not over hint collider, allowing drag.");
+        return false;
+    }
+
     void HandleMouseDrag()
     {
         if (Input.GetMouseButtonDown(0))
         {
             startedOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+
+            if (startedOverUI && IsPointerOverHintCollider(Input.mousePosition))
+            {
+                startedOverUI = false;
+            }
+
             if (startedOverUI) return;
 
             lastPanPosition = Input.mousePosition;
@@ -116,17 +138,23 @@ public class CameraDragMove : MonoBehaviour
 
     void HandleTouchDrag()
     {
-        var validTouches = Input.touches
-            .Where(touch => !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-            .ToArray();
-
         if (Input.touchCount == 1 && currentGesture != GestureMode.Zoom)
         {
-            Touch touch = validTouches[0];
+            Touch touch = Input.GetTouch(0);
+
+            // UI check
+            bool isOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(touch.fingerId);
+
+            // Hint collider check
+            bool isOverHint = IsPointerOverHintCollider(touch.position);
 
             switch (touch.phase)
             {
                 case TouchPhase.Began:
+                    // Only allow pan if not over UI or if over a Hint collider
+                    if (isOverUI && !isOverHint)
+                        return;
+
                     lastPanPosition = touch.position;
                     isDragging = true;
                     currentGesture = GestureMode.Pan;
@@ -149,6 +177,7 @@ public class CameraDragMove : MonoBehaviour
             }
         }
     }
+
 
     void HandleMouseZoom()
     {
@@ -354,6 +383,11 @@ public class CameraDragMove : MonoBehaviour
             preventPanAndZoom = false;
             UIManager.Instance.EnablePersonItems();
             UIManager.Instance.CheckForOutOfLives();
+        }
+
+        if (DailyStatsDataManager.Instance != null)
+        {
+            DailyStatsDataManager.Instance.LevelStarted();
         }
     }
 

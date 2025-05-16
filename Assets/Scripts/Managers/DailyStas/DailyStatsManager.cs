@@ -48,8 +48,8 @@ public class DailyStatsManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI prevIQ;
     [SerializeField] private TextMeshProUGUI nextIQ;
 
-
-
+    [SerializeField] private GameObject IQUpPage;
+    [SerializeField] private TextMeshProUGUI newIQText;
 
 
     void Start()
@@ -74,7 +74,7 @@ public class DailyStatsManager : MonoBehaviour
         }
     }
 
-    void InitialsieUI()
+    public void InitialsieUI()
     {
 
         currentIQ.text = $"IQ {GameData.IQ}";
@@ -97,10 +97,7 @@ public class DailyStatsManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // Wait for the UI to be visible
 
-
-
-
-        float duration = 1.5f; // Duration of the animation
+        float duration = 1f; // Duration of the animation
         float elapsed = 0f;
 
         int levelsPlayed = GameData.LevelsPlayed;
@@ -112,12 +109,24 @@ public class DailyStatsManager : MonoBehaviour
         float targetFillMinutes = Mathf.Clamp01((float)minutesPlayed / minuitesPlayedTarget);
         float targetFillOverall = (targetFillLevels + targetFillFirstTry + targetFillMinutes) / 3f;
 
+        if (targetFillOverall >= 1f)
+        {
+            targetFillOverall = 1f;
+
+            newIQText.text = $"{GameData.IQ + 1}";
+            GameData.IQ++;
+            GameData.TimeSpentInSeconds = 0;
+            GameData.SolvedOnFirstTry = 0;
+            GameData.LevelsPlayed = 0;
+            GameData.MinutesPlayed = 0;
+
+        }
 
         if (targetFillOverall > 0)
         {
             transform.DOScale(1.05f, 1f).SetEase(Ease.OutBack).OnComplete(() =>
             {
-                transform.DOScale(1f, .5f).SetEase(Ease.OutBack);
+                transform.DOScale(1f, .2f).SetEase(Ease.OutBack);
             });
         }
 
@@ -140,7 +149,10 @@ public class DailyStatsManager : MonoBehaviour
         fill_solvedOnFirstTry.fillAmount = targetFillFirstTry;
         fill_minuitesPlayed.fillAmount = targetFillMinutes;
         fill_overallFill.value = targetFillOverall;
-
+        if (targetFillOverall >= 1f)
+        {
+            IQUpPage.SetActive(true);
+        }
 
     }
 
@@ -173,11 +185,15 @@ public class DailyStatsManager : MonoBehaviour
         infoPanelAnimator.gameObject.SetActive(true);
         infoPanelAnimator.Play("Open", 0, 0);
         infoButtonImage.sprite = closeSprite;
+
+        SoundManager.Play(SoundNames.Click, 1f);
     }
     void CloseInfoPanel()
     {
         infoPanelAnimator.Play("Close", 0, 0);
         infoButtonImage.sprite = infoSprite;
+
+        SoundManager.Play(SoundNames.Click, 1f);
     }
 
 }
