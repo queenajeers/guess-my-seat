@@ -3831,7 +3831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147fc39252b8143e4ad7c25154857733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneWidth: 5.6
+  sceneWidth: 5.8
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0

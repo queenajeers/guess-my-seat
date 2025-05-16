@@ -300,7 +300,7 @@ public class LevelLoader : MonoBehaviour
         }
         if (seatData.GetLength(1) <= minSeatsVisible)
         {
-            seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2.5f) - new Vector2(0, offset);
+            seatsCentre.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, 2f) - new Vector2(0, offset);
         }
         else
         {
