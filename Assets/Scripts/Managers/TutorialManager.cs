@@ -52,6 +52,8 @@ public class TutorialManager : MonoBehaviour
         instBG.transform.position = VptoWP(0.5f, 1f) - new Vector2(0, .6f) - new Vector2(0, offset);
         seatsByName["Nicky"].holdSeat = false;
         personItemsByName["Nicky"].preventFromUse = false;
+
+        yield return new WaitForSeconds(1.5f);
         FingerMover.Instance.ActivateFinger();
         FingerMover.Instance.Animate(personItemsByName["Nicky"].GetSP(), seatsByName["Nicky"].GetSP());
 
@@ -84,19 +86,19 @@ public class TutorialManager : MonoBehaviour
         LoadInstruction(instructions[1]);
         FadeIn(instruction, 1f);
         yield return new WaitForSeconds(.1f);
-        FingerMover.Instance.ActivateFinger();
-        FingerMover.Instance.Animate(personItemsByName["Lucky"].GetSP(), seatsByName["Lucky"].GetSP());
+        // FingerMover.Instance.ActivateFinger();
+        // FingerMover.Instance.Animate(personItemsByName["Lucky"].GetSP(), seatsByName["Lucky"].GetSP());
 
         while (!seatsByName["Lucky"].isPlaced)
         {
             if (personItemsByName["Lucky"].isDragging || personItemsByName["Lucky"].targetFound)
             {
-                FingerMover.Instance.DeActivateFinger();
+                //FingerMover.Instance.DeActivateFinger();
             }
             else if (!FingerMover.Instance.IsFingerActive)
             {
-                FingerMover.Instance.ActivateFinger();
-                FingerMover.Instance.Animate();
+                // FingerMover.Instance.ActivateFinger();
+                // FingerMover.Instance.Animate();
             }
 
             yield return null;
@@ -104,7 +106,7 @@ public class TutorialManager : MonoBehaviour
 
         seatsByName["Vicky"].holdSeat = false;
         personItemsByName["Vicky"].preventFromUse = false;
-        FingerMover.Instance.DeActivateFinger();
+        //FingerMover.Instance.DeActivateFinger();
         mask1.transform.position = seatsByName["Vicky"].transform.position;
         FadeIn(borderSpriteRenderer1, 1f);
         instruction.transform.DOScale(1.1f, 0.3f).OnComplete((() =>
@@ -116,19 +118,19 @@ public class TutorialManager : MonoBehaviour
         LoadInstruction(instructions[2]);
         FadeIn(instruction, 1f);
         yield return new WaitForSeconds(.1f);
-        FingerMover.Instance.ActivateFinger();
-        FingerMover.Instance.Animate(personItemsByName["Vicky"].GetSP(), seatsByName["Vicky"].GetSP());
+        // FingerMover.Instance.ActivateFinger();
+        // FingerMover.Instance.Animate(personItemsByName["Vicky"].GetSP(), seatsByName["Vicky"].GetSP());
 
         while (!seatsByName["Vicky"].isPlaced)
         {
             if (personItemsByName["Vicky"].isDragging || personItemsByName["Vicky"].targetFound)
             {
-                FingerMover.Instance.DeActivateFinger();
+                // FingerMover.Instance.DeActivateFinger();
             }
             else if (!FingerMover.Instance.IsFingerActive)
             {
-                FingerMover.Instance.ActivateFinger();
-                FingerMover.Instance.Animate();
+                // FingerMover.Instance.ActivateFinger();
+                // FingerMover.Instance.Animate();
             }
 
             yield return null;

@@ -474,7 +474,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 744990343876134963, guid: 1e778ca52551d4267bcabdcdbf596fa5, type: 2}
+  - {fileID: -3522759092161901272, guid: 1c1a89ba174d741eaab72220332a97d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -520,15 +520,15 @@ MonoBehaviour:
     starts seated,\nrevealing a hint, here we can deduct that\n,\"<u>Nicky</u> should
     sit \nnext to <u>Ricky</u>.\"\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1e778ca52551d4267bcabdcdbf596fa5, type: 2}
-  m_sharedMaterial: {fileID: 744990343876134963, guid: 1e778ca52551d4267bcabdcdbf596fa5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c1a89ba174d741eaab72220332a97d1, type: 2}
+  m_sharedMaterial: {fileID: -3522759092161901272, guid: 1c1a89ba174d741eaab72220332a97d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16760386
-  m_fontColor: {r: 0.25882354, g: 0.74509805, b: 1, a: 0}
+    rgba: 14433161
+  m_fontColor: {r: 0.5372549, g: 0.23137255, b: 0.8627451, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -545,8 +545,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.05
-  m_fontSizeBase: 1.05
+  m_fontSize: 0.95
+  m_fontSizeBase: 0.95
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -22.2
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

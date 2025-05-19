@@ -1,0 +1,106 @@
+{
+  "levelName": "Airport_1",
+  "rows": 3,
+  "cols": 3,
+  "seats": [
+    {
+      "seatNumber": "B2",
+      "row": 1,
+      "col": 1,
+      "personName": "Ethan",
+      "personGender": "Male",
+      "hint": "Everyone in the first column works at the airport. Marcus, an air traffic controller, sits in the middle.",
+      "isInitiallyOpened": true,
+      "linkedSeats": ["A2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "A2",
+      "row": 1,
+      "col": 0,
+      "personName": "Marcus",
+      "personGender": "Male",
+      "hint": "Names in the row above start with N. David is in the second column. Nina and Priya share a column.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["B3", "C1", "C2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "A3",
+      "row": 2,
+      "col": 0,
+      "personName": "Alice",
+      "personGender": "Male",
+      "hint": "Nathan, a security guard at the airport, is helping Nolan with his luggage.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["A1", "B1"],
+      "tags": []
+    },
+    {
+      "seatNumber": "B3",
+      "row": 2,
+      "col": 1,
+      "personName": "David",
+      "personGender": "Male",
+      "hint": "Nina prefers corner seats. Priya does not work at the airport.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["C1", "C2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "C1",
+      "row": 0,
+      "col": 2,
+      "personName": "Nina",
+      "personGender": "Female",
+      "hint": "Alice and Jake sit in the same row. Alice works at the airport.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["A3", "C3"],
+      "tags": []
+    },
+    {
+      "seatNumber": "C3",
+      "row": 2,
+      "col": 2,
+      "personName": "Jake",
+      "personGender": "Male",
+      "hint": "Marcus knows who is seated in C2.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["C2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personName": "Nathan",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personName": "Nolan",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "C2",
+      "row": 1,
+      "col": 2,
+      "personName": "Priya",
+      "personGender": "Female",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    }
+  ]
+}

@@ -5245,8 +5245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0146, y: -0.4907}
-  m_SizeDelta: {x: 1.5995, y: 0.7204}
+  m_AnchoredPosition: {x: 0.0146, y: -0.5712}
+  m_SizeDelta: {x: 1.61, y: 1.0338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &981711242789107998
 MeshRenderer:
@@ -5271,7 +5271,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 744990343876134963, guid: 1e778ca52551d4267bcabdcdbf596fa5, type: 2}
+  - {fileID: -3522759092161901272, guid: 1c1a89ba174d741eaab72220332a97d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5313,10 +5313,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I sit next to Charlie, and I'm to his left
+  m_text: All individuals in the first column work at the airport. Marcus, the air
+    traffic controller, sits in the middle.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1e778ca52551d4267bcabdcdbf596fa5, type: 2}
-  m_sharedMaterial: {fileID: 744990343876134963, guid: 1e778ca52551d4267bcabdcdbf596fa5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c1a89ba174d741eaab72220332a97d1, type: 2}
+  m_sharedMaterial: {fileID: -3522759092161901272, guid: 1c1a89ba174d741eaab72220332a97d1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5340,11 +5341,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.8
+  m_fontSize: 1.35
   m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 1.5
+  m_fontSizeMin: 1.3
   m_fontSizeMax: 2
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -5353,7 +5354,7 @@ MonoBehaviour:
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: -24.47
-  m_lineSpacingMax: 0
+  m_lineSpacingMax: -8.95
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
@@ -10561,7 +10562,7 @@ MonoBehaviour:
   correctColorMale: {r: 0.49411765, g: 0.78431374, b: 0.9607843, a: 1}
   correctColorFemale: {r: 0.94509804, g: 0.627451, b: 0.9647059, a: 1}
   normalColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 1}
-  solvedHintColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
+  solvedHintColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   happyEmoji: {fileID: 1773336089198361386}
   checkMark: {fileID: 8387623151214453076}
   checkMarkSolved: {fileID: 5409106700160184368}
@@ -10814,7 +10815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.497}
+  m_AnchoredPosition: {x: 0, y: -0.45}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5802532295414126974
@@ -11228,7 +11229,7 @@ SpriteRenderer:
   m_Size: {x: 1.1, y: 1.1666666}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5035626402219907669
@@ -11358,8 +11359,8 @@ Transform:
   m_GameObject: {fileID: 7381422873414040111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6025, z: 0}
-  m_LocalScale: {x: 1.255, y: 1.2919561, z: 1.24}
+  m_LocalPosition: {x: 0, y: -0.5783, z: 0}
+  m_LocalScale: {x: 1.255, y: 1.3499649, z: 1.24}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1298717693741031406}

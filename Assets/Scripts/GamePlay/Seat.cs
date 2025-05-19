@@ -32,6 +32,7 @@ public class Seat : MonoBehaviour
         get { return gender == Gender.Male ? correctColorMale : correctColorFemale; }
 
     }
+
     public Color correctColorMale;
     public Color correctColorFemale;
     public Color normalColor;
@@ -117,9 +118,9 @@ public class Seat : MonoBehaviour
         {
             isSeatSolved = true;
             hintIndicator.DOColor(solvedHintColor, 0.5f).SetDelay(.2f).SetEase(Ease.InOutQuad);
-            checkMarkSolved.transform.localRotation = Quaternion.Euler(0, 0, -185);
-            checkMarkSolved.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
-            checkMarkSolved.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
+            // checkMarkSolved.transform.localRotation = Quaternion.Euler(0, 0, -185);
+            // checkMarkSolved.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), .5f);
+            // checkMarkSolved.DOScale(1f, .5f).SetDelay(.2f).SetEase(Ease.OutBack);
         }
     }
 

@@ -307,7 +307,6 @@ public class LevelLoader : MonoBehaviour
             seatsCentre.transform.position = VptoWP(0f, 1f) + new Vector2(0.25f, -2f) - new Vector2(0, offset);
         }
 
-
         for (int p = 0; p < levelData.seats.Count; p++)
         {
             var personName = levelData.seats[p].personName.Trim();

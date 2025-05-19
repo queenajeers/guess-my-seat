@@ -18,8 +18,6 @@ public class StoryModeManager : MonoBehaviour
         public Sprite chapterIcon;
     }
 
-    public List<Story> stories;
-
     [Header("UI Prefabs")]
     public GameObject storyPagePrefab;
     public GameObject chapterButtonPrefab;
@@ -29,6 +27,9 @@ public class StoryModeManager : MonoBehaviour
     public PageSlider pageSlider;
 
     public RectTransform fingerUI;
+
+    [Header("STORIES")]
+    public List<Story> stories;
 
     private void Awake()
     {
