@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ethan
   m_EditorClassIdentifier: 
   gender: 0
-  personIcon: {fileID: 2235066113507241306, guid: ba6967def31e747a9a4b3f5406a8e0a6, type: 3}
+  personIcon: {fileID: 21300000, guid: 4cae2e44cb9304e42874d46de84175b2, type: 3}

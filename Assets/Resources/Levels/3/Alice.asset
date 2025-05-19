@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Alice
   m_EditorClassIdentifier: 
   gender: 0
-  personIcon: {fileID: 6993750288869558128, guid: 397ac618db0884a4e9ff216488d71ed3, type: 3}
+  personIcon: {fileID: 21300000, guid: ba6967def31e747a9a4b3f5406a8e0a6, type: 3}

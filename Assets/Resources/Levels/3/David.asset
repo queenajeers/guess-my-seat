@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: David
   m_EditorClassIdentifier: 
   gender: 0
-  personIcon: {fileID: 7689624473917174618, guid: 19a551e7633ab4e6a9075f7eb5aed743, type: 3}
+  personIcon: {fileID: 21300000, guid: 7ddcc84fcdc7645248006c53d2df2a0e, type: 3}

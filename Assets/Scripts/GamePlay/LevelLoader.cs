@@ -284,7 +284,7 @@ public class LevelLoader : MonoBehaviour
 
         seatsCenterPos.y = allSeats[0, 0].transform.position.y + (seatBounds[0].GetBounds().size.y / 2f);
 
-        int minSeatsVisible = 3;
+        int minSeatsVisible = 6;
 
         if (seatData.GetLength(1) > minSeatsVisible)
         {

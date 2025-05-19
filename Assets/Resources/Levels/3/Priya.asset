@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Priya
   m_EditorClassIdentifier: 
   gender: 1
-  personIcon: {fileID: -2728594284186527412, guid: f4754ca37061d447295559a68de0d216, type: 3}
+  personIcon: {fileID: 21300000, guid: f4754ca37061d447295559a68de0d216, type: 3}

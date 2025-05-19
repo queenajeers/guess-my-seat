@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Marcus
   m_EditorClassIdentifier: 
   gender: 0
-  personIcon: {fileID: 8814398339939677220, guid: 19103c79bd83d451fa498ce6e021988b, type: 3}
+  personIcon: {fileID: 21300000, guid: ffffd179b3bd04736915971be035cb0f, type: 3}

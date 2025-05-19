@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Nolan
   m_EditorClassIdentifier: 
   gender: 0
-  personIcon: {fileID: 7010613992462897895, guid: 0f75aa168a77941199c00519dd6110a5, type: 3}
+  personIcon: {fileID: 21300000, guid: 1d628aaa2c6684d828363eb8aa32efdb, type: 3}

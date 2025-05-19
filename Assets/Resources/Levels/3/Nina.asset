@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Nina
   m_EditorClassIdentifier: 
   gender: 1
-  personIcon: {fileID: -1432785408778158234, guid: 9a155d05f621d4de69048ed751dd88c6, type: 3}
+  personIcon: {fileID: 21300000, guid: b56216074a4774d668b493f1d7cc7e2a, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Nathan
   m_EditorClassIdentifier: 
   gender: 0
-  personIcon: {fileID: -2923615267664224798, guid: 89eef6afca55c4367a6cd563e582aedb, type: 3}
+  personIcon: {fileID: 21300000, guid: 19a551e7633ab4e6a9075f7eb5aed743, type: 3}
