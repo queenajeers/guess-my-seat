@@ -12,9 +12,12 @@ public class LoadingManager : MonoBehaviour
 
     public TextMeshProUGUI loadingText;
 
+    // public int FirstLevel;
+
     void Awake()
     {
         Application.targetFrameRate = 60;
+        // GameData.CurrentLevel = FirstLevel;
     }
     private void Start()
     {

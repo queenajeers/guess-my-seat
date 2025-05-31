@@ -6868,6 +6868,14 @@ MonoBehaviour:
       chapterIcon: {fileID: -855298285791758126, guid: 7e96e2d0890c841e0b0b01cae6703ed1, type: 3}
     - chapterName: Chapter 3
       chapterIcon: {fileID: -855298285791758126, guid: 7e96e2d0890c841e0b0b01cae6703ed1, type: 3}
+  - storyName: Bla Bla Bla
+    chapters:
+    - chapterName: Chapter 1
+      chapterIcon: {fileID: -855298285791758126, guid: 7e96e2d0890c841e0b0b01cae6703ed1, type: 3}
+    - chapterName: Chapter 2
+      chapterIcon: {fileID: -855298285791758126, guid: 7e96e2d0890c841e0b0b01cae6703ed1, type: 3}
+    - chapterName: Chapter 3
+      chapterIcon: {fileID: -855298285791758126, guid: 7e96e2d0890c841e0b0b01cae6703ed1, type: 3}
 --- !u!1 &1971738096
 GameObject:
   m_ObjectHideFlags: 0

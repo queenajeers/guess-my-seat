@@ -1,0 +1,106 @@
+{
+  "levelName": "Airport",
+  "rows": 3,
+  "cols": 3,
+  "seats": [
+    {
+      "seatNumber": "C1",
+      "row": 0,
+      "col": 2,
+      "personName": "Lena",
+      "personGender": "Female",
+      "hint": "A1 is security officer A3 is a ticket agent. Marcus is the only security officer.",
+      "isInitiallyOpened": true,
+      "linkedSeats": ["A1,A3"],
+      "tags": []
+    },
+    {
+      "seatNumber": "A1",
+      "row": 0,
+      "col": 0,
+      "personName": "Marcus",
+      "personGender": "Male",
+      "hint": "Passenger Olivia is in a corner square.Her ticket agent was Mason.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["C3", "A3"],
+      "tags": []
+    },
+    {
+      "seatNumber": "C2",
+      "row": 1,
+      "col": 2,
+      "personName": "James",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "A2",
+      "row": 1,
+      "col": 0,
+      "personName": "Harper",
+      "personGender": "Male",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": [],
+      "tags": []
+    },
+    {
+      "seatNumber": "C3",
+      "row": 2,
+      "col": 2,
+      "personName": "Olivia",
+      "personGender": "Female",
+      "hint": "",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["C2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "A3",
+      "row": 2,
+      "col": 0,
+      "personName": "Mason",
+      "personGender": "Male",
+      "hint": "Isabella is sitting in this row. Noah shares column with Isabella.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["B3", "B2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "B3",
+      "row": 2,
+      "col": 1,
+      "personName": "Isabella",
+      "personGender": "Female",
+      "hint": "Logan sits above Noah.",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["B1", "B2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "B2",
+      "row": 1,
+      "col": 1,
+      "personName": "Noah",
+      "personGender": "Male",
+      "hint": "James doesn't share a column with Mason",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["C2"],
+      "tags": []
+    },
+    {
+      "seatNumber": "B1",
+      "row": 0,
+      "col": 1,
+      "personName": "Logan",
+      "personGender": "Male",
+      "hint": "Harper and James are in the same row",
+      "isInitiallyOpened": false,
+      "linkedSeats": ["A2", "C2"],
+      "tags": []
+    }
+  ]
+}
